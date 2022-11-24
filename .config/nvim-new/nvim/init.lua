@@ -21,4 +21,4 @@ vim.cmd([[
   let g:ackprg = 'ag --vimgrep --smart-case'
 ]])
 
--- local capabilities = vim.lsp.protocol.make_client_capabilities()
+vim.cmd 'colorscheme catppuccin'

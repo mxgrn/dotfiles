@@ -56,6 +56,3 @@ o.undodir = os.getenv("XDG_CACHE_HOME") .. "/undo"
 
 -- Ack
 g.ackprg = 'ag --vimgrep --smart-case'
-
--- A.nvim_create_autocmd("BufWrite", { pattern = "*", command = "" })
-A.nvim_command('colorscheme one')
