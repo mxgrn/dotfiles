@@ -1,0 +1,13 @@
+[user]
+  email = regzok@gmail.com
+  name = Max Gorin
+[push]
+  default = current
+[pull]
+  rebase = true
+[fetch]
+  prune = true
+[diff]
+  colorMoved = zebra
+[core]
+  excludesfile = /Users/mxgrn/.gitignore
