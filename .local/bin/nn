@@ -1,0 +1,11 @@
+#!/bin/sh
+# Start an isolated neovim setup, which is currently WIP
+
+NVIM_PROFILE_NAME="nvim-new"
+NVIM_INIT_FILE="init.lua"
+NVIM_COMMAND="nvim"
+
+exec env XDG_CONFIG_HOME="$HOME/.config/${NVIM_PROFILE_NAME}" \
+         XDG_DATA_HOME="$HOME/.local/share/${NVIM_PROFILE_NAME}" \
+         XDG_CACHE_HOME="$HOME/.cache/${NVIM_PROFILE_NAME}" \
+         ${NVIM_COMMAND} "$@"
