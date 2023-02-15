@@ -1,12 +1,17 @@
-local lspconfig = require("lspconfig")
+local lsp_status_ok, lspconfig = pcall(require, 'lspconfig')
+if not lsp_status_ok then
+  return
+end
 
--- Generic
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+
 local on_attach = function(_, bufnr)
   local function map(...)
     vim.api.nvim_buf_set_keymap(bufnr, ...)
   end
 
-  local map_opts = { noremap = true, silent = true }
+  -- bufnr=bufnr needed?
+  local map_opts = { noremap = true, silent = true, buffer = bufnr }
   --
   vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format { async = true }' ]])
   -- map("n", "df", "<cmd>lua vim.lsp.buf.formatting()<cr>", map_opts)
@@ -26,6 +31,8 @@ local on_attach = function(_, bufnr)
 
   -- Move to the next diagnostic
   map('n', '<space>[', '<cmd>lua vim.diagnostic.goto_next()<cr>', map_opts)
+
+  vim.keymap.set('n', 'gr', vim.lsp.buf.references, map_opts)
   -- map("n", "gD", "<cmd>lua vim.lsp.buf.implementation()<cr>", map_opts)
   -- map("n", "<c-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", map_opts)
   -- map("n", "1gD", "<cmd>lua vim.lsp.buf.type_definition()<cr>", map_opts)
@@ -53,61 +60,24 @@ local on_attach = function(_, bufnr)
   -- require("cmp_nvim_lsp").update_capabilities(capabilities)
 end
 
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches.
+-- Add your language server below:
+local servers = { 'lua' }
 
+local root_dir = function()
+  return vim.fn.getcwd()
+end
 
--- Lua
-lspconfig.sumneko_lua.setup {
-  settings = {
-    -- on_attach = on_attach,
-    Lua = {
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = { 'vim' },
-      },
-    },
-    format = {
-      enable = true,
-      -- Put format options here
-      -- NOTE: the value should be STRING!!
-      defaultConfig = {
-        indent_style = "space",
-        indent_size = "2",
+-- Call setup
+for _, lsp in ipairs(servers) do
+  lspconfig[lsp].setup {
+      on_attach = on_attach,
+      root_dir = root_dir,
+      capabilities = capabilities,
+      flags = {
+          -- default in neovim 0.7+
+          debounce_text_changes = 150,
       }
-    },
   }
-}
-
--- Elixir
-local path_to_elixirls = vim.fn.expand("$XDG_DATA_HOME/nvim/mason/packages/elixir-ls/language_server.sh")
-lspconfig.elixirls.setup({
-  cmd = { path_to_elixirls },
-  on_attach = on_attach,
-  settings = {
-    elixirLS = {
-      -- I choose to disable dialyzer for personal reasons, but
-      -- I would suggest you also disable it unless you are well
-      -- aquainted with dialzyer and know how to use it.
-      dialyzerEnabled = false,
-      -- I also choose to turn off the auto dep fetching feature.
-      -- It often get's into a weird state that requires deleting
-      -- the .elixir_ls directory and restarting your editor.
-      fetchDeps = false
-    }
-  }
-})
-
-require 'nvim-treesitter.configs'.setup {
-  ensure_installed = { "elixir", "heex", "eex" },
-  sync_install = false,
-  ignore_install = {},
-  highlight = {
-    enable = true,
-    disable = {},
-  },
-}
-
--- Autoformat on save
-local num_au = vim.api.nvim_create_augroup('NUMTOSTR', { clear = true })
-vim.api.nvim_create_autocmd('BufWrite *', { group = num_au, callback = function()
-  vim.lsp.buf.format { async = false }
-end })
+end
