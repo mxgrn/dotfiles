@@ -37,8 +37,8 @@ window:
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
   padding:
-   x: 2
-   y: 2
+    x: 2
+    y: 2
 
   # Spread additional padding evenly around the terminal content.
   dynamic_padding: true
@@ -163,122 +163,45 @@ draw_bold_text_with_bright_colors: false
 
 # Colors (Tomorrow Night)
 colors:
+  # COLORSCHEME: tomorrow_night.yaml
   # Default colors
   primary:
-    background: '#000000'
-    foreground: '#bbbbbb'
+    # hard contrast: background = '0x1d2021'
+    background: '0x000000'
+    foreground: '0xc5c8c6'
 
-    # Bright and dim foreground colors
-    #
-    # The dimmed foreground color is calculated automatically if it is not present.
-    # If the bright foreground color is not set, or `draw_bold_text_with_bright_colors`
-    # is `false`, the normal foreground color will be used.
-    #dim_foreground: '#828482'
-    #bright_foreground: '#eaeaea'
-
-  # Cursor colors
-  #
-  # Colors which should be used to draw the terminal cursor. If these are
-  # unset, the cursor color will be the inverse of the cell color.
-  #cursor:
-  #  text: '#000000'
-  #  cursor: '#ffffff'
-
-  # Vi mode cursor colors
-  #
-  # Colors for the cursor when the vi mode is active. If these are unset, the
-  # cursor color will be the inverse of the cell color.
-  #vi_mode_cursor:
-  #  text: '#000000'
-  #  cursor: '#ffffff'
-
-  # Selection colors
-  #
-  # Colors which should be used to draw the selection area. If selection
-  # background is unset, selection color will be the inverse of the cell colors.
-  # If only text is unset the cell text color will remain the same.
+  # Colors the cursor will use if `custom_cursor_colors` is true
   selection:
-    text: '#000000'
-    background: '#b2c5f4'
+    text: '#ffe9d7'
+    background: '#265b75'
 
   # Normal colors
-  # normal:
-  #   black:   '#000000'
-  #   red:     '#980000'
-  #   green:   '#1aa500'
-  #   yellow:  '#989900'
-  #   blue:    '#0300b2'
-  #   magenta: '#b200b2'
-  #   cyan:    '#1ca6b1'
-  #   white:   '#bebfbe'
+  cursor:
+    text: '0x1d1f21'
+    cursor: '0xffffff'
 
-  # # Bright colors
-  # bright:
-  #   black:   '#656665'
-  #   red:     '#e50000'
-  #   green:   '#26d802'
-  #   yellow:  '#e5e501'
-  #   blue:    '#0800fe'
-  #   magenta: '#e500e5'
-  #   cyan:    '#2ae5e5'
-  #   white:   '#e5e5e6'
+  # Normal colors
+  normal:
+    black: '0x689da6'
+    red: '0xcc6666'
+    green: '0xb5bd68'
+    yellow: '0xe6c547'
+    blue: '0x81a2be'
+    magenta: '0xb294bb'
+    cyan: '0x70c0ba'
+    white: '0x373b41'
 
-  # Dim colors
-  #
-  # If the dim colors are not set, they will be calculated automatically based
-  # on the `normal` colors.
-  #dim:
-  #  black:   '#131415'
-  #  red:     '#864343'
-  #  green:   '#777c44'
-  #  yellow:  '#9e824c'
-  #  blue:    '#556a7d'
-  #  magenta: '#75617b'
-  #  cyan:    '#5b7d78'
-  #  white:   '#828482'
-
-  # Indexed Colors
-  #
-  # The indexed colors include all colors from 16 to 256.
-  # When these are not set, they're filled with sensible defaults.
-  #
-  # Example:
-  #   `- { index: 16, color: '#ff00ff' }`
-  #
-  #indexed_colors: []
-
-# Visual Bell
-#
-# Any time the BEL code is received, Alacritty "rings" the visual bell. Once
-# rung, the terminal background will be set to white and transition back to the
-# default background color. You can control the rate of this transition by
-# setting the `duration` property (represented in milliseconds). You can also
-# configure the transition function by setting the `animation` property.
-#
-# Values for `animation`:
-#   - Ease
-#   - EaseOut
-#   - EaseOutSine
-#   - EaseOutQuad
-#   - EaseOutCubic
-#   - EaseOutQuart
-#   - EaseOutQuint
-#   - EaseOutExpo
-#   - EaseOutCirc
-#   - Linear
-#
-# Specifying a `duration` of `0` will disable the visual bell.
-# visual_bell:
-#   animation: EaseOutExpo
-#   duration: 50
-#   color: '#000000'
-
-# Background opacity
-#
-# Window opacity as a floating point number from `0.0` to `1.0`.
-# The value `0.0` is completely transparent and `1.0` is opaque.
-# background_opacity: 0.95
-
+  # Bright colors
+  bright:
+    black: '0x373b41'
+    red: '0xff3334'
+    green: '0x9ec400'
+    yellow: '0xf0c674'
+    blue: '0x81a2be'
+    magenta: '0xb77ee0'
+    cyan: '0x54ced6'
+    white: '0x282a2e'
+  indexed_colors: []
 selection:
   #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
 
@@ -624,12 +547,12 @@ key_bindings:
   #- { key: H,      mods: Command,            action: Hide             }
   #- { key: M,      mods: Command,            action: Minimize         }
   #- { key: Q,      mods: Command,            action: Quit             }
-  - { key: W,       mods: Command,          action: None                   }
-  - { key: Q,       mods: Command,          action: None                   }
+  - {key: W, mods: Command, action: None}
+  - {key: Q, mods: Command, action: None}
   # - { key: N,       mods: Command,          action: SpawnNewInstance        }
-  - { key: Return,       mods: Command,     action: ToggleSimpleFullscreen  }
+  - {key: Return, mods: Command, action: ToggleSimpleFullscreen}
 
-  - { key: Key6,        mods: Control, chars: "\x1e" }
+  - {key: Key6, mods: Control, chars: "\x1E"}
 
   # - { key: Comma,     mods: Command,      command:
   #       {program: "open", args: ["~/.config/alacritty/alacritty.yml"]}     }

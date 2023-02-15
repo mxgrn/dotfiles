@@ -11,3 +11,5 @@
   colorMoved = zebra
 [core]
   excludesfile = /Users/mxgrn/.gitignore
+[init]
+	defaultBranch = master
