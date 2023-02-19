@@ -168,8 +168,9 @@ nmap("<leader>u", "<cmd>lua require'core/qf'.toggle_qf()<cr>")
 -- Git status
 nmap("<space>g", "<cmd>G<cr>")
 
--- GitHub copilot: don't use tab to accept suggestions, as it interferes with snippets. Instead, press <c-j>.
-vim.api.nvim_set_keymap('i', "<c-j>", "copilot#Accept(\"\")",
+-- GitHub copilot: don't use tab to accept suggestions, as it interferes with snippets.
+-- Instead, press ctrl + enter.
+vim.api.nvim_set_keymap('i', '<c-cr>', 'copilot#Accept("")',
   { script = true, expr = true, silent = true })
 vim.g.copilot_no_tab_map = true
 

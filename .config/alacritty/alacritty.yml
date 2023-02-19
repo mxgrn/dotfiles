@@ -554,6 +554,9 @@ key_bindings:
 
   - {key: Key6, mods: Control, chars: "\x1E"}
 
+  # Make <c-cr> mappable in Neovim, from https://erwin.co/getting-ctrltab-to-work-in-neovim/
+  - {key: Return, mods: Control, chars: "\x1b[13;5u"}
+
   # - { key: Comma,     mods: Command,      command:
   #       {program: "open", args: ["~/.config/alacritty/alacritty.yml"]}     }
   #
