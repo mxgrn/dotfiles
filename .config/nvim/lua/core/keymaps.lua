@@ -137,6 +137,10 @@ nmap("<space><leader>s", ":execute 'edit' expand(stdpath('config')..'/snippets/'
 
 -- vim-projectionist
 nmap("<space>a", ":A<cr>")
+nmap("<space>eh", ":Ehtml<cr>")
+nmap("<space>el", ":ELive<cr>")
+nmap("<space>es", ":Esource<cr>")
+nmap("<space>et", ":Etest<cr>")
 
 -- Make line completion easier
 imap("<C-l>", "<C-x><C-l>")
@@ -147,7 +151,9 @@ imap("<C-o>", "<C-x><C-o>")
 -- Terminal behaviour
 tmap("<esc>", "<c-\\><c-n>")
 tmap("<c-c>", "<c-\\><c-n>")
+tmap("gt", "<c-\\><c-n>gt")
 
+-- Terminal window navigation
 tmap("<c-h>", "<c-\\><c-n><c-w>h")
 tmap("<c-j>", "<c-\\><c-n><c-w>j")
 tmap("<c-k>", "<c-\\><c-n><c-w>k")
@@ -158,5 +164,13 @@ nmap("<leader>/", ":AckFromSearch<CR>")
 
 -- Toggle QF window
 nmap("<leader>u", "<cmd>lua require'core/qf'.toggle_qf()<cr>")
+
+-- Git status
+nmap("<space>g", "<cmd>G<cr>")
+
+-- GitHub copilot: don't use tab to accept suggestions, as it interferes with snippets. Instead, press <c-j>.
+vim.api.nvim_set_keymap('i', "<c-j>", "copilot#Accept(\"\")",
+  { script = true, expr = true, silent = true })
+vim.g.copilot_no_tab_map = true
 
 return false

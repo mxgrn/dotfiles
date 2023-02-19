@@ -58,7 +58,17 @@ return packer.startup(function(use)
   -- Treesitter interface
   use {
     'nvim-treesitter/nvim-treesitter',
-    run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
+    config = function()
+      require 'nvim-treesitter.configs'.setup {
+        -- enable auto indentation while editing
+        indent = {
+          enable = true
+        }
+      }
+    end,
+    run = function()
+      require('nvim-treesitter.install').update({ with_sync = true })
+    end,
   }
 
   use {
@@ -133,8 +143,7 @@ return packer.startup(function(use)
 
   use 'kana/vim-textobj-user'
 
-  -- E.g.: dii
-  use 'mxgrn/vim-indent-object'
+  -- use 'mxgrn/vim-indent-object'
 
   -- Grepping in open buffers, e.g.:
   -- :Bsgrep[!] {pattern}
@@ -199,6 +208,18 @@ return packer.startup(function(use)
 
   use 'junegunn/fzf'
   use 'junegunn/fzf.vim'
+
+  -- support for e.g. `da,`
+  use 'wellle/targets.vim'
+
+  -- Indentation support
+  use({
+    'jessekelighine/vindent.vim',
+    config = function()
+      -- vim.g.vindent_motion_OO_prev = '[i' -- jump to prev block of same indent.
+      -- vim.g.vindent_motion_OO_next = ']i' -- jump to next block of same indent.
+    end
+  })
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
