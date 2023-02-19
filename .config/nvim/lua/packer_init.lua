@@ -74,6 +74,9 @@ return packer.startup(function(use)
   use {
     'nvim-telescope/telescope.nvim',
     config = function()
+      -- telescope-zf-native.nvim
+      require("telescope").load_extension("zf-native")
+
       require('telescope').setup {
         defaults = {
           preview = false,
@@ -220,6 +223,9 @@ return packer.startup(function(use)
       -- vim.g.vindent_motion_OO_next = ']i' -- jump to next block of same indent.
     end
   })
+
+  -- Favor file names over paths when searching
+  use "natecraddock/telescope-zf-native.nvim"
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
