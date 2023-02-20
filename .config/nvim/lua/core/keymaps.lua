@@ -20,22 +20,12 @@ local function tmap(shortcut, command)
   map('t', shortcut, command)
 end
 
--- local function imap(shortcut, command)
---   map('i', shortcut, command)
--- end
-
 nmap("<leader>s", ":w<cr>")
 nmap("<leader>v", ":e $MYVIMRC<cr>")
 
 -- require('telescope').load_extension('fzf')
 nmap("<c-p>", "<CMD>lua require'telescope.builtin'.find_files({show_untracked = true})<CR>")
 nmap("<leader>f", "<cmd>Telescope buffers<cr>")
-
--- Window jumping
--- nmap("<C-h>", ":wincmd h<CR>")
--- nmap("<C-j>", ":wincmd j<CR>")
--- nmap("<C-k>", ":wincmd k<CR>")
--- nmap("<C-l>", ":wincmd l<CR>")
 
 -- Save and quit on space-q
 nmap("<space>q", ":wa<cr>:qa<cr>")
@@ -44,10 +34,8 @@ nmap("<space>q", ":wa<cr>:qa<cr>")
 nmap("H", "g^")
 nmap("L", "g$")
 vmap("H", "g^")
--- vmap("L", "g$")
 -- Do not include EOL when selecting till the end of the string
 vmap("L", "$h")
-
 
 -- Move naturally over wrapped lines
 nmap("j", "gj")
@@ -88,18 +76,10 @@ nmap("<space>k", ":close<CR>")
 nmap("<space>X", ":%bd<cr>")
 -- vim-bbye
 nmap("<silent>", "<leader>K :bufdo :Bwipeout<cr>")
--- Kill window (it won't close the last window)
+-- kill window (it won't close the last window)
 nmap("<space>x", ":Bwipeout<cr>")
 
--- vim-test
-nmap("<space>n", ":wa<cr>:TestNearest<CR>")
-nmap("<Leader>ta", ":wa<cr>:TestSuite<CR>")
-nmap("<space>t", ":wa<cr>:TestLast<CR>")
-nmap("<space>s", ":wa<cr>:TestFile<CR>")
-nmap("<Leader>tv", ":wa<cr>:TestVisit<CR>")
-
 -- vim-fugitive
-
 nmap("<leader>g", ":Git blame<cr>")
 nmap("<space>g", ":G<cr>")
 

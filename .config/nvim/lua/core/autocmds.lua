@@ -32,41 +32,13 @@ autocmd('BufEnter', {
   command = 'set fo-=c fo-=r fo-=o'
 })
 
+-- LSP-format before saving
 autocmd('BufWritePre', {
   pattern = '',
   callback = function()
     vim.lsp.buf.format { async = false }
   end
 })
-
--- Settings for filetypes:
---------------------------
-
--- Disable line length marker
--- augroup('setLineLength', { clear = true })
--- autocmd('Filetype', {
---   group = 'setLineLength',
---   pattern = { 'text', 'markdown', 'html', 'xhtml', 'javascript', 'typescript' },
---   command = 'setlocal cc=0'
--- })
-
--- Terminal settings:
----------------------
-
--- Open a Terminal on the right tab
--- autocmd('CmdlineEnter', {
---   command = 'command! Term :botright vsplit term://$SHELL'
--- })
-
--- Enter insert mode when switching to terminal
--- autocmd('TermOpen', {
---   command = 'setlocal listchars= nonumber norelativenumber nocursorline',
--- })
-
--- autocmd('TermOpen', {
---   pattern = '',
---   command = 'startinsert'
--- })
 
 -- Close terminal buffer on process exit
 autocmd('BufLeave', {
