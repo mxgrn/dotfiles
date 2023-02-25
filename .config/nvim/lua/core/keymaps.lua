@@ -130,7 +130,7 @@ imap("<C-o>", "<C-x><C-o>")
 
 -- Terminal behaviour
 tmap("<esc>", "<c-\\><c-n>")
-tmap("<c-c>", "<c-\\><c-n>")
+-- tmap("<c-c>", "<c-\\><c-n>")
 tmap("gt", "<c-\\><c-n>gt")
 
 -- Terminal window navigation
@@ -147,6 +147,9 @@ nmap("<leader>u", "<cmd>lua require'core/qf'.toggle_qf()<cr>")
 
 -- Git status
 nmap("<space>g", "<cmd>G<cr>")
+
+-- Manual cd into current file's dir
+nmap("<space>c", "<cmd>cd %:p:h<cr>")
 
 -- GitHub copilot: don't use tab to accept suggestions, as it interferes with snippets.
 -- Instead, press ctrl + enter.
