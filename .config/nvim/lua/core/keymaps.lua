@@ -61,9 +61,6 @@ nmap("<C-l>", ":lua require('Navigator').right()<CR>")
 nmap("<leader>/", ":AckFromSearch")
 nmap("<C-\\>", ":Ack<space>")
 
--- bbye
-nmap("<space>k", ":close<CR>")
-
 -- Tests
 nmap("<space>n", ":wa<cr>:TestNearest<CR>")
 nmap("<Leader>ta", ":wa<cr>:TestSuite<CR>")
@@ -73,11 +70,12 @@ nmap("<Leader>tv", ":wa<cr>:TestVisit<CR>")
 
 -- Buffers
 nmap("<space>k", ":close<CR>")
+-- delete all saved buffers
 nmap("<space>X", ":%bd<cr>")
--- vim-bbye
-nmap("<silent>", "<leader>K :bufdo :Bwipeout<cr>")
--- kill window (it won't close the last window)
+-- vim-bbye kill buffer w/o closing the window (it won't kill last buffer)
 nmap("<space>x", ":Bwipeout<cr>")
+-- close window along with the buffer
+nmap("<space>k", ":close<CR>")
 
 -- vim-fugitive
 nmap("<leader>g", ":Git blame<cr>")

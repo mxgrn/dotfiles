@@ -49,10 +49,13 @@ return packer.startup(function(use)
 
   use "nvim-lua/plenary.nvim" -- Useful lua functions used by lots of plugins
 
+  -- Color scheme
   use "rakr/vim-one"
 
+  -- Netrw tweaks and fixes
   use 'tpope/vim-vinegar'
 
+  -- All sorts of ]* and [* goodies
   use 'tpope/vim-unimpaired'
 
   -- Treesitter interface
@@ -71,6 +74,7 @@ return packer.startup(function(use)
     end,
   }
 
+  -- Telescope
   use {
     'nvim-telescope/telescope.nvim',
     config = function()
@@ -104,8 +108,10 @@ return packer.startup(function(use)
     end
   }
 
-  use 'nvim-tree/nvim-web-devicons' -- for file icons
+  -- File type icons in Telescope
+  use 'nvim-tree/nvim-web-devicons'
 
+  -- Comment stuff like a pro
   use {
     'numToStr/Comment.nvim',
     config = function()
@@ -113,6 +119,7 @@ return packer.startup(function(use)
     end
   }
 
+  -- Seamless navigation between neovim windows and tmux panes
   use {
     'numToStr/Navigator.nvim',
     config = function()
@@ -120,45 +127,53 @@ return packer.startup(function(use)
     end
   }
 
+  -- Extra buffer manupilations, such as :Bwipeout
   use 'moll/vim-bbye'
 
+  -- Run tests directly from test files
   use 'vim-test/vim-test'
 
+  -- Replace or delete surrounding characters
   use 'tpope/vim-surround'
 
   -- E.g. auto-add end after do
   use 'tpope/vim-endwise'
 
+  -- Git support, e.g. :G
   use 'tpope/vim-fugitive'
 
+  -- Make the dot command work in more situations
   use 'tpope/vim-repeat'
 
+  -- Powerful search and replace, e.g. :S/foo/bar/g
   use 'tpope/vim-abolish'
 
   -- Support for Linux commands such as :Chmod
   use 'tpope/vim-eunuch'
 
+  -- Alternate files (e.g. :A) and newly created file templates
   use 'tpope/vim-projectionist'
 
+  -- Never lose your undo history: :UndotreeToggle
   use 'mbbill/undotree'
 
+  -- Project-wide search: :Ack foo
   use 'mileszs/ack.vim'
-
-  use 'kana/vim-textobj-user'
-
-  -- use 'mxgrn/vim-indent-object'
 
   -- Grepping in open buffers, e.g.:
   -- :Bsgrep[!] {pattern}
   use 'jeetsukumaran/vim-buffersaurus'
 
+  -- Swap any two fragments of text with shift-x (in visual mode)
   use 'tommcdo/vim-exchange'
 
   -- HTML support
   use 'mattn/emmet-vim'
 
+  -- Working patch of ZoomWin
   use 'mxgrn/vim-zoomwin'
 
+  -- Jumping around the window with s or S
   use {
     'ggandor/leap.nvim',
     config = function()
@@ -166,6 +181,7 @@ return packer.startup(function(use)
     end
   }
 
+  -- Language server manager
   use {
     'williamboman/mason.nvim',
     config = function()
@@ -178,13 +194,11 @@ return packer.startup(function(use)
     config = function()
       require("mason-lspconfig").setup()
       -- You can various LSs right here, check out `:h mason-lspconfig.setup_handlers()`
-      -- Currently those are in "core/lsp.lua"
+      -- Currently those configs are in "core/lsp.lua"
     end
   }
 
   use 'neovim/nvim-lspconfig'
-
-  use 'andyl/vim-textobj-elixir'
 
   -- Snippets
   use 'honza/vim-snippets'
@@ -209,10 +223,10 @@ return packer.startup(function(use)
 
   use 'github/copilot.vim'
 
-  use 'junegunn/fzf'
-  use 'junegunn/fzf.vim'
+  -- Favor file names over paths when searching
+  use "natecraddock/telescope-zf-native.nvim"
 
-  -- support for e.g. `da,`
+  -- Support for e.g. `da,`
   use 'wellle/targets.vim'
 
   -- Indentation support
@@ -223,9 +237,6 @@ return packer.startup(function(use)
       -- vim.g.vindent_motion_OO_next = ']i' -- jump to next block of same indent.
     end
   })
-
-  -- Favor file names over paths when searching
-  use "natecraddock/telescope-zf-native.nvim"
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
