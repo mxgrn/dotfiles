@@ -1,4 +1,5 @@
 local lspconfig = require('lspconfig')
+-- local util = require 'lspconfig.util'
 
 local on_attach = function(_, bufnr)
   local function map(...)
@@ -15,47 +16,60 @@ local on_attach = function(_, bufnr)
 end
 
 lspconfig.lua_ls.setup {
-    on_attach = on_attach,
-    settings = {
-        Lua = {
-            diagnostics = {
-                -- https://www.reddit.com/r/neovim/comments/khk335/lua_configuration_global_vim_is_undefined/
-                globals = { 'vim' }
-            }
-        }
+  on_attach = on_attach,
+  settings = {
+    Lua = {
+      diagnostics = {
+        -- https://www.reddit.com/r/neovim/comments/khk335/lua_configuration_global_vim_is_undefined/
+        globals = { 'vim' }
+      }
     }
+  }
 }
 
+-- lspconfig.sqlls.setup {
+--   capabilities = vim.lsp.protocol.make_client_capabilities(),
+--   on_attach = on_attach,
+--   root_dir = util.find_git_ancestor,
+-- }
+
 lspconfig.elixirls.setup {
-    cmd = { vim.fn.expand(vim.fn.stdpath('data') .. "/mason/packages/elixir-ls/language_server.sh") },
-    capabilities = vim.lsp.protocol.make_client_capabilities(),
-    on_attach = on_attach,
-    elixirLS = {
-        -- I choose to disable dialyzer for personal reasons, but
-        -- I would suggest you also disable it unless you are well
-        -- aquainted with dialzyer and know how to use it.
-        dialyzerEnabled = false,
-        -- I also choose to turn off the auto dep fetching feature.
-        -- It often get's into a weird state that requires deleting
-        -- the .elixir_ls directory and restarting your editor.
-        fetchDeps = false
-    }
+  cmd = { vim.fn.expand(vim.fn.stdpath('data') .. "/mason/packages/elixir-ls/language_server.sh") },
+  capabilities = vim.lsp.protocol.make_client_capabilities(),
+  on_attach = on_attach,
+  elixirLS = {
+    -- I choose to disable dialyzer for personal reasons, but
+    -- I would suggest you also disable it unless you are well
+    -- aquainted with dialzyer and know how to use it.
+    dialyzerEnabled = false,
+    -- I also choose to turn off the auto dep fetching feature.
+    -- It often get's into a weird state that requires deleting
+    -- the .elixir_ls directory and restarting your editor.
+    fetchDeps = false
+  }
 }
 
 lspconfig.dockerls.setup {
-    on_attach = on_attach,
+  on_attach = on_attach,
 }
 
 lspconfig.html.setup {
-    capabilities = vim.lsp.protocol.make_client_capabilities(),
-    on_attach = on_attach,
+  capabilities = vim.lsp.protocol.make_client_capabilities(),
+  on_attach = on_attach,
+}
+
+lspconfig.jsonls.setup {}
+
+lspconfig.html.setup {
+  capabilities = vim.lsp.protocol.make_client_capabilities(),
+  on_attach = on_attach,
 }
 
 lspconfig.elmls.setup({
-    on_attach = on_attach,
-    settings = {
-        elmLS = {
-            onlyUpdateDiagnosticsOnSave = true
-        }
+  on_attach = on_attach,
+  settings = {
+    elmLS = {
+      onlyUpdateDiagnosticsOnSave = true
     }
+  }
 })
