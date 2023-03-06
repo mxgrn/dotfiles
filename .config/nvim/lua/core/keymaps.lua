@@ -149,6 +149,15 @@ nmap("<space>g", "<cmd>G<cr>")
 -- Manual cd into current file's dir
 nmap("<space>c", "<cmd>cd %:p:h<cr>")
 
+-- Center various jumps
+nmap("*", "*zz")
+nmap("n", "nzz")
+nmap("N", "Nzz")
+nmap("<c-]>", "<c-]>zz")
+nmap("<c-t>", "<c-t>zz")
+nmap("<c-i>", "<c-i>zz")
+nmap("<c-o>", "<c-o>zz")
+
 -- GitHub copilot: don't use tab to accept suggestions, as it interferes with snippets.
 -- Instead, press ctrl + enter.
 vim.api.nvim_set_keymap('i', '<c-cr>', 'copilot#Accept("")',
