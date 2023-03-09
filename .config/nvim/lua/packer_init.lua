@@ -87,7 +87,7 @@ return packer.startup(function(use)
           mappings = {
             i = {
               -- Close Telescope window on Esc
-              ["<esc>"] = require("telescope.actions").close,
+                  ["<esc>"] = require("telescope.actions").close,
             },
           },
         },
@@ -103,7 +103,8 @@ return packer.startup(function(use)
   }
 
   use { 'nvim-telescope/telescope-fzf-native.nvim',
-    run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+    run =
+    'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
     config = function()
     end
   }
