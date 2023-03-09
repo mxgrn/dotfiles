@@ -164,4 +164,24 @@ vim.api.nvim_set_keymap('i', '<c-cr>', 'copilot#Accept("")',
   { script = true, expr = true, silent = true })
 vim.g.copilot_no_tab_map = true
 
+vim.cmd [[
+function! NetrwEnter()
+  nmap <buffer> <TAB> mfj
+  " nmap <buffer> <S-TAB> kmf
+  nmap <buffer> ff %:w<CR>:buffer #<CR>
+  " Make <c-l> to go to the window on the right as everywhere
+  nnoremap <buffer> <c-l> :wincmd l<cr>
+  nmap <buffer> mM mtmm
+  nmap <buffer> x :!open %<cr>
+  " nmap <c-p> lua require('telescope.builtin').find_files( { cwd = vim.fn.expand('%:p:h') })
+
+  nmap <buffer> FF :call NetrwRemoveRecursive()<CR>
+endfunction
+
+augroup netrw_enter
+  autocmd!
+  autocmd filetype netrw call NetrwEnter()
+augroup END
+]]
+
 return false
