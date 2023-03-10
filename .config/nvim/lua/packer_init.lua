@@ -230,7 +230,7 @@ return packer.startup(function(use)
   -- Support for e.g. `da,`
   use 'wellle/targets.vim'
 
-  -- Indentation support
+  -- Indentation support, e.g. '[-'
   use({
     'jessekelighine/vindent.vim',
     config = function()

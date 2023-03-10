@@ -5,7 +5,7 @@ require('core/autocmds')
 require('core/keymaps')
 require('core/colors')
 require('core/lsp')
-require('core/qf')
+require('core/quickfix')
 
 require('plugins/treesitter')
 
