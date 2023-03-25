@@ -6,23 +6,23 @@
 -- See: https://neovim.io/doc/user/vim_diff.html
 -- [2] Defaults - *nvim-defaults*
 
-local g                    = vim.g -- Global variables
+local g                    = vim.g   -- Global variables
 local opt                  = vim.opt -- Set options (global/buffer/windows-scoped)
 
 -----------------------------------------------------------
 -- General
 -----------------------------------------------------------
-opt.mouse                  = 'a' -- Enable mouse support
+opt.mouse                  = 'a'           -- Enable mouse support
 opt.clipboard              = 'unnamedplus' -- Copy/paste to system clipboard
-opt.swapfile               = false -- Don't use swapfile
-opt.complete               = '.,w,b' -- For autocomplete, use current buffer, other windows, and other open buffers
-opt.undofile               = true -- Persistent undo history
+opt.swapfile               = false         -- Don't use swapfile
+opt.complete               = '.,w,b'       -- For autocomplete, use current buffer, other windows, and other open buffers
+opt.undofile               = true          -- Persistent undo history
 
 -----------------------------------------------------------
 -- Neovim UI
 -----------------------------------------------------------
 -- opt.number = true           -- Show line number
-opt.showmatch              = true -- Highlight matching parenthesis
+opt.showmatch              = true     -- Highlight matching parenthesis
 opt.foldmethod             = 'marker' -- Enable folding (default 'foldmarker')
 -- opt.splitright = true       -- Vertical split to the right
 -- opt.splitbelow = true       -- Horizontal split to the bottom
@@ -36,8 +36,8 @@ opt.termguicolors          = true -- Enable 24-bit RGB colors
 -- Tabs, indent
 -----------------------------------------------------------
 opt.expandtab              = true -- Use spaces instead of tabs
-opt.shiftwidth             = 2 -- Shift 4 spaces when tab
-opt.tabstop                = 2 -- 1 tab == 4 spaces
+opt.shiftwidth             = 2    -- Shift 4 spaces when tab
+opt.tabstop                = 2    -- 1 tab == 4 spaces
 opt.smartindent            = true -- Autoindent new lines
 
 -----------------------------------------------------------
@@ -46,8 +46,8 @@ opt.smartindent            = true -- Autoindent new lines
 opt.hidden                 = true -- Enable background buffers
 -- opt.history = 100           -- Remember N lines in history
 opt.lazyredraw             = true -- Faster scrolling
-opt.synmaxcol              = 240 -- Max column for syntax highlight
-opt.updatetime             = 250 -- ms to wait for trigger an event
+opt.synmaxcol              = 240  -- Max column for syntax highlight
+opt.updatetime             = 250  -- ms to wait for trigger an event
 
 -----------------------------------------------------------
 -- Working directory
@@ -80,10 +80,18 @@ g.vindent_motion_XX_se     = ']p' -- jump to end   of the current block scope.
 g.vindent_object_XX_ii     = 'ii' -- select current block.
 g.vindent_object_XX_ai     = 'aI' -- select current block + one extra line  at beginning.
 g.vindent_object_XX_aI     = 'ai' -- select current block + two extra lines at beginning and end.
-g.vindent_jumps            = 1 -- make vindent motion count as a |jump-motion| (works with |jumplist|).
+g.vindent_jumps            = 1    -- make vindent motion count as a |jump-motion| (works with |jumplist|).
+
+
+-- wipe netrw buffers when closed
+-- https://www.reddit.com/r/vim/comments/g45w7q/let_gnetrw_altfile_1_has_no_effect/
+-- (the autocmd wasn't even required so far)
+g.netrw_fastbrowse       = 0
+-- Allow ctrl-6 to work for a file that has just been opened via netrw
+g.netrw_altfile          = 1
 
 -- -- Disable builtin plugins
-local disabled_built_ins   = {
+local disabled_built_ins = {
   "2html_plugin",
   "getscript",
   "getscriptPlugin",

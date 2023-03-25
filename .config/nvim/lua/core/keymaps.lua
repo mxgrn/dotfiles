@@ -141,7 +141,7 @@ tmap("<c-l>", "<c-\\><c-n><c-w>l")
 nmap("<leader>/", ":AckFromSearch<CR>")
 
 -- Toggle QF window
-nmap("<leader>u", "<cmd>lua require'core/qf'.toggle_qf()<cr>")
+nmap("<leader>u", "<cmd>lua require'core/quickfix'.toggle_qf()<cr>")
 
 -- Git status
 nmap("<space>g", "<cmd>G<cr>")
