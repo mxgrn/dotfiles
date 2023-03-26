@@ -220,7 +220,15 @@ return packer.startup(function(use)
   -- use 'junegunn/fzf.vim'
 
   -- Use QF window like a pro
-  use { 'kevinhwang91/nvim-bqf', ft = 'qf' }
+  use { 'kevinhwang91/nvim-bqf', ft = 'qf', config = function()
+    require('bqf').setup({
+      auto_enable = true,
+      preview = {
+        -- Disable auto-preview, didn't find it helpful
+        auto_preview = false,
+      },
+    })
+  end }
 
   use 'github/copilot.vim'
 
