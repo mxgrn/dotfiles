@@ -16,4 +16,6 @@ vim.cmd([[
     autocmd!
     autocmd BufWritePost init.lua luafile %
   augroup end
+
+  hi TreesitterContextBottom guibg=Black
 ]])

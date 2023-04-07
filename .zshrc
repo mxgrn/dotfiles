@@ -31,13 +31,13 @@ bindkey '^x^e' edit-command-line
 export PATH="/usr/local/opt/qt/bin:$PATH"
 
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-  tmux
+  env TERM=screen-256color tmux
 fi
 
 export PATH="/Users/mxgrn/.local/bin:$PATH"
 
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
-export PATH="/opt/homebrew/opt/postgresql@10/bin:$PATH"
+# export PATH="/opt/homebrew/opt/postgresql@10/bin:$PATH"
 
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
@@ -62,3 +62,4 @@ export PATH="$FLYCTL_INSTALL/bin:$PATH"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="/opt/homebrew/opt/curl/bin:$PATH"
 export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
+export PATH=$PATH:/Users/mxgrn/code/temp/roc_nightly-macos_apple_silicon-2023-03-31-424b4aa

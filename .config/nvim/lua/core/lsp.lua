@@ -1,5 +1,5 @@
 local lspconfig = require('lspconfig')
--- local util = require 'lspconfig.util'
+local util = require 'lspconfig.util'
 
 local on_attach = function(_, bufnr)
   local function map(...)
@@ -27,11 +27,11 @@ lspconfig.lua_ls.setup {
   }
 }
 
--- lspconfig.sqlls.setup {
---   capabilities = vim.lsp.protocol.make_client_capabilities(),
---   on_attach = on_attach,
---   root_dir = util.find_git_ancestor,
--- }
+lspconfig.sqlls.setup {
+  capabilities = vim.lsp.protocol.make_client_capabilities(),
+  on_attach = on_attach,
+  root_dir = util.find_git_ancestor,
+}
 
 lspconfig.elixirls.setup {
   cmd = { vim.fn.expand(vim.fn.stdpath('data') .. "/mason/packages/elixir-ls/language_server.sh") },

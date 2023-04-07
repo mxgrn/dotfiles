@@ -174,11 +174,22 @@ return packer.startup(function(use)
   -- Working patch of ZoomWin
   use 'mxgrn/vim-zoomwin'
 
+  use {
+    'nvim-treesitter/nvim-treesitter-context',
+    config = function()
+      require 'treesitter-context'.setup {
+        max_lines = 1,
+        min_window_height = 1
+      }
+    end
+  }
+
   -- Jumping around the window with s or S
   use {
     'ggandor/leap.nvim',
     config = function()
       require('leap').add_default_mappings()
+      require('leap').opts.safe_labels = {}
     end
   }
 

@@ -3,14 +3,14 @@
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
-env:
+# env:
   # TERM variable
   #
   # This value is used to set the `$TERM` environment variable for
   # each instance of Alacritty. If it is not present, alacritty will
   # check the local terminfo database and use `alacritty` if it is
   # available, otherwise `xterm-256color` is used.
-  TERM: xterm-256color
+  # TERM: xterm-256color
 
 window:
   # Allow terminal applications to change Alacritty's window title.
@@ -102,7 +102,7 @@ font:
     family: Iosevka Nerd Font Mono
 
     # The `style` can be specified to pick a specific face.
-    style: Light
+    style: Extralight
 
   # Bold font face
   bold:
@@ -124,7 +124,7 @@ font:
     family: Iosevka Nerd Font Mono
 
     # The `style` can be specified to pick a specific face.
-    style: Regular Italic
+    style: Light Italic
 
   # Bold italic font face
   bold_italic:

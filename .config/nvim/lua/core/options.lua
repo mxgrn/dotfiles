@@ -82,16 +82,21 @@ g.vindent_object_XX_ai     = 'aI' -- select current block + one extra line  at b
 g.vindent_object_XX_aI     = 'ai' -- select current block + two extra lines at beginning and end.
 g.vindent_jumps            = 1    -- make vindent motion count as a |jump-motion| (works with |jumplist|).
 
+opt.splitbelow             = true
+opt.splitright             = true
 
 -- wipe netrw buffers when closed
 -- https://www.reddit.com/r/vim/comments/g45w7q/let_gnetrw_altfile_1_has_no_effect/
 -- (the autocmd wasn't even required so far)
-g.netrw_fastbrowse       = 0
+g.netrw_fastbrowse         = 0
 -- Allow ctrl-6 to work for a file that has just been opened via netrw
-g.netrw_altfile          = 1
+g.netrw_altfile            = 1
+
+-- Let context on the top always have a line of space, so it's always visible
+opt.scrolloff              = 1
 
 -- -- Disable builtin plugins
-local disabled_built_ins = {
+local disabled_built_ins   = {
   "2html_plugin",
   "getscript",
   "getscriptPlugin",
