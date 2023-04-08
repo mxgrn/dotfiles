@@ -31,7 +31,7 @@ bindkey '^x^e' edit-command-line
 export PATH="/usr/local/opt/qt/bin:$PATH"
 
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-  env TERM=screen-256color tmux
+  tmux
 fi
 
 export PATH="/Users/mxgrn/.local/bin:$PATH"
