@@ -63,10 +63,10 @@ nmap("<C-\\>", ":Ack<space>")
 
 -- Tests
 nmap("<space>n", ":wa<cr>:TestNearest<CR>")
-nmap("<Leader>ta", ":wa<cr>:TestSuite<CR>")
 nmap("<space>t", ":wa<cr>:TestLast<CR>")
+nmap("<space>T", ":wa<cr>:TestSuite<CR>")
 nmap("<space>s", ":wa<cr>:TestFile<CR>")
-nmap("<Leader>tv", ":wa<cr>:TestVisit<CR>")
+nmap("<space>v", ":wa<cr>:TestVisit<CR>")
 
 -- Buffers
 nmap("<space>k", ":close<CR>")
@@ -80,9 +80,6 @@ nmap("<space>k", ":close<CR>")
 -- vim-fugitive
 nmap("<leader>g", ":Git blame<cr>")
 nmap("<space>g", ":G<cr>")
-
--- ZoomWin
-nmap("<leader>,", ":silent! ZoomWin<CR>")
 
 -- Switch off search highlight
 nmap("<Esc>", ":nohls<CR>")
@@ -130,12 +127,15 @@ imap("<C-o>", "<C-x><C-o>")
 tmap("<esc>", "<c-\\><c-n>")
 -- tmap("<c-c>", "<c-\\><c-n>")
 tmap("gt", "<c-\\><c-n>gt")
+tmap("<leader><leader>", "<c-\\><c-n><leader><leader>")
 
 -- Terminal window navigation
 tmap("<c-h>", "<c-\\><c-n><c-w>h")
 tmap("<c-j>", "<c-\\><c-n><c-w>j")
 tmap("<c-k>", "<c-\\><c-n><c-w>k")
 tmap("<c-l>", "<c-\\><c-n><c-w>l")
+tmap("<c-f>", "<c-\\><c-n><c-f>")
+tmap("<c-b>", "<c-\\><c-n><c-b>")
 
 -- Ack for the last search.
 nmap("<leader>/", ":AckFromSearch<CR>")
@@ -148,6 +148,15 @@ nmap("<space>g", "<cmd>G<cr>")
 
 -- Manual cd into current file's dir
 nmap("<space>c", "<cmd>cd %:p:h<cr>")
+
+-- Switch between 2 recent tabs
+vim.cmd [[
+au TabLeave * let g:lasttab = tabpagenr()
+]]
+nmap("<leader><leader>", ":exe 'tabn '.g:lasttab<cr>")
+
+-- Close all tabse exept current
+nmap("<leader>t", ":tabonly<cr>")
 
 -- Center various jumps (disabling for now, getting a movement fatigue)
 -- nmap("*", "*zz")
@@ -182,5 +191,11 @@ augroup netrw_enter
   autocmd filetype netrw call NetrwEnter()
 augroup END
 ]]
+
+---------
+-- Elixir
+
+-- Wrap selection in %{} (requires vim-surround)
+vim.api.nvim_set_keymap('v', "<c-^>", "S}i%<esc>%", { noremap = false, silent = true })
 
 return false
