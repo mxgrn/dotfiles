@@ -125,9 +125,8 @@ imap("<C-o>", "<C-x><C-o>")
 
 -- Terminal behaviour
 tmap("<esc>", "<c-\\><c-n>")
--- tmap("<c-c>", "<c-\\><c-n>")
 tmap("gt", "<c-\\><c-n>gt")
-tmap("<leader><leader>", "<c-\\><c-n><leader><leader>")
+tmap("gT", "<c-\\><c-n>gT")
 
 -- Terminal window navigation
 tmap("<c-h>", "<c-\\><c-n><c-w>h")
@@ -152,11 +151,24 @@ nmap("<space>c", "<cmd>cd %:p:h<cr>")
 -- Switch between 2 recent tabs
 vim.cmd [[
 au TabLeave * let g:lasttab = tabpagenr()
+
+function! DeleteHiddenBuffers()
+  let tpbl=[]
+  let closed = 0
+  call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
+  for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
+    if getbufvar(buf, '&mod') == 0
+      silent execute 'bwipeout' buf
+      let closed += 1
+    endif
+  endfor
+  echo "Closed ".closed." hidden buffers"
+endfunction
 ]]
 nmap("<leader><leader>", ":exe 'tabn '.g:lasttab<cr>")
 
 -- Close all tabse exept current
-nmap("<leader>t", ":tabonly<cr>")
+nmap("<leader>t", ":tabonly<cr>:call DeleteHiddenBuffers()<cr>")
 
 -- Center various jumps (disabling for now, getting a movement fatigue)
 -- nmap("*", "*zz")
@@ -190,6 +202,11 @@ augroup netrw_enter
   autocmd!
   autocmd filetype netrw call NetrwEnter()
 augroup END
+
+
+autocmd FileType foo let b:surround_45 = "%{\r}"
+
+let g:surround_37 = "%{\r}"
 ]]
 
 ---------

@@ -79,7 +79,7 @@ return packer.startup(function(use)
     'nvim-telescope/telescope.nvim',
     config = function()
       -- telescope-zf-native.nvim
-      require("telescope").load_extension("zf-native")
+      -- require("telescope").load_extension("zf-native")
 
       require('telescope').setup {
         defaults = {
@@ -137,8 +137,17 @@ return packer.startup(function(use)
   -- Replace or delete surrounding characters
   use 'tpope/vim-surround'
 
-  -- E.g. auto-add end after do
-  use 'tpope/vim-endwise'
+  -- E.g. auto-add 'end' after 'do'
+  use {
+    'RRethy/nvim-treesitter-endwise',
+    config = function()
+      require('nvim-treesitter.configs').setup {
+        endwise = {
+          enable = true,
+        },
+      }
+    end
+  }
 
   -- Git support, e.g. :G
   use 'tpope/vim-fugitive'
@@ -217,8 +226,6 @@ return packer.startup(function(use)
     end
   }
 
-  -- use 'elixir-editors/vim-elixir'
-
   use {
     'nvim-treesitter/nvim-treesitter-context',
     config = function()
@@ -255,15 +262,15 @@ return packer.startup(function(use)
     end
   }
 
-  -- use 'm4xshen/autoclose.nvim'
-
-
-  -- use {
-  --   "windwp/nvim-autopairs",
-  --   config = function() require("nvim-autopairs").setup {} end
-  -- }
-
   use 'neovim/nvim-lspconfig'
+
+  use {
+    'andymass/vim-matchup',
+    setup = function()
+      -- may set any options here
+      vim.g.matchup_matchparen_offscreen = { method = "popup" }
+    end
+  }
 
   -- Snippets
   use 'honza/vim-snippets'
@@ -296,8 +303,8 @@ return packer.startup(function(use)
 
   use 'github/copilot.vim'
 
-  -- Favor file names over paths when searching
-  use "natecraddock/telescope-zf-native.nvim"
+  -- Favor file names over paths when fuzzy-searching
+  -- use "natecraddock/telescope-zf-native.nvim"
 
   -- Support for e.g. `da,`
   use 'wellle/targets.vim'

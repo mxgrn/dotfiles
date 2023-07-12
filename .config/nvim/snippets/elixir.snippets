@@ -1,3 +1,6 @@
+snippet tap "Tap inspect"
+	|> tap(&IO.inspect(&1.${1}, pretty: true, label: "!!! $1"))
+
 snippet # "String interpolation"
   #{${1}}${2}
 
