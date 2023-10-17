@@ -17,19 +17,20 @@ opt.clipboard              = 'unnamedplus' -- Copy/paste to system clipboard
 opt.swapfile               = false         -- Don't use swapfile
 opt.complete               = '.,w,b'       -- For autocomplete, use current buffer, other windows, and other open buffers
 opt.undofile               = true          -- Persistent undo history
+opt.foldenable             = false         -- Don't fold by default
 
 -----------------------------------------------------------
 -- Neovim UI
 -----------------------------------------------------------
 -- opt.number = true           -- Show line number
 opt.showmatch              = true     -- Highlight matching parenthesis
-opt.foldmethod             = 'marker' -- Enable folding (default 'foldmarker')
--- opt.splitright = true       -- Vertical split to the right
--- opt.splitbelow = true       -- Horizontal split to the bottom
-opt.ignorecase             = true -- Ignore case letters when search
-opt.smartcase              = true -- Ignore lowercase for the whole pattern
-opt.linebreak              = true -- Wrap on word boundary
-opt.termguicolors          = true -- Enable 24-bit RGB colors
+opt.foldmethod             = 'indent' -- Enable folding (default 'foldmarker')
+opt.splitright             = true     -- Vertical split to the right
+opt.splitbelow             = true     -- Horizontal split to the bottom
+opt.ignorecase             = true     -- Ignore case letters when search
+opt.smartcase              = true     -- Ignore lowercase for the whole pattern
+opt.linebreak              = true     -- Wrap on word boundary
+opt.termguicolors          = true     -- Enable 24-bit RGB colors
 -- opt.laststatus=3            -- Set global statusline
 
 -----------------------------------------------------------
@@ -81,9 +82,6 @@ g.vindent_object_XX_ii     = 'ii' -- select current block.
 g.vindent_object_XX_ai     = 'aI' -- select current block + one extra line  at beginning.
 g.vindent_object_XX_aI     = 'ai' -- select current block + two extra lines at beginning and end.
 g.vindent_jumps            = 1    -- make vindent motion count as a |jump-motion| (works with |jumplist|).
-
-opt.splitbelow             = true
-opt.splitright             = true
 
 -- wipe netrw buffers when closed
 -- https://www.reddit.com/r/vim/comments/g45w7q/let_gnetrw_altfile_1_has_no_effect/

@@ -24,8 +24,8 @@ nmap("<leader>s", ":w<cr>")
 nmap("<leader>v", ":e $MYVIMRC<cr>")
 
 -- require('telescope').load_extension('fzf')
-nmap("<c-p>", "<CMD>lua require'telescope.builtin'.find_files({show_untracked = true})<CR>")
-nmap("<leader>f", "<cmd>Telescope buffers<cr>")
+nmap("<leader>f", "<CMD>lua require'telescope.builtin'.find_files({show_untracked = true})<CR>")
+nmap("<c-p>", "<cmd>lua require('telescope.builtin').buffers({ sort_mru = true, ignore_current_buffer = true })<cr>")
 
 -- Save and quit on space-q
 nmap("<space>q", ":wa<cr>:qa<cr>")
@@ -147,6 +147,12 @@ nmap("<space>g", "<cmd>G<cr>")
 
 -- Manual cd into current file's dir
 nmap("<space>c", "<cmd>cd %:p:h<cr>")
+
+-- Center by hitting enter
+nmap("<cr>", "zz")
+
+nmap("1z", ":setlocal foldlevel=1<cr>")
+nmap("2z", ":setlocal foldlevel=2<cr>")
 
 -- Switch between 2 recent tabs
 vim.cmd [[
