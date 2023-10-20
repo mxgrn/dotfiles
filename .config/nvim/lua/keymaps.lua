@@ -176,7 +176,7 @@ nmap("<leader><leader>", ":exe 'tabn '.g:lasttab<cr>")
 -- Close all tabse exept current
 nmap("<leader>t", ":tabonly<cr>:call DeleteHiddenBuffers()<cr>")
 
--- Center various jumps (disabling for now, getting a movement fatigue)
+-- Center various jumps (UPD: disabling for now, getting a movement fatigue)
 -- nmap("*", "*zz")
 -- nmap("n", "nzz")
 -- nmap("N", "Nzz")

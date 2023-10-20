@@ -12,9 +12,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  'wbthomason/packer.nvim',
-
-  { "catppuccin/nvim",    as = "catppuccin" },
+  { "catppuccin/nvim", as = "catppuccin" },
 
   "nvim-lua/plenary.nvim", -- Useful lua functions used by lots of plugins
 
@@ -51,12 +49,15 @@ require("lazy").setup({
     end,
   },
 
+  -- Favor file names over paths when fuzzy-searching
+  'natecraddock/telescope-zf-native.nvim',
+
   -- Telescope
   {
     'nvim-telescope/telescope.nvim',
     config = function()
       -- telescope-zf-native.nvim
-      -- require("telescope").load_extension("zf-native")
+      require("telescope").load_extension("zf-native")
 
       require('telescope').setup {
         defaults = {
@@ -79,13 +80,13 @@ require("lazy").setup({
     end
   },
 
-  {
-    'nvim-telescope/telescope-fzf-native.nvim',
-    run =
-    'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
-    config = function()
-    end
-  },
+  -- {
+  --   'nvim-telescope/telescope-fzf-native.nvim',
+  --   run =
+  --   'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+  --   config = function()
+  --   end
+  -- },
 
   -- File type icons in Telescope
   'nvim-tree/nvim-web-devicons',
@@ -208,14 +209,14 @@ require("lazy").setup({
   'honza/vim-snippets',
 
   {
-    "L3MON4D3/LuaSnip",
+    'L3MON4D3/LuaSnip',
     -- follow latest release.
     -- tag = "v<CurrentMajor>.*",
     -- install jsregexp (optional!:).
-    run = "make install_jsregexp",
+    run = 'make install_jsregexp',
     config = function()
       -- require("luasnip.loaders.from_snipmate").lazy_load { paths = "./snippets" }
-      require("luasnip.loaders.from_snipmate").lazy_load {}
+      require('luasnip.loaders.from_snipmate').lazy_load {}
     end
   },
 
@@ -239,22 +240,10 @@ require("lazy").setup({
 
   'github/copilot.vim',
 
-  -- Favor file names over paths when fuzzy-searching
-  "natecraddock/telescope-zf-native.nvim",
-
   -- Support for e.g. `da,`
   'wellle/targets.vim',
 
-  -- Indentation support, e.g. '[-'
-  ({
-    'jessekelighine/vindent.vim',
-    config = function()
-      -- vim.g.vindent_motion_OO_prev = '[i' -- jump to prev block of same indent.
-      -- vim.g.vindent_motion_OO_next = ']i' -- jump to next block of same indent.
-    end
-  }),
-
-  "folke/which-key.nvim",
-  { "folke/neoconf.nvim", cmd = "Neoconf" },
-  "folke/neodev.nvim",
+  -- Indentation support, e.g. '[i'
+  -- The actuall mappings are in options.lua
+  'jessekelighine/vindent.vim',
 })

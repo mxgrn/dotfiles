@@ -58,12 +58,6 @@ g.netrw_alto               = 1
 -- g.netrw_banner          = 1
 g.netrw_localcopydircmd    = 'cp -r'
 
------------------------------------------------------------
--- Startup
------------------------------------------------------------
--- Disable nvim intro
--- opt.shortmess:append "sI"
-
 -- Ack
 g.ackprg                   = 'ag --vimgrep --smart-case'
 
@@ -125,3 +119,5 @@ local disabled_built_ins   = {
 for _, plugin in pairs(disabled_built_ins) do
   g["loaded_" .. plugin] = 1
 end
+
+return false

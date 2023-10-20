@@ -1,5 +1,6 @@
-require('plugins')
+-- must be required _before_ plugins (otherwise vindent stops working, for example)
 require('options')
+require('plugins')
 require('autocmds')
 require('keymaps')
 require('colors')
