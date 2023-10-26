@@ -12,6 +12,11 @@
   # available, otherwise `xterm-256color` is used.
   # TERM: xterm-256color
 
+bell:
+  duration: 50
+  animation: EaseOut
+  color: '#000000'
+
 window:
   # Allow terminal applications to change Alacritty's window title.
   dynamic_title: true
@@ -37,8 +42,8 @@ window:
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
   padding:
-    x: 2
-    y: 2
+    x: 0
+    y: 0
 
   # Spread additional padding evenly around the terminal content.
   dynamic_padding: true
@@ -265,9 +270,6 @@ working_directory: /Users/mxgrn
 # Setting this option to `true` makes Alacritty use the legacy WinPTY backend,
 # even if the ConPTY backend is available.
 #winpty_backend: false
-
-# Send ESC (\x1b) before characters when alt is pressed.
-alt_send_esc: true
 
 mouse:
   # Click settings
