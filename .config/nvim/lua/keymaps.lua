@@ -91,6 +91,8 @@ vmap("p", "pgvy")
 -- Project notes
 nmap("<Leader>pn", ":sp .notes.md<cr>")
 
+nmap("<leader>d", ":DBUIToggle<cr>")
+
 -- Luasnip
 vim.cmd [[
 " press <Tab> to expand or jump in a snippet. These can also be mapped separately
@@ -140,7 +142,7 @@ tmap("<c-b>", "<c-\\><c-n><c-b>")
 nmap("<leader>/", ":AckFromSearch<CR>")
 
 -- Toggle QF window
-nmap("<leader>u", "<cmd>lua require'core/quickfix'.toggle_qf()<cr>")
+nmap("<leader>u", "<cmd>lua require'quickfix'.toggle_qf()<cr>")
 
 -- Git status
 nmap("<space>g", "<cmd>G<cr>")
@@ -174,7 +176,8 @@ endfunction
 nmap("<leader><leader>", ":exe 'tabn '.g:lasttab<cr>")
 
 -- Close all tabse exept current
-nmap("<leader>t", ":tabonly<cr>:call DeleteHiddenBuffers()<cr>")
+nmap("<leader>T", ":tabonly<cr>:call DeleteHiddenBuffers()<cr>")
+nmap("<leader>t", ":tabnew<cr>")
 
 -- Center various jumps (UPD: disabling for now, getting a movement fatigue)
 -- nmap("*", "*zz")

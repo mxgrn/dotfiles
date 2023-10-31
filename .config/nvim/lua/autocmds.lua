@@ -55,4 +55,8 @@ autocmd('VimEnter', {
 -- Autosave files on losing focus
 autocmd('FocusLost', { pattern = '', command = "silent! wa" })
 
+-- Expand DBUI dbout window on open
+autocmd('FileType', { pattern = 'dbout', command = 'horizontal resize 40' })
+
+
 return false
