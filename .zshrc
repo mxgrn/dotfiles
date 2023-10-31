@@ -63,3 +63,6 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="/opt/homebrew/opt/curl/bin:$PATH"
 export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 export PATH=$PATH:/Users/mxgrn/code/temp/roc_nightly-macos_apple_silicon-2023-03-31-424b4aa
+
+export DIRENV_LOG_FORMAT=
+eval "$(direnv hook zsh)"
