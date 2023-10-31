@@ -37,7 +37,7 @@
           {
             "manipulators": [
               {
-                "description": "Alt down arrow",
+                "description": "Alternative down arrow",
                 "from": {
                   "key_code": "k",
                   "modifiers": {
@@ -57,7 +57,7 @@
                 "type": "basic"
               },
               {
-                "description": "Alt up arrow",
+                "description": "Alternative up arrow",
                 "from": {
                   "key_code": "i",
                   "modifiers": {
@@ -77,7 +77,7 @@
                 "type": "basic"
               },
               {
-                "description": "Alt right arrow",
+                "description": "Alternative right arrow",
                 "from": {
                   "key_code": "l",
                   "modifiers": {
@@ -97,7 +97,7 @@
                 "type": "basic"
               },
               {
-                "description": "Alt left arrow",
+                "description": "Alternative left arrow",
                 "from": {
                   "key_code": "j",
                   "modifiers": {
@@ -160,6 +160,110 @@
                 "to_if_alone": [
                   {
                     "key_code": "escape"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "Change single left shift to f19",
+            "manipulators": [
+              {
+                "from": {
+                  "key_code": "left_shift",
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "left_shift"
+                  }
+                ],
+                "to_if_alone": [
+                  {
+                    "key_code": "f19"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "Change single left shift to f20",
+            "manipulators": [
+              {
+                "from": {
+                  "key_code": "right_shift",
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "right_shift"
+                  }
+                ],
+                "to_if_alone": [
+                  {
+                    "key_code": "f20"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "Change single left alt to f17",
+            "manipulators": [
+              {
+                "from": {
+                  "key_code": "left_option",
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "left_option"
+                  }
+                ],
+                "to_if_alone": [
+                  {
+                    "key_code": "f17"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "Change single right alt to f18",
+            "manipulators": [
+              {
+                "from": {
+                  "key_code": "right_option",
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "right_option"
+                  }
+                ],
+                "to_if_alone": [
+                  {
+                    "key_code": "f18"
                   }
                 ],
                 "type": "basic"
