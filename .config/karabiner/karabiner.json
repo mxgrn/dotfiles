@@ -167,58 +167,6 @@
             ]
           },
           {
-            "description": "Change single left shift to f19",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "left_shift",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "left_shift"
-                  }
-                ],
-                "to_if_alone": [
-                  {
-                    "key_code": "f19"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Change single left shift to f20",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "right_shift",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "right_shift"
-                  }
-                ],
-                "to_if_alone": [
-                  {
-                    "key_code": "f20"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
             "description": "Change single left alt to f17",
             "manipulators": [
               {
