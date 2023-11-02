@@ -28,6 +28,8 @@ require("lazy").setup({
   -- WIP
   'nvim-treesitter/nvim-treesitter-textobjects',
 
+  'tpope/vim-dotenv',
+
   -- Treesitter interface
   {
     'nvim-treesitter/nvim-treesitter',
