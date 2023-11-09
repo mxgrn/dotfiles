@@ -11,5 +11,8 @@
   colorMoved = zebra
 [core]
   excludesfile = /Users/mxgrn/.gitignore
+	pager = delta
 [init]
 	defaultBranch = master
+; [delta]
+;     side-by-side = true

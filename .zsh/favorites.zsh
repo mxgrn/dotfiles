@@ -46,5 +46,6 @@ alias -g KK='~/code/mxgrn/ketoketo'
 alias -g GT='~/code/mxgrn/geektrack'
 alias -g P="~/code/mxgrn/pairs.one"
 alias -g V="~/code/mxgrn/vocab"
+alias -g TP="~/code/mxgrn/trustpot"
 
 alias T='~/temp'
