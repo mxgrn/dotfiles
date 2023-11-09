@@ -275,6 +275,17 @@ require("lazy").setup({
   'jessekelighine/vindent.vim',
 
   {
+    'TaDaa/vimade',
+    config = function()
+      -- Not sure why I need to wrap it in a vim.cmd, but it doesn't work otherwise
+      vim.cmd [[
+        let g:vimade.fadelevel = 0.6
+        let g:vimade.enabletreesitter = 1
+      ]]
+    end
+  },
+
+  {
     'kristijanhusak/vim-dadbod-ui',
     dependencies = {
       { 'tpope/vim-dadbod',                     lazy = true },
@@ -290,5 +301,5 @@ require("lazy").setup({
       -- Your DBUI configuration
       vim.g.db_ui_use_nerd_fonts = 1
     end,
-  }
+  },
 })
