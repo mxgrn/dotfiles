@@ -12,8 +12,9 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  -- Color scheme
-  "catppuccin/nvim",
+  -- My 2 favorite colorschemes
+  'EdenEast/nightfox.nvim',
+  'catppuccin/nvim',
 
   -- Useful lua functions used by lots of plugins
   "nvim-lua/plenary.nvim",
