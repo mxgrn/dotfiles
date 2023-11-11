@@ -12,12 +12,11 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  { "catppuccin/nvim", as = "catppuccin" },
-
-  "nvim-lua/plenary.nvim", -- Useful lua functions used by lots of plugins
-
   -- Color scheme
-  "rakr/vim-one",
+  "catppuccin/nvim",
+
+  -- Useful lua functions used by lots of plugins
+  "nvim-lua/plenary.nvim",
 
   -- Netrw tweaks and fixes
   'tpope/vim-vinegar',
@@ -279,7 +278,7 @@ require("lazy").setup({
     config = function()
       -- Not sure why I need to wrap it in a vim.cmd, but it doesn't work otherwise
       vim.cmd [[
-        let g:vimade.fadelevel = 0.6
+        let g:vimade.fadelevel = 0.7
         let g:vimade.enabletreesitter = 1
       ]]
     end
