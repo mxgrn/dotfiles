@@ -14,5 +14,7 @@
 	pager = delta
 [init]
 	defaultBranch = master
-; [delta]
-;     side-by-side = true
+[include]
+  path = /Users/mxgrn/.config/delta/themes.gitconfig
+[delta]
+  features = gruvmax-fang
