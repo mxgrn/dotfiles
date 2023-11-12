@@ -340,14 +340,13 @@
     dark = true
     syntax-theme = gruvbox-dark
     # File
-    file-style = "#FFFFFF" bold
+    file-style = "#009092" bold
     file-added-label = [+]
     file-copied-label = [==]
     file-modified-label = [*]
     file-removed-label = [-]
     file-renamed-label = [->]
-    file-decoration-style = "#434C5E" ul
-    file-decoration-style = "#84786A" ul
+    file-decoration-style = "#111111" ul
     # No hunk headers
     hunk-header-style = omit
     # Line numbers
