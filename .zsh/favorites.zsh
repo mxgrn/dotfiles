@@ -11,7 +11,6 @@ alias -g CT="~/code/temp"
 alias -g CL='~/code/labs'
 alias -g CP='~/code/playground'
 
-
 alias -g B="~/code/bluecode"
 alias -g BM="~/code/bluecode/mission-control"
 alias -g BI="~/code/bluecode/issuer-adapters"
@@ -31,8 +30,6 @@ alias -g BB="~/code/bluecode/bluebuy-server"
 alias -g BVA="~/code/bluecode/vas_api_client"
 
 alias -g FAM='~/Studio/assets/icons/famfamfam_silk_icons_v013/icons'
-
-alias -g D='~/.dotfiles'
 
 alias -g HD='~/Downloads'
 alias -g HI='~/Inbox'

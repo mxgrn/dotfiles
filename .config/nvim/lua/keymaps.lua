@@ -113,6 +113,8 @@ smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' 
 nmap("<space><leader>s", ":execute 'edit' expand(stdpath('config')..'/snippets/'..(&filetype)..'.snippets')<cr>")
 
 -- vim-projectionist
+nmap("<c-w>a", "<c-w>v:A<cr>")
+nmap("<c-w>A", "<c-w>s:A<cr>")
 nmap("<space>a", ":A<cr>")
 nmap("<space>eh", ":Ehtml<cr>")
 nmap("<space>el", ":ELive<cr>")
@@ -151,12 +153,13 @@ nmap("<space>g", "<cmd>G<cr>")
 nmap("<space>c", "<cmd>cd %:p:h<cr>")
 
 -- Center by hitting enter
-nmap("<cr>", "zz")
+-- nmap("<cr>", "zz")
 
 nmap("1z", ":setlocal foldlevel=1<cr>")
 nmap("2z", ":setlocal foldlevel=2<cr>")
 
--- Switch between 2 recent tabs
+nmap("<c-w><c-]>", ":vsplit<cr><c-]>")
+
 vim.cmd [[
 au TabLeave * let g:lasttab = tabpagenr()
 
@@ -173,10 +176,13 @@ function! DeleteHiddenBuffers()
   echo "Closed ".closed." hidden buffers"
 endfunction
 ]]
+
+-- Close all tabs exept current
+nmap("<leader>T", ":tabonly<cr>:call DeleteHiddenBuffers()<cr>")
+
+-- Switch between 2 recent tabs
 nmap("<leader><leader>", ":exe 'tabn '.g:lasttab<cr>")
 
--- Close all tabse exept current
-nmap("<leader>T", ":tabonly<cr>:call DeleteHiddenBuffers()<cr>")
 nmap("<leader>t", ":tabnew<cr>")
 
 -- Center various jumps (UPD: disabling for now, getting a movement fatigue)
@@ -211,7 +217,6 @@ augroup netrw_enter
   autocmd!
   autocmd filetype netrw call NetrwEnter()
 augroup END
-
 
 autocmd FileType foo let b:surround_45 = "%{\r}"
 

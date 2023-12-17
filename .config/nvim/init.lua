@@ -21,6 +21,7 @@ vim.cmd([[
 ]])
 
 -- Fix LuaSnip behaviour: https://github.com/L3MON4D3/LuaSnip/issues/258#issuecomment-1429989436
+-- This is a workaround for the snippet "session" not finishing when exiting insert mode.
 vim.api.nvim_create_autocmd('ModeChanged', {
   pattern = '*',
   callback = function()

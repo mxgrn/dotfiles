@@ -56,25 +56,25 @@ autocmd('VimEnter', {
 autocmd('FocusLost', { pattern = '', command = "silent! wa" })
 
 -- Expand DBUI dbout window on open
-autocmd('FileType', { pattern = 'dbout', command = 'horizontal resize 30' })
+-- autocmd('FileType', { pattern = 'dbout', command = 'horizontal resize 30' })
 
 -- Map O to directly go to tables in DBUI
 vim.cmd([[
-autocmd User DBUIOpened call OpenDBUI()
+  autocmd User DBUIOpened call OpenDBUI()
 
-function! OpenDBUI()
-  noremap O :call Open_tables()<CR>
-endfunction
+  function! OpenDBUI()
+    noremap O :call Open_tables()<CR>
+  endfunction
 
-function! Open_tables()
-  norm o
+  function! Open_tables()
+    norm o
 
-  call search('Schemas')
-  norm o
+    call search('Schemas')
+    norm o
 
-  call search('public')
-  norm o
-endfunction
+    call search('public')
+    norm o
+  endfunction
 ]])
 
 return false

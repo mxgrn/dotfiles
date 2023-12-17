@@ -69,11 +69,17 @@ require("lazy").setup({
           -- `false` will disable the whole extension
           enable = true,
         },
+        -- matchup = {
+        --   enable = false, -- mandatory, false will disable the whole extension
+        --   disable_virtual_text = true,
+        --   -- disable = { "c", "ruby" }, -- optional, list of language that will be disabled
+        --   -- [options]
+        -- },
       }
     end,
-    run = function()
-      require('nvim-treesitter.install').update({ with_sync = true })
-    end,
+    -- run = function()
+    --   require('nvim-treesitter.install').update({ with_sync = true })
+    -- end,
   },
 
   -- Favor file names over paths when fuzzy-searching
@@ -226,23 +232,36 @@ require("lazy").setup({
 
   {
     'andymass/vim-matchup',
-    setup = function()
-      -- may set any options here
-      vim.g.matchup_matchparen_offscreen = { method = "popup" }
-    end
+    config = function()
+      vim.cmd [[
+        let g:matchup_matchparen_offscreen = {}
+        " If you want the matching line to appear on the top (overriding 'treesitter-context'), do this instead:
+        " let g:matchup_matchparen_offscreen = { 'method': 'popup' }
+      ]]
+    end,
   },
 
   -- Snippets
   'honza/vim-snippets',
 
+  -- {
+  --   'L3MON4D3/LuaSnip',
+  --   -- follow latest release.
+  --   -- tag = "v<CurrentMajor>.*",
+  --   -- install jsregexp (optional!:).
+  --   run = 'make install_jsregexp',
+  --   config = function()
+  --     -- require("luasnip.loaders.from_snipmate").lazy_load { paths = "./snippets" }
+  --     require('luasnip.loaders.from_snipmate').lazy_load {}
+  --   end
+  -- },
   {
-    'L3MON4D3/LuaSnip',
+    "L3MON4D3/LuaSnip",
     -- follow latest release.
-    -- tag = "v<CurrentMajor>.*",
-    -- install jsregexp (optional!:).
-    run = 'make install_jsregexp',
+    version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+    -- install jsregexp (optional!).
+    build = "make install_jsregexp",
     config = function()
-      -- require("luasnip.loaders.from_snipmate").lazy_load { paths = "./snippets" }
       require('luasnip.loaders.from_snipmate').lazy_load {}
     end
   },
@@ -274,16 +293,16 @@ require("lazy").setup({
   -- The actuall mappings are in options.lua
   'jessekelighine/vindent.vim',
 
-  {
-    'TaDaa/vimade',
-    config = function()
-      -- Not sure why I need to wrap it in a vim.cmd, but it doesn't work otherwise
-      vim.cmd [[
-        let g:vimade.fadelevel = 0.7
-        let g:vimade.enabletreesitter = 1
-      ]]
-    end
-  },
+  -- {
+  --   'TaDaa/vimade',
+  --   config = function()
+  --     -- Not sure why I need to wrap it in a vim.cmd, but it doesn't work otherwise
+  --     vim.cmd [[
+  --       let g:vimade.fadelevel = 0.7
+  --       let g:vimade.enabletreesitter = 1
+  --     ]]
+  --   end
+  -- },
 
   {
     'kristijanhusak/vim-dadbod-ui',
@@ -298,8 +317,25 @@ require("lazy").setup({
       'DBUIFindBuffer',
     },
     init = function()
-      -- Your DBUI configuration
       vim.g.db_ui_use_nerd_fonts = 1
     end,
+  },
+
+  {
+    'nyngwang/NeoZoom.lua',
+    config = function()
+      require('neo-zoom').setup {
+        winopts = {
+          offset = {
+            top = 0,
+            left = 0,
+            width = 1,
+            height = 1,
+          },
+          border = 'rounded',
+        },
+      }
+      vim.keymap.set('n', '<CR>', function() vim.cmd('NeoZoomToggle') end, { silent = true, nowait = true })
+    end
   },
 })
