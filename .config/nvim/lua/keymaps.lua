@@ -73,7 +73,7 @@ nmap("<space>k", ":close<CR>")
 -- delete all saved buffers
 nmap("<space>X", ":%bd<cr>")
 -- vim-bbye kill buffer w/o closing the window (it won't kill last buffer)
-nmap("<space>x", ":silent! w<cr>:Bwipeout<cr>")
+nmap("<space>x", ":silent! w<cr>:Bdelete<cr>")
 -- close window along with the buffer
 nmap("<space>k", ":close<CR>")
 

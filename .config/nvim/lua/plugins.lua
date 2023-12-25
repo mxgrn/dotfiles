@@ -141,6 +141,8 @@ require("lazy").setup({
   },
 
   -- Extra buffer manupilations, such as :Bwipeout
+  -- Long unmaintained. Check out famiu/bufdelete.nvim at some point, may be a drop-in replacement.
+  -- Difference b/w :Bdelete and :Bwipeout: Bwipeout also removes the buffer from the jumplist
   'moll/vim-bbye',
 
   -- Run tests directly from test files
