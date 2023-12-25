@@ -1,6 +1,6 @@
 setopt auto_cd # now we can omit `cd`
 
-alias efav="nvim ~/.dotfiles/zsh/_favorites.zsh"
+alias efav="nvim ~/.zsh/favorites.zsh"
 
 alias JL='~/Dropbox/Journal/Life'
 alias JB='~/Dropbox/Journal/Bluecode'
@@ -29,8 +29,6 @@ alias -g BO="~/code/bluecode/customer-onboarding-e2e-tests"
 alias -g BB="~/code/bluecode/bluebuy-server"
 alias -g BVA="~/code/bluecode/vas_api_client"
 
-alias -g FAM='~/Studio/assets/icons/famfamfam_silk_icons_v013/icons'
-
 alias -g HD='~/Downloads'
 alias -g HI='~/Inbox'
 alias -g HD='~/Documents'
@@ -44,5 +42,7 @@ alias -g GT='~/code/mxgrn/geektrack'
 alias -g P="~/code/mxgrn/pairs.one"
 alias -g V="~/code/mxgrn/vocab"
 alias -g TP="~/code/mxgrn/trustpot"
+alias -g AT="~/code/mxgrn/ash_table"
+alias -g PL="~/code/temp/phx_latest"
 
 alias T='~/temp'
