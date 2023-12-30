@@ -1,0 +1,48 @@
+[font]
+size = 14.0
+
+[font.normal]
+family = "Iosevka Term"
+style = "Extralight"
+
+[font.bold]
+family = "Iosevka"
+style = "Medium"
+
+[font.italic]
+family = "Iosevka"
+style = "Light Italic"
+
+[mouse]
+hide_when_typing = true
+
+[[keyboard.bindings]]
+action = "ToggleSimpleFullscreen"
+key = "Return"
+mods = "Command"
+
+# Prevent accidental closing of the window
+[[keyboard.bindings]]
+action = "None"
+key = "w"
+mods = "Command"
+
+# This stopped working for Alacritty a while ago
+# [[keyboard.bindings]]
+# action = "None"
+# key = "q"
+# mods = "Command"
+
+# Make <c-cr> mappable in Neovim, from https://erwin.co/getting-ctrltab-to-work-in-neovim/
+[[keyboard.bindings]]
+chars = "\u001b[13;5u"
+key = "Return"
+mods = "Control"
+
+# Hide window title bar
+[window]
+decorations = "None"
+
+# Copy selected text to the primary clipboard
+[selection]
+  save_to_clipboard = true
