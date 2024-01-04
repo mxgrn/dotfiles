@@ -107,7 +107,9 @@ g.copilot_filetypes = {
   rust = true,
   haskell = true,
   vim = true,
-  javascript = true
+  javascript = true,
+  lua = true,
+  sql = true
 }
 
 -- Let context on the top always have a line of space, so it's always visible

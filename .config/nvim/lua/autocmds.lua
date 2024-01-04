@@ -55,6 +55,22 @@ autocmd('VimEnter', {
 -- Autosave files on losing focus
 autocmd('FocusLost', { pattern = '', command = "silent! wa" })
 
+
+-- For sql buffers, run sleek on save for formatting
+autocmd('FileType', {
+  pattern = 'sql',
+  callback = function()
+    autocmd('BufWritePre', {
+      callback = function()
+        -- vim.cmd('silent %!pg_format')
+        vim.cmd('silent %!sleek')
+      end
+    })
+  end
+})
+
+
+
 -- Expand DBUI dbout window on open
 -- autocmd('FileType', { pattern = 'dbout', command = 'horizontal resize 30' })
 
