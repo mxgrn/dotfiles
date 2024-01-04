@@ -101,6 +101,15 @@ g.db_ui_table_helpers      = {
   }
 }
 
+g.copilot_filetypes = {
+  ['*'] = false,
+  elixir = true,
+  rust = true,
+  haskell = true,
+  vim = true,
+  javascript = true
+}
+
 -- Let context on the top always have a line of space, so it's always visible
 opt.scrolloff              = 1
 

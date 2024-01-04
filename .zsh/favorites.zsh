@@ -9,6 +9,7 @@ alias JK='~/Dropbox/Journal/Keto-Keto'
 alias -g C="~/code"
 alias -g CT="~/code/temp"
 alias -g CL='~/code/labs'
+alias -g CM='~/code/mxgrn'
 alias -g CP='~/code/playground'
 
 alias -g B="~/code/bluecode"

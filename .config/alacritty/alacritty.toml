@@ -1,5 +1,9 @@
 [font]
-size = 14.0
+size = 15.0
+
+[font.offset]
+x = 0
+y = 0
 
 [font.normal]
 family = "Iosevka Term"
@@ -42,6 +46,8 @@ mods = "Control"
 # Hide window title bar
 [window]
 decorations = "None"
+startup_mode = "Maximized"
+
 
 # Copy selected text to the primary clipboard
 [selection]
