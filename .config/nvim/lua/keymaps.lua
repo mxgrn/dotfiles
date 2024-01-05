@@ -25,6 +25,7 @@ nmap("<leader>v", ":e $MYVIMRC<cr><cmd>cd %:p:h<cr>")
 
 -- require('telescope').load_extension('fzf')
 nmap("<leader>f", "<CMD>lua require'telescope.builtin'.find_files({show_untracked = true})<CR>")
+nmap("<space>/", "<CMD>lua require'telescope.builtin'.current_buffer_fuzzy_find({})<CR>")
 nmap("<c-p>", "<cmd>lua require('telescope.builtin').buffers({ sort_mru = true, ignore_current_buffer = true })<cr>")
 
 -- Save and quit on space-q
