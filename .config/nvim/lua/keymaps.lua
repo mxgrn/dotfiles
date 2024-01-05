@@ -211,6 +211,10 @@ augroup END
 autocmd FileType foo let b:surround_45 = "%{\r}"
 
 let g:surround_37 = "%{\r}"
+
+" don't clobber the jumplist with } and {, source: https://superuser.com/questions/836784/in-vim-dont-store-motions-in-jumplist
+nnoremap <silent> } :<C-u>execute "keepjumps norm! " . v:count1 . "}"<CR>
+nnoremap <silent> { :<C-u>execute "keepjumps norm! " . v:count1 . "{"<CR>
 ]]
 
 ---------
