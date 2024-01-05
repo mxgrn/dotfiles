@@ -21,7 +21,7 @@ local function tmap(shortcut, command)
 end
 
 nmap("<leader>s", ":w<cr>")
-nmap("<leader>v", ":e $MYVIMRC<cr>")
+nmap("<leader>v", ":e $MYVIMRC<cr><cmd>cd %:p:h<cr>")
 
 -- require('telescope').load_extension('fzf')
 nmap("<leader>f", "<CMD>lua require'telescope.builtin'.find_files({show_untracked = true})<CR>")
@@ -185,16 +185,6 @@ nmap("<leader><leader>", ":exe 'tabn '.g:lasttab<cr>")
 
 nmap("<leader>t", ":tabnew<cr>")
 
--- Center various jumps (UPD: disabling for now, getting a movement fatigue)
--- nmap("*", "*zz")
--- nmap("n", "nzz")
--- nmap("N", "Nzz")
--- nmap("G", "Gzz")
--- nmap("<c-]>", "<c-]>zz")
--- nmap("<c-t>", "<c-t>zz")
--- nmap("<c-i>", "<c-i>zz")
--- nmap("<c-o>", "<c-o>zz")
-
 -- GitHub copilot: don't use tab to accept suggestions, as it interferes with snippets.
 -- Instead, press ctrl + enter.
 vim.api.nvim_set_keymap('i', '<c-cr>', 'copilot#Accept("")',
@@ -228,5 +218,8 @@ let g:surround_37 = "%{\r}"
 
 -- Wrap selection in %{} (requires vim-surround)
 vim.api.nvim_set_keymap('v', "<c-^>", "S}i%<esc>%", { noremap = false, silent = true })
+
+-- oil
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 return false
