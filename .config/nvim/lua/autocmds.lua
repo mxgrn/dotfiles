@@ -21,10 +21,10 @@ autocmd('TextYankPost', {
 })
 
 -- Remove whitespace on save
-autocmd('BufWritePre', {
-  pattern = '',
-  command = ":%s/\\s\\+$//e"
-})
+-- autocmd('BufWritePre', {
+--   pattern = '',
+--   command = ":%s/\\s\\+$//e"
+-- })
 
 -- Don't auto comment new lines
 autocmd('BufEnter', {
@@ -61,6 +61,7 @@ autocmd('FileType', {
   pattern = 'sql',
   callback = function()
     autocmd('BufWritePre', {
+      buffer = vim.api.nvim_get_current_buf(),
       callback = function()
         -- vim.cmd('silent %!pg_format')
         vim.cmd('silent %!sleek')
