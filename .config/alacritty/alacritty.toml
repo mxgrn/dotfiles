@@ -6,16 +6,16 @@ x = 0
 y = 0
 
 [font.normal]
-family = "Iosevka Term"
-style = "Extralight"
+family = "IosevkaTerm Nerd Font Mono"
+style = "ExtraLight"
 
 [font.bold]
-family = "Iosevka"
-style = "Medium"
+family = "IosevkaTerm Nerd Font Mono"
+style = "Light"
 
 [font.italic]
-family = "Iosevka"
-style = "Light Italic"
+family = "IosevkaTerm Nerd Font Mono"
+style = "ExtraLight Italic"
 
 [mouse]
 hide_when_typing = true
