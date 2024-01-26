@@ -26,7 +26,7 @@ require("lazy").setup({
       require("oil").setup({
         -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`)
         -- Set to false if you still want to use netrw.
-        default_file_explorer = true,
+        default_file_explorer = false,
         -- Id is automatically added at the beginning, and name at the end
         -- See :help oil-columns
         columns = {
@@ -80,7 +80,7 @@ require("lazy").setup({
           -- ["<C-h>"] = "actions.select_split",
           -- ["<C-t>"] = "actions.select_tab",
           -- ["<C-p>"] = "actions.preview",
-          ["<esc>"] = "actions.close",
+          -- ["<esc>"] = "actions.close",
           -- ["<C-l>"] = "actions.refresh",
           ["-"] = "actions.parent",
           ["_"] = "actions.open_cwd",
