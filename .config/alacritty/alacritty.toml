@@ -18,7 +18,7 @@ family = "IosevkaTerm Nerd Font Mono"
 style = "ExtraLight Italic"
 
 [colors.normal]
-red = "0xff8888"
+red = "0xee8888"
 
 [mouse]
 hide_when_typing = true
