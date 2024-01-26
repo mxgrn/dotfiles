@@ -70,28 +70,4 @@ autocmd('FileType', {
   end
 })
 
-
-
--- Expand DBUI dbout window on open
--- autocmd('FileType', { pattern = 'dbout', command = 'horizontal resize 30' })
-
--- Map O to directly go to tables in DBUI
-vim.cmd([[
-  autocmd User DBUIOpened call OpenDBUI()
-
-  function! OpenDBUI()
-    noremap O :call Open_tables()<CR>
-  endfunction
-
-  function! Open_tables()
-    norm o
-
-    call search('Schemas')
-    norm o
-
-    call search('public')
-    norm o
-  endfunction
-]])
-
 return false

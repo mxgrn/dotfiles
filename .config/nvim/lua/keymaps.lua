@@ -92,8 +92,6 @@ vmap("p", "pgvy")
 -- Project notes
 nmap("<Leader>pn", ":sp .notes.md<cr>")
 
-nmap("<leader>d", ":DBUIToggle<cr>")
-
 -- Luasnip
 vim.cmd [[
 " press <Tab> to expand or jump in a snippet. These can also be mapped separately

@@ -87,21 +87,7 @@ g.netrw_fastbrowse         = 0
 -- Allow ctrl-6 to work for a file that has just been opened via netrw
 g.netrw_altfile            = 1
 
--- DBUI options
--- g.db_ui_execute_on_save    = 0
-g.db_ui_show_database_icon = 1
-g.db_ui_use_nerd_fonts     = 1
-g.db_ui_show_help          = 0
-g.db_ui_hide_schemas       = { 'pg_catalog', 'pg_toast', 'information_schema' }
-g.db_ui_use_nvim_notify    = 1
-g.db_ui_table_helpers      = {
-  postgresql = {
-    ["Recently updated"] = 'select * from {table} order by updated_at desc limit 50',
-    ["Recently added"] = 'select * from {table} order by inserted_at desc limit 50',
-  }
-}
-
-g.copilot_filetypes = {
+g.copilot_filetypes        = {
   ['*'] = false,
   elixir = true,
   rust = true,
