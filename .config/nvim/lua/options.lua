@@ -95,7 +95,10 @@ g.copilot_filetypes        = {
   vim = true,
   javascript = true,
   lua = true,
-  sql = true
+  sql = true,
+  po = true,
+  eelixir = true,
+  elm = true
 }
 
 -- Let context on the top always have a line of space, so it's always visible
