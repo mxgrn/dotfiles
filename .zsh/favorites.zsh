@@ -12,6 +12,8 @@ alias -g CL='~/code/labs'
 alias -g CM='~/code/mxgrn'
 alias -g CP='~/code/playground'
 
+alias -g D='~/dotfiles'
+
 alias -g HD='~/Downloads'
 alias -g HI='~/Inbox'
 alias -g HD='~/Documents'

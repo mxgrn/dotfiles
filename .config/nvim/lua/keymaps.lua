@@ -21,7 +21,10 @@ local function tmap(shortcut, command)
 end
 
 nmap("<leader>s", ":w<cr>")
-nmap("<leader>v", ":e $MYVIMRC<cr><cmd>cd %:p:h<cr>")
+
+-- Because Telescope doesn't by default "sees" symbolic links
+-- nmap("<leader>v", ":e $MYVIMRC<cr><cmd>cd %:p:h<cr>")
+nmap("<leader>v", ":e ~/dotfiles/.config/nvim/init.lua<cr><cmd>cd %:p:h<cr>")
 
 -- require('telescope').load_extension('fzf')
 nmap("<leader>f", "<CMD>lua require'telescope.builtin'.find_files({show_untracked = true})<CR>")
