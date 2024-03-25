@@ -30,5 +30,6 @@ alias -g B="~/code/mxgrn/botcare"
 alias -g TP="~/code/mxgrn/trustpot"
 alias -g AT="~/code/mxgrn/ash_table"
 alias -g PL="~/code/temp/phx_latest"
+alias -g B="~/code/mxgrn/botenvy"
 
 alias T='~/temp'
