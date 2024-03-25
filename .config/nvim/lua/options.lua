@@ -98,7 +98,8 @@ g.copilot_filetypes        = {
   sql = true,
   po = true,
   eelixir = true,
-  elm = true
+  elm = true,
+  markdown = true
 }
 
 -- Let context on the top always have a line of space, so it's always visible

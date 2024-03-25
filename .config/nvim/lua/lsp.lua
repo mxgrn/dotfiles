@@ -35,22 +35,6 @@ lspconfig.sqlls.setup {
   root_dir = util.find_git_ancestor,
 }
 
-lspconfig.elixirls.setup {
-  cmd = { vim.fn.expand(vim.fn.stdpath('data') .. "/mason/packages/elixir-ls/language_server.sh") },
-  capabilities = vim.lsp.protocol.make_client_capabilities(),
-  on_attach = on_attach,
-  elixirLS = {
-    -- I choose to disable dialyzer for personal reasons, but
-    -- I would suggest you also disable it unless you are well
-    -- aquainted with dialzyer and know how to use it.
-    dialyzerEnabled = false,
-    -- I also choose to turn off the auto dep fetching feature.
-    -- It often get's into a weird state that requires deleting
-    -- the .elixir_ls directory and restarting your editor.
-    fetchDeps = false
-  }
-}
-
 lspconfig.dockerls.setup {
   on_attach = on_attach,
 }
