@@ -12,6 +12,14 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+  "mbbill/undotree",
+  {
+    "mhanberg/output-panel.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("output_panel").setup()
+    end
+  },
   {
     "elixir-tools/elixir-tools.nvim",
     version = "*",
@@ -31,6 +39,7 @@ require("lazy").setup({
           },
           on_attach = function(client, bufnr)
             -- Duplication, see lsp.lua
+            map_opts = { noremap = true, silent = true }
             vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", map_opts)
             vim.keymap.set('n', '<space>d', '<cmd>lua vim.diagnostic.open_float()<cr>', map_opts)
             vim.keymap.set('n', '<space>[', '<cmd>lua vim.diagnostic.goto_next()<cr>', map_opts)
@@ -39,7 +48,7 @@ require("lazy").setup({
             vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format { async = true }' ]])
 
             vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
-            vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
+            -- vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
             vim.keymap.set("v", "<space>em", ":ElixirExpandMacro<cr>", { buffer = true, noremap = true })
           end,
         }
