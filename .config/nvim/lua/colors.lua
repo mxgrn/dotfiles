@@ -16,6 +16,12 @@ vim.cmd [[
 
   hi StatusLineNC guifg=#666666 guibg=#282828
   hi StatusLine guifg=#eeeeee guibg=#282828
+
+  " The leap plugin
+  hi LeapLabelPrimary guifg=#1e1e2e guibg=#cdd6f4 cterm=bold gui=bold
+
+  " Highlighted selection under cursor (active)
+  hi CurSearch guifg=#1e1e2e guibg=#cdd6f4
 ]]
 
 return false
