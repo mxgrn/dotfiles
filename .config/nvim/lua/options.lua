@@ -99,7 +99,9 @@ g.copilot_filetypes        = {
   po = true,
   eelixir = true,
   elm = true,
-  markdown = true
+  markdown = true,
+  typescript = true,
+  heex = true
 }
 
 -- Let context on the top always have a line of space, so it's always visible
