@@ -102,6 +102,8 @@ require("lazy").setup({
     'stevearc/oil.nvim',
     config = function()
       require("oil").setup({
+        -- We still need netrw for :GBrowse
+        default_file_explorer = false,
         keymaps = {
           ["<C-h>"] = false,
           ["<C-l>"] = false,
@@ -254,6 +256,9 @@ require("lazy").setup({
 
   -- Git support, e.g. :G
   'tpope/vim-fugitive',
+
+  -- Enable :GBrowse
+  'tpope/vim-rhubarb',
 
   -- Make the dot command work in more situations
   'tpope/vim-repeat',
