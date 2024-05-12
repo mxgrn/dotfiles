@@ -41,6 +41,8 @@ lspconfig.dockerls.setup {
 
 lspconfig.jsonls.setup {}
 
+-- lspconfig.harper_ls.setup {}
+
 lspconfig.html.setup {
   capabilities = vim.lsp.protocol.make_client_capabilities(),
   on_attach = on_attach,

@@ -104,6 +104,7 @@ alias gbr='git for-each-ref --count=15 --sort=-committerdate refs/heads/ --forma
 alias gbf='gbr | fzf | xargs git checkout'
 alias grh='git reset head~'
 alias grm='git rebase master'
+alias gcaap='git add . && git commit --amend --no-edit && git push -f'
 
 alias wip='git add . && git commit -a -m WIP'
 alias lg='lazygit'

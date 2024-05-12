@@ -229,12 +229,12 @@ vim.api.nvim_set_keymap('v', "<c-^>", "S}i%<esc>%", { noremap = false, silent = 
 -- oil
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
-vim.keymap.set("n", "<C-e>",
-  function()
-    local result = vim.treesitter.get_captures_at_cursor(0)
-    print(vim.inspect(result))
-  end,
-  { noremap = true, silent = false }
-)
+-- vim.keymap.set("n", "<C-e>",
+--   function()
+--     local result = vim.treesitter.get_captures_at_cursor(0)
+--     print(vim.inspect(result))
+--   end,
+--   { noremap = true, silent = false }
+-- )
 
 return false

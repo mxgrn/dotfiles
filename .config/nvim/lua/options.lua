@@ -101,8 +101,11 @@ g.copilot_filetypes        = {
   elm = true,
   markdown = true,
   typescript = true,
-  heex = true
+  heex = true,
+  yaml = true
 }
+
+g.user_emmet_mode          = 'i' -- Use insert mode for emmet
 
 -- Let context on the top always have a line of space, so it's always visible
 opt.scrolloff              = 1
