@@ -39,10 +39,10 @@ export PATH="/Users/mxgrn/.local/bin:$PATH"
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
 # export PATH="/opt/homebrew/opt/postgresql@10/bin:$PATH"
 
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+# export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
 # FZF preview colors (adapted from https://github.com/junegunn/fzf/blob/master/ADVANCED.md)
-export FZF_DEFAULT_OPTS='--color=border:#6B6B6B,spinner:#98BC99,hl:#719872,fg:#D9D9D9,header:#719872,info:#BDBB72,pointer:#E12672,marker:#E17899,fg+:#D9D9D9,preview-bg:#3F3F3F,prompt:#98BEDE,hl+:#98BC99'
+# export FZF_DEFAULT_OPTS='--color=border:#6B6B6B,spinner:#98BC99,hl:#719872,fg:#D9D9D9,header:#719872,info:#BDBB72,pointer:#E12672,marker:#E17899,fg+:#D9D9D9,preview-bg:#3F3F3F,prompt:#98BEDE,hl+:#98BC99'
 
 if [ -n "${commands[fzf-share]}" ]; then
   source "$(fzf-share)/key-bindings.zsh"
@@ -52,7 +52,8 @@ fi
 export FLYCTL_INSTALL="/Users/mxgrn/.fly"
 export PATH="$FLYCTL_INSTALL/bin:$PATH"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source <(fzf --zsh)
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
@@ -72,3 +73,4 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 eval "$(direnv hook zsh)"
+
