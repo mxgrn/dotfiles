@@ -229,6 +229,8 @@ vim.api.nvim_set_keymap('v', "<c-^>", "S}i%<esc>%", { noremap = false, silent = 
 -- oil
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
+vim.keymap.set("i", "<c-\\>", " |> dbg<esc>")
+
 -- vim.keymap.set("n", "<C-e>",
 --   function()
 --     local result = vim.treesitter.get_captures_at_cursor(0)
