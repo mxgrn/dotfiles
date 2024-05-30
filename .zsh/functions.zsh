@@ -63,3 +63,11 @@ function git-nuke {
 function cdd {
   cd "$*"
 }
+
+function dapp {
+  DOCKER_HOST=ssh://app$1 docker exec -ti $2_${3:-prod} /app/bin/$2 remote
+}
+
+function sapp {
+  ssh app$1
+}
