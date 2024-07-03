@@ -13,51 +13,70 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   "mbbill/undotree",
-  {
-    "mhanberg/output-panel.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("output_panel").setup()
-    end
-  },
-  {
-    "elixir-tools/elixir-tools.nvim",
-    version = "*",
-    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      local elixir = require("elixir")
-      local elixirls = require("elixir.elixirls")
-
-      elixir.setup {
-        nextls = { enable = true },
-        credo = {},
-        elixirls = {
-          enable = true,
-          settings = elixirls.settings {
-            dialyzerEnabled = false,
-            enableTestLenses = false,
-          },
-          on_attach = function(client, bufnr)
-            -- Duplication, see lsp.lua
-            map_opts = { noremap = true, silent = true }
-            vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", map_opts)
-            vim.keymap.set('n', '<space>d', '<cmd>lua vim.diagnostic.open_float()<cr>', map_opts)
-            vim.keymap.set('n', '<space>[', '<cmd>lua vim.diagnostic.goto_next()<cr>', map_opts)
-            vim.keymap.set('n', '<space>]', '<cmd>lua vim.diagnostic.goto_prev()<cr>', map_opts)
-            vim.keymap.set('n', 'gr', vim.lsp.buf.references, map_opts)
-            vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format { async = true }' ]])
-
-            vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
-            -- vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
-            vim.keymap.set("v", "<space>em", ":ElixirExpandMacro<cr>", { buffer = true, noremap = true })
-          end,
-        }
-      }
-    end,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-  },
+  -- {
+  --   "mhanberg/output-panel.nvim",
+  --   event = "VeryLazy",
+  --   config = function()
+  --     require("output_panel").setup()
+  --   end
+  -- },
+  -- {
+  --   "elixir-tools/elixir-tools.nvim",
+  --   version = "*",
+  --   event = { "BufReadPre", "BufNewFile" },
+  --   config = function()
+  --     local elixir = require("elixir")
+  --     local elixirls = require("elixir.elixirls")
+  --
+  --     elixir.setup {
+  --       nextls = { enable = false,
+  --         on_attach = function(client, bufnr)
+  --           -- vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
+  --           -- vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
+  --           -- vim.keymap.set("v", "<space>em", ":ElixirExpandMacro<cr>", { buffer = true, noremap = true })
+  --           map_opts = { noremap = true, silent = true }
+  --           vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", map_opts)
+  --           vim.keymap.set('n', '<space>d', '<cmd>lua vim.diagnostic.open_float()<cr>', map_opts)
+  --           vim.keymap.set('n', '<space>[', '<cmd>lua vim.diagnostic.goto_next()<cr>', map_opts)
+  --           vim.keymap.set('n', '<space>]', '<cmd>lua vim.diagnostic.goto_prev()<cr>', map_opts)
+  --           vim.keymap.set('n', 'gr', vim.lsp.buf.references, map_opts)
+  --           vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format { async = true }' ]])
+  --
+  --           vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
+  --           -- vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
+  --           vim.keymap.set("v", "<space>em", ":ElixirExpandMacro<cr>", { buffer = true, noremap = true })
+  --         end,
+  --       },
+  --       credo = {},
+  --       elixirls = {
+  --         enable = true,
+  --         settings = elixirls.settings {
+  --           dialyzerEnabled = false,
+  --           enableTestLenses = false,
+  --         },
+  --         on_attach = function(client, bufnr)
+  --           -- vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
+  --           -- vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
+  --           -- vim.keymap.set("v", "<space>em", ":ElixirExpandMacro<cr>", { buffer = true, noremap = true })
+  --           map_opts = { noremap = true, silent = true }
+  --           vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", map_opts)
+  --           vim.keymap.set('n', '<space>d', '<cmd>lua vim.diagnostic.open_float()<cr>', map_opts)
+  --           vim.keymap.set('n', '<space>[', '<cmd>lua vim.diagnostic.goto_next()<cr>', map_opts)
+  --           vim.keymap.set('n', '<space>]', '<cmd>lua vim.diagnostic.goto_prev()<cr>', map_opts)
+  --           vim.keymap.set('n', 'gr', vim.lsp.buf.references, map_opts)
+  --           vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format { async = true }' ]])
+  --
+  --           vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
+  --           -- vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
+  --           vim.keymap.set("v", "<space>em", ":ElixirExpandMacro<cr>", { buffer = true, noremap = true })
+  --         end,
+  --       }
+  --     }
+  --   end,
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --   },
+  -- },
   -- Favorite color scheme
   -- To see all highlight groups created by Treesitter: https://github.com/nvim-treesitter/nvim-treesitter/blob/master/CONTRIBUTING.md#highlights
   {
@@ -383,5 +402,5 @@ require("lazy").setup({
   -- The actuall mappings are in options.lua
   'jessekelighine/vindent.vim',
 
-  { 'wakatime/vim-wakatime', lazy = false }
+  -- { 'wakatime/vim-wakatime', lazy = false }
 })
