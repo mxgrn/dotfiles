@@ -179,12 +179,6 @@ require("lazy").setup({
           -- `false` will disable the whole extension
           enable = true,
         },
-        -- matchup = {
-        --   enable = false, -- mandatory, false will disable the whole extension
-        --   disable_virtual_text = true,
-        --   -- disable = { "c", "ruby" }, -- optional, list of language that will be disabled
-        --   -- [options]
-        -- },
       }
     end,
     -- run = function()
@@ -352,6 +346,13 @@ require("lazy").setup({
         let g:matchup_matchparen_offscreen = {}
         " If you want the matching line to appear on the top (overriding 'treesitter-context'), do this instead:
         " let g:matchup_matchparen_offscreen = { 'method': 'popup' }
+
+        " Changing opening tag changes closing tag at quitting the insert mode
+        let g:matchup_transmute_enabled = 1
+
+        " Only highlight the current match, not what we have under the cursor
+        hi MatchParenCur cterm=none gui=none
+        hi MatchWordCur cterm=none gui=none
       ]]
     end,
   },
