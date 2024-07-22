@@ -74,3 +74,7 @@ export NVM_DIR="$HOME/.nvm"
 
 eval "$(direnv hook zsh)"
 
+
+. "$HOME/.atuin/bin/env"
+
+eval "$(atuin init zsh)"
