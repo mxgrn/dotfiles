@@ -55,7 +55,6 @@ autocmd('VimEnter', {
 -- Autosave files on losing focus
 autocmd('FocusLost', { pattern = '', command = "silent! wa" })
 
-
 -- For sql buffers, run sleek on save for formatting
 autocmd('FileType', {
   pattern = 'sql',
