@@ -18,13 +18,25 @@ vim.cmd [[
   hi StatusLine guifg=#eeeeee guibg=#282828
 
   " The leap plugin
-  hi LeapLabelPrimary guifg=#1e1e2e guibg=#cdd6f4 cterm=bold gui=bold
+  hi LeapLabelPrimary guifg=#1e1e2e guibg=#cdd6f4 gui=bold
 
   " Highlighted selection under cursor (active)
   hi CurSearch guifg=#1e1e2e guibg=#cdd6f4
 
   " Leap jump labels (bold doesn't seem to work)
-  hi LeapLabel guifg=white guibg=black cterm=bold gui=bold
+  hi LeapLabel guifg=white guibg=black gui=bold
+
+  " Make comments a bit lighter
+  hi Comment guifg=#9d9d9d
+
+  " Italic is even lighter (only in multiline comments)
+  hi @markup.italic guifg=#cdcdcd
+
+  " Special comment words (only in single line comments)
+  hi @comment.todo.comment guifg=#fdd7d7 gui=underdouble
+  hi @comment.error.comment guifg=#fc87af gui=underdouble
+  hi @comment.warning.comment guifg=#fcd7af gui=underdouble
+  hi @comment.note.comment guifg=#87afff gui=underdouble
 ]]
 
 return false
