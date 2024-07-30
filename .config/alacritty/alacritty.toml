@@ -9,9 +9,10 @@ y = 0
 family = "IosevkaTerm Nerd Font Mono"
 style = "ExtraLight"
 
+# WARN font.bold doesn't take effect
 [font.bold]
 family = "IosevkaTerm Nerd Font Mono"
-style = "Light"
+style = "Regular"
 
 [font.italic]
 family = "IosevkaTerm Nerd Font Mono"
