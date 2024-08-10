@@ -24,10 +24,10 @@ snippet defm defmodule
 		${2}
 	end
 
-# snippet m "%{}"
-# 	%{${1}}
+snippet m %{}
+	%{$1}$2
 
-snippet m %{foo: foo}
+snippet ms %{foo: foo}
 	%{${1:foo}: $1 $2}
 
 snippet mq %{foo" => foo}"
