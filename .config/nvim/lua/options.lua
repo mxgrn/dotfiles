@@ -103,7 +103,8 @@ g.copilot_filetypes        = {
   markdown = true,
   typescript = true,
   heex = true,
-  yaml = true
+  yaml = true,
+  css = true
 }
 
 g.user_emmet_mode          = 'i' -- Use insert mode for emmet
