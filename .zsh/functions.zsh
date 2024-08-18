@@ -46,15 +46,6 @@ function g {
 }
 compdef g=git # autocompletion
 
-# yadm
-function y {
-  if [[ $# > 0 ]]; then
-    yadm $@
-  else
-    yadm status
-  fi
-}
-
 function git-nuke {
   git branch -D $1 && git push origin :$1
 }
@@ -64,6 +55,7 @@ function cdd {
   cd "$*"
 }
 
+# Example: dapp 1 ketoketo
 function dapp {
   DOCKER_HOST=ssh://app$1 docker exec -ti $2_${3:-prod} /app/bin/$2 remote
 }
