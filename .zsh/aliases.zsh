@@ -2,11 +2,10 @@
 alias reload='source ~/.zshrc'
 
 # Generic
-alias ls='exa'
-alias l='exa -l'
-alias ll='exa -al'
-alias lll='ls -Al'
-alias tree='exa --tree'
+alias ls='lsd'
+alias l='lsd -l'
+alias ll='lsd -al'
+alias tree='lsd --tree'
 
 alias psgrep='ps aux | grep $1'
 
@@ -39,6 +38,7 @@ alias gt='git log --pretty=format:"%C(yellow)%h $RELATIVE_TIME %Cblue%an%C(auto,
 # push
 alias gp='git push'
 alias gpu='git push --set-upstream'
+
 # 'git patch' or something
 alias gpa='git add . && git commit --amend --no-edit && git push -f'
 
