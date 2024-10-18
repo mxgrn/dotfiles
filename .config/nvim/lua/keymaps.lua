@@ -158,6 +158,9 @@ nmap("<space>c", "<cmd>cd %:p:h<cr>")
 -- Center by hitting enter
 -- nmap("<cr>", "zz")
 
+-- Zen mode by hitting enter
+nmap("<cr>", ":ZenMode<cr>")
+
 nmap("1z", ":setlocal foldlevel=1<cr>")
 nmap("2z", ":setlocal foldlevel=2<cr>")
 
@@ -192,6 +195,8 @@ nmap("<leader>t", ":tabnew<cr>")
 -- Instead, press ctrl + enter.
 vim.api.nvim_set_keymap('i', '<c-cr>', 'copilot#Accept("")',
   { script = true, expr = true, silent = true })
+-- this version would also exit insert mode, but it doesn't seem practical
+-- vim.api.nvim_set_keymap('i', '<c-cr>', 'copilot#Accept("") . "<Esc>"', { script = true, expr = true, silent = true })
 vim.g.copilot_no_tab_map = true
 
 vim.cmd [[
