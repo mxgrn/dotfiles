@@ -52,6 +52,18 @@ autocmd('VimEnter', {
   command = 'nnoremap <C-\\> :Ack<space>'
 })
 
+-- Forcefully getting <c-\> back from vim-tmux-navigator
+autocmd('WinLeave', {
+  pattern = '',
+  command = 'set nocursorline'
+})
+
+-- Forcefully getting <c-\> back from vim-tmux-navigator
+autocmd('WinEnter', {
+  pattern = '',
+  command = 'set cursorline'
+})
+
 -- Autosave files on losing focus
 autocmd('FocusLost', { pattern = '', command = "silent! wa" })
 

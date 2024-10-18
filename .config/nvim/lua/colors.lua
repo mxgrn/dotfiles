@@ -4,24 +4,30 @@ vim.cmd [[
   hi Folded guibg=NONE guifg=gray
 
   " slightly darker background on active windows
-  hi Normal guifg=#cdd6f4 guibg=#0f0f0f
+  hi Normal guifg=#cdd6f4 guibg=#131313
 
   " Same color for nyngwang/NeoZoom.lua
   hi NormalFloat guifg=#cdd6f4 guibg=#1c1c1c
 
   " slightly lighter background on inactive windows
-  hi NormalNC guifg=#cdd6f4 guibg=#282828
+  hi NormalNC guifg=#cdd6f4 guibg=#242424
 
   hi VertSplit guifg=#282828 guibg=#1c1c1c
 
-  hi StatusLineNC guifg=#666666 guibg=#282828
-  hi StatusLine guifg=#eeeeee guibg=#282828
+  " status line on inactive windows
+  hi StatusLineNC guifg=#888888 guibg=#333333
+
+  " status line on active windows
+  hi StatusLine guifg=#888888 guibg=#282828
 
   " The leap plugin
   hi LeapLabelPrimary guifg=#1e1e2e guibg=#cdd6f4 gui=bold
 
   " Highlighted selection under cursor (active)
-  hi CurSearch guifg=#1e1e2e guibg=#cdd6f4
+  hi CurSearch guifg=white guibg=#888888
+  hi Search guifg=white guibg=#555555
+  hi CursorLine guibg=black
+  hi CursorColumn guibg=black
 
   " Leap jump labels (bold doesn't seem to work)
   hi LeapLabel guifg=white guibg=black gui=bold
