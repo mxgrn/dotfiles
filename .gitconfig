@@ -18,3 +18,5 @@
   path = /Users/mxgrn/.config/delta/themes.gitconfig
 [delta]
   features = gruvmax-fang
+[pack]
+	window = 1

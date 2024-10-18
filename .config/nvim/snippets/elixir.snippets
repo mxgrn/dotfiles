@@ -2,7 +2,10 @@ snippet c class
 	class="${1}"
 
 snippet ti Tap inspect
-	|> tap(&IO.inspect(&1.${1}, pretty: true, label: "!!! $1"))
+	|> tap(&IO.dbg(&1, pretty: true, label: "!!! $1"))
+
+snippet td Tap debug
+	|> tap(&dbg(&1))
 
 snippet # String interpolation
   #{${1}}${2}

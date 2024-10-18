@@ -23,7 +23,7 @@ function s {
     if [ -e Gemfile ]; then
         be rails server $@
     else
-        mix phx.server
+        iex -S mix phx.server
     fi
 }
 
