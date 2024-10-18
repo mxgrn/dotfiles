@@ -406,8 +406,6 @@ require("lazy").setup({
   -- time tracking
   { 'wakatime/vim-wakatime', lazy = false },
 
-  'pasky/claude.vim',
-
   {
     "danielfalk/smart-open.nvim",
     branch = "0.2.x",
