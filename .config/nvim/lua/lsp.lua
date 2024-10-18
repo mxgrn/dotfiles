@@ -15,7 +15,7 @@ local on_attach = function(_, bufnr)
   vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format { async = true }' ]])
 end
 
-lspconfig.tsserver.setup { on_attach = on_attach }
+lspconfig.ts_ls.setup { on_attach = on_attach }
 
 lspconfig.lua_ls.setup {
   on_attach = on_attach,
