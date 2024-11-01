@@ -11,8 +11,6 @@ alias psgrep='ps aux | grep $1'
 
 alias tailf='tail -f -n200'
 
-alias k='kubectl'
-
 alias vim='nvim'
 alias vi='nvim'
 alias v='nvim'
@@ -20,6 +18,12 @@ alias v='nvim'
 # Capistrano
 alias capd="cap deploy"
 alias capdr="cap deploy:restart"
+
+######
+# tmux
+######
+
+alias t=tmuxinator
 
 #####
 # git
