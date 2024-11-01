@@ -193,11 +193,11 @@ nmap("<leader>t", ":tabnew<cr>")
 
 -- GitHub copilot: don't use tab to accept suggestions, as it interferes with snippets.
 -- Instead, press ctrl + enter.
-vim.api.nvim_set_keymap('i', '<c-cr>', 'copilot#Accept("")',
-  { script = true, expr = true, silent = true })
+-- vim.api.nvim_set_keymap('i', '<c-cr>', 'copilot#Accept("")',
+--   { script = true, expr = true, silent = true })
 -- this version would also exit insert mode, but it doesn't seem practical
 -- vim.api.nvim_set_keymap('i', '<c-cr>', 'copilot#Accept("") . "<Esc>"', { script = true, expr = true, silent = true })
-vim.g.copilot_no_tab_map = true
+-- vim.g.copilot_no_tab_map = true
 
 vim.cmd [[
 function! NetrwEnter()
