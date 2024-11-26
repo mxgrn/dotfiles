@@ -55,9 +55,21 @@ function cdd {
   cd "$*"
 }
 
-# Example: dapp 1 ketoketo
-function dapp {
-  DOCKER_HOST=ssh://app$1 docker exec -ti $2_${3:-prod} /app/bin/$2 remote
+# docker remote
+# Examples:
+#   dr ketoketo
+#   dr ketoketo 2
+#   dr ketoketo 2 staging
+function dr {
+  DOCKER_HOST=ssh://app${2:-1} docker exec -ti $1_${3:-prod} /app/bin/$1 remote
+}
+
+function dl {
+  DOCKER_HOST=ssh://app${2:-1} docker logs -f $1_${3:-prod}
+}
+
+function ds {
+  DOCKER_HOST=ssh://app${2:-1} docker exec -ti $1_${3:-prod} bash
 }
 
 function sapp {

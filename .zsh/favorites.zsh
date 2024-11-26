@@ -33,4 +33,7 @@ alias -g PL="~/code/temp/phx_latest"
 alias -g B="~/code/mxgrn/botpresto"
 alias -g UM="~/code/mxgrn/ultramemory"
 
+# Jump
+alias -g J="~/code/jump/Jump/api"
+
 alias T='~/temp'
