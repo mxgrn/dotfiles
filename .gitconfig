@@ -17,6 +17,7 @@
 [include]
   path = /Users/mxgrn/.config/delta/themes.gitconfig
 [delta]
+  hunk-header-style = file line-number
   features = gruvmax-fang
 [pack]
 	window = 1
