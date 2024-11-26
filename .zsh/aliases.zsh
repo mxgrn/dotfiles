@@ -67,6 +67,7 @@ alias gch='git cherry-pick'
 # checkout
 alias gco='git checkout'
 alias gom='git checkout master'
+alias goma='git checkout main'
 alias gomu='git checkout master && git pull'
 alias gos='git checkout staging'
 
