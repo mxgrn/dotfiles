@@ -394,20 +394,20 @@ require("lazy").setup({
     end
   },
 
-  -- 'github/copilot.vim',
+  'github/copilot.vim',
 
-  {
-    "supermaven-inc/supermaven-nvim",
-    config = function()
-      require("supermaven-nvim").setup({
-        keymaps = {
-          accept_suggestion = "<C-cr>",
-          clear_suggestion = "<C-]>",
-          accept_word = "<C-j>",
-        },
-      })
-    end,
-  },
+  -- {
+  --   "supermaven-inc/supermaven-nvim",
+  --   config = function()
+  --     require("supermaven-nvim").setup({
+  --       keymaps = {
+  --         accept_suggestion = "<C-cr>",
+  --         clear_suggestion = "<C-]>",
+  --         accept_word = "<C-j>",
+  --       },
+  --     })
+  --   end,
+  -- },
 
   -- Support for e.g. `da,`
   'wellle/targets.vim',
@@ -460,4 +460,5 @@ require("lazy").setup({
       },
     }
   },
+  { "rose-pine/neovim",      name = "rose-pine" },
 })

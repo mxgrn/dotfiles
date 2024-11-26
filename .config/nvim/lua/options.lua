@@ -104,7 +104,8 @@ g.copilot_filetypes        = {
   typescript = true,
   heex = true,
   yaml = true,
-  css = true
+  css = true,
+  toml = true
 }
 
 g.user_emmet_mode          = 'i' -- Use insert mode for emmet
