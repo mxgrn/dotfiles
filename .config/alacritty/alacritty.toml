@@ -20,6 +20,8 @@ style = "ExtraLight Italic"
 
 [colors.normal]
 red = "0xee8888"
+# work-around for ExUnit printing filenames in black
+black = "0x555555"
 
 [mouse]
 hide_when_typing = true
