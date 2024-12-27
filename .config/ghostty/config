@@ -1,0 +1,71 @@
+# Minimalistic window, no title bars, no rounded corders
+window-decoration=false
+window-decoration=0
+
+# Whatever is selected is copied into the system clipboard
+copy-on-select=true
+
+# My font of the choice
+font-family="IosevkaTerm Nerd Font Mono"
+font-style=ExtraLight
+font-style-bold=Medium
+font-style-italic="Light Italic"
+font-size=15
+
+# Sometimes ExUnit may print something in black on black...
+minimum-contrast=1.5
+
+# Once maximized, stay maximized
+window-save-state=always
+
+# Non-native fullscreen, but do leave the menu bar visible
+macos-non-native-fullscreen=visible-menu
+
+# Finally
+macos-option-as-alt=true
+
+# Cmd+Esc shows quick terminal
+keybind = global:super+escape=toggle_quick_terminal
+
+# Don't quit on Cmd+Q
+keybind = super+q=ignore
+
+# DO quit (without warning!) on Cmd+Q when pressed inside the macOS app switcher
+confirm-close-surface = false
+
+# Disable ligatures
+font-feature=-calt
+font-feature=-liga
+font-feature=-dlig
+
+# The padding is black
+background=black
+
+###########################################################################
+# TMUX integrations
+#
+# !!! NOTE that my tmux prefix is <c-s> (handy and relaxing on Dvorak), so,
+# your '\x13' part will be different!
+###########################################################################
+
+# Cmd+N picks the corresponding tmux window
+keybind = super+one=text:\x131
+keybind = super+two=text:\x132
+keybind = super+three=text:\x133
+keybind = super+four=text:\x134
+keybind = super+five=text:\x135
+keybind = super+six=text:\x136
+keybind = super+seven=text:\x137
+keybind = super+eight=text:\x138
+keybind = super+nine=text:\x139
+
+# Go to Next/Prev tmux window just like with tabs in Chrome
+keybind = super+shift+right_bracket=text:\x13n
+keybind = super+shift+left_bracket=text:\x13p
+
+# New tmux window on Cmd+t
+keybind = super+t=text:\x13c
+
+# Press cmd+shift+alt+[|] to move the current tmux window left/right
+keybind = super+shift+alt+right_bracket=text:\x13\x0c
+keybind = super+shift+alt+left_bracket=text:\x13\x08
