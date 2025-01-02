@@ -6,7 +6,7 @@ window-decoration=0
 copy-on-select=true
 
 # My font of the choice
-font-family="IosevkaTerm Nerd Font Mono"
+font-family="Iosevka Term"
 font-style=ExtraLight
 font-style-bold=Medium
 font-style-italic="Light Italic"
