@@ -6,10 +6,10 @@ window-decoration=0
 copy-on-select=clipboard
 
 # My font of the choice
-font-family = Iosevka
-font-family-bold = Iosevka Medium
-font-family-bold-italic = Iosevka Medium Italic
-font-family-italic = Iosevka Italic
+font-family = Iosevka Term
+font-family-bold = Iosevka Term Medium
+font-family-bold-italic = Iosevka Term Medium Italic
+font-family-italic = Iosevka Term Italic
 
 font-size=16
 

@@ -1,2 +1,5 @@
 .notes.md
 .zsh/cache
+.elixir_ls
+.zshenv.local
+.DS_Store

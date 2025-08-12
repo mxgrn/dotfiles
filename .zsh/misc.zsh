@@ -9,6 +9,12 @@ setopt rmstarsilent
 
 export EDITOR='nvim'
 
+autoload -U edit-command-line
+zle -N edit-command-line
+
+# Edit command line in nvim
+bindkey "^X^E" edit-command-line
+
 # Re-enable emacs shortcats in vim mode
 bindkey '^R' history-incremental-search-backward
 bindkey '^p' up-history
@@ -17,4 +23,4 @@ bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line
 
 # If want to disable vim mode whatsoever:
-# bindkey -e
+bindkey -e

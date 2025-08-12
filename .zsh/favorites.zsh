@@ -12,6 +12,9 @@ alias -g CL='~/code/labs'
 alias -g CM='~/code/mxgrn'
 alias -g CP='~/code/playground'
 
+alias -g CR='~/code/reference'
+alias -g CRPL='~/code/reference/phx_latest'
+
 alias -g D='~/dotfiles'
 
 alias -g HD='~/Downloads'
@@ -32,8 +35,12 @@ alias -g AT="~/code/mxgrn/ash_table"
 alias -g PL="~/code/temp/phx_latest"
 alias -g B="~/code/mxgrn/botpresto"
 alias -g UM="~/code/mxgrn/ultramemory"
+alias -g LF="~/code/mxgrn/lexifarm"
 
 # Jump
 alias -g J="~/code/jump/Jump/api"
+# alternative checkout
+alias -g alt="../../alt"
 
 alias T='~/temp'
+

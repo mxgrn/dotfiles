@@ -18,6 +18,17 @@ extract () {
   fi
 }
 
+function gom() {
+  if git rev-parse --verify main >/dev/null 2>&1; then
+    git checkout main
+  elif git rev-parse --verify master >/dev/null 2>&1; then
+    git checkout master
+  else
+    echo "Neither 'main' nor 'master' branch found"
+    return 1
+  fi
+}
+
 # Start Rails/Phoenix server
 function s {
     if [ -e Gemfile ]; then
@@ -65,7 +76,7 @@ function dr {
 }
 
 function dl {
-  DOCKER_HOST=ssh://app${2:-1} docker logs -f $1_${3:-prod}
+  DOCKER_HOST=ssh://app${2:-1} docker logs -f --tail 100 $1_${3:-prod}
 }
 
 function ds {

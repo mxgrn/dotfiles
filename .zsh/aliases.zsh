@@ -23,6 +23,9 @@ alias capdr="cap deploy:restart"
 # tmux
 ######
 
+# if there's a session to attach to, attach
+alias tmux='tmux has-session 2>/dev/null && tmux attach || tmux'
+
 alias t=tmuxinator
 
 #####
@@ -37,7 +40,7 @@ REFS="%C(red)%d%C(reset)"
 SUBJECT="%s"
 
 alias gl='git log --pretty=tformat:"$HASH $RELATIVE_TIME $AUTHOR $SUBJECT" --graph'
-alias gt='git log --pretty=format:"%C(yellow)%h $RELATIVE_TIME %Cblue%an%C(auto,green)%d %Creset%s" --graph --all'
+alias glt='git log --pretty=format:"%C(yellow)%h $RELATIVE_TIME %Cblue%an%C(auto,green)%d %Creset%s" --graph --all'
 
 # push
 alias gp='git push'
@@ -66,8 +69,8 @@ alias gch='git cherry-pick'
 
 # checkout
 alias gco='git checkout'
-alias gom='git checkout master'
-alias goma='git checkout main'
+# alias gom='git checkout master'
+# alias goma='git checkout main'
 alias gomu='git checkout master && git pull'
 alias gos='git checkout staging'
 
@@ -81,7 +84,8 @@ alias gb='git branch'
 alias gba='git branch -a'
 # deletes merged local branches
 alias gbdm='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
-alias gbr='git for-each-ref --count=15 --sort=-committerdate refs/heads/ --format="%(refname:short)"'
+# alias gbr='git for-each-ref --sort=-committerdate --format="%(committerdate:relative) -- %(refname:short)" refs/heads/ | head -n 20'
+alias gbr='git for-each-ref --sort=-committerdate --format="%(committerdate:relative) -- %(refname:short) -> %(upstream:short)" refs/heads/ | head -n 20'
 alias gbf='gbr | fzf | xargs git checkout'
 
 # stash
@@ -94,6 +98,8 @@ alias gR='git reset'
 # recent branches
 alias grh='git reset head~'
 alias wip='git add . && git commit -a -m WIP'
+alias gi='git init . && git add . && git commit -m "Initial commit"'
+
 alias lg='lazygit'
 
 # "Run" ssh links to clone repos:
@@ -113,3 +119,4 @@ alias md='mix deps.get'
 alias mt='mix test'
 alias mc='mix compile'
 alias mf='mix format'
+alias count_lines='find . -name "*.ex" -o -name "*.exs" | xargs wc -l'

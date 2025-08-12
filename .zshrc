@@ -17,26 +17,28 @@ unset config_file # clean-up
 ### Some stuff gets install in /usr/local/sbin
 PATH=$PATH:/usr/local/sbin:/Users/mxgrn/bin:/usr/local/smlnj/bin:/Users/mxgrn/bin/bc
 
-export LANG=C
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
 
 export ERL_AFLAGS="-kernel shell_history enabled"
 
 # make <c-x><c-e> edit line in vim
-autoload -U edit-command-line
-zle -N edit-command-line
-bindkey '^x^e' edit-command-line
+# autoload -U edit-command-line
+# zle -N edit-command-line
+# bindkey '^x^e' edit-command-line
 
 # source /Users/mxgrn/Library/Preferences/org.dystroy.broot/launcher/bash/br
 
 export PATH="/usr/local/opt/qt/bin:$PATH"
 
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-  tmux
-fi
+# if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+#   tmux
+# fi
 
 export PATH="/Users/mxgrn/.local/bin:$PATH"
 
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
+# . /opt/homebrew/opt/asdf/libexec/asdf.sh
 # export PATH="/opt/homebrew/opt/postgresql@10/bin:$PATH"
 
 # export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
@@ -78,3 +80,25 @@ eval "$(direnv hook zsh)"
 . "$HOME/.atuin/bin/env"
 
 eval "$(atuin init zsh --disable-up-arrow)"
+
+export ASDF_DATA_DIR="/Users/mxgrn/.asdf"
+export PATH="$ASDF_DATA_DIR/shims:$PATH"
+
+# Load local zshrc which will not be committed to git
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+
+export PATH="$HOME/.npm-global/bin:$PATH"
+
+export CLOAK_KEY=lltjQNosz5rgCM14cVFNFB/wYmIaRk6DNzZhUgSiLEs=
+
+export ASDF_DIR=~/.asdf
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/mxgrn/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/mxgrn/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/mxgrn/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/mxgrn/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+PATH="$PATH":"$HOME/.local/scripts/"
+bindkey -s ^f "tmux-sessionizer\n"
+export PATH="/Applications/Postgres.app/Contents/Versions/17/bin:$PATH"
