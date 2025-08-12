@@ -12,6 +12,20 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+  "romainl/vim-qf",
+
+  -- QW ehnancements. I'm missing inline search by file names.
+  -- {
+  --   'stevearc/quicker.nvim',
+  --   event = "FileType qf",
+  --   ---@module "quicker"
+  --   ---@type quicker.SetupOptions
+  --   opts = {},
+  -- },
+  {
+    "LintaoAmons/bookmarks.nvim",
+    tag = "v1.4.2"
+  },
   "mbbill/undotree",
   -- {
   --   "mhanberg/output-panel.nvim",
@@ -166,15 +180,15 @@ require("lazy").setup({
           }
         },
         auto_install = true,
-        -- enable auto indentation while editing
-        indent = {
-          enable = true
-        },
+        -- enable auto indentation while editing (important)
+        indent = { enable = true },
+
         -- A list of parser names, or "all"
         -- ensure_installed = 'all',
         -- ensure_installed = {},
         -- Install parsers synchronously (only applied to `ensure_installed`)
         sync_install = false,
+
         highlight = {
           -- `false` will disable the whole extension
           enable = true,
@@ -186,19 +200,25 @@ require("lazy").setup({
     -- end,
   },
 
+
+  -- Very confusing results
+  -- 'natecraddock/telescope-zf-native.nvim',
+
   -- Favor file names over paths when fuzzy-searching
-  'natecraddock/telescope-zf-native.nvim',
+  -- 'nvim-telescope/telescope-fzy-native.nvim',
 
   -- Telescope
   {
     'nvim-telescope/telescope.nvim',
     config = function()
-      -- telescope-zf-native.nvim
-      require("telescope").load_extension("zf-native")
+      -- Looks like Telescope is great by default
+      -- require("telescope").load_extension("zf-native")
+      -- require('telescope').load_extension('fzy_native')
 
       require('telescope').setup {
         defaults = {
-          preview = false,
+          -- preview = false,
+          -- theme = "ivy",
           mappings = {
             i = {
               -- Close Telescope window on Esc
@@ -210,7 +230,8 @@ require("lazy").setup({
         pickers = {
           find_files = {
             -- Show hidden files
-            hidden = true
+            hidden = true,
+            -- theme = "ivy",
           }
         }
       }
@@ -269,6 +290,7 @@ require("lazy").setup({
 
   -- Git support, e.g. :G
   'tpope/vim-fugitive',
+  'junegunn/gv.vim',
 
   -- Enable :GBrowse
   'tpope/vim-rhubarb',
@@ -417,7 +439,7 @@ require("lazy").setup({
   'jessekelighine/vindent.vim',
 
   -- time tracking
-  { 'wakatime/vim-wakatime', lazy = false },
+  -- { 'wakatime/vim-wakatime', lazy = false },
 
   {
     "danielfalk/smart-open.nvim",
@@ -433,32 +455,205 @@ require("lazy").setup({
       { "nvim-telescope/telescope-fzy-native.nvim" },
     },
   },
+  -- {
+  --   -- Show current window in the middle of the screen, hide everything else.
+  --   -- I have it mapped to <cr>.
+  --   "folke/zen-mode.nvim",
+  --   opts = {
+  --     window = {
+  --       backdrop = 1, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
+  --       -- height and width can be:
+  --       -- * an absolute number of cells when > 1
+  --       -- * a percentage of the width / height of the editor when <= 1
+  --       -- * a function that returns the width or the height
+  --       width = .9,  -- width of the Zen window
+  --       height = .9, -- height of the Zen window
+  --       -- by default, no options are changed for the Zen window
+  --       -- uncomment any of the options below, or add other vim.wo options you want to apply
+  --       options = {
+  --         -- signcolumn = "no", -- disable signcolumn
+  --         -- number = false, -- disable number column
+  --         -- relativenumber = false, -- disable relative numbers
+  --         -- cursorline = false, -- disable cursorline
+  --         -- cursorcolumn = false, -- disable cursor column
+  --         -- foldcolumn = "0", -- disable fold column
+  --         -- list = false, -- disable whitespace characters
+  --       },
+  --     },
+  --   }
+  -- },
+  { "rose-pine/neovim", name = "rose-pine" },
+  "IndianBoy42/tree-sitter-just",
   {
-    -- Show current window in the middle of the screen, hide everything else.
-    -- I have it mapped to <cr>.
-    "folke/zen-mode.nvim",
+    "CopilotC-Nvim/CopilotChat.nvim",
+    dependencies = {
+      { "github/copilot.vim" },                       -- or zbirenbaum/copilot.lua
+      { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
+    },
+    build = "make tiktoken",                          -- Only on MacOS or Linux
     opts = {
-      window = {
-        backdrop = 1, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
-        -- height and width can be:
-        -- * an absolute number of cells when > 1
-        -- * a percentage of the width / height of the editor when <= 1
-        -- * a function that returns the width or the height
-        width = .8,  -- width of the Zen window
-        height = .8, -- height of the Zen window
-        -- by default, no options are changed for the Zen window
-        -- uncomment any of the options below, or add other vim.wo options you want to apply
-        options = {
-          -- signcolumn = "no", -- disable signcolumn
-          -- number = false, -- disable number column
-          -- relativenumber = false, -- disable relative numbers
-          -- cursorline = false, -- disable cursorline
-          -- cursorcolumn = false, -- disable cursor column
-          -- foldcolumn = "0", -- disable fold column
-          -- list = false, -- disable whitespace characters
-        },
-      },
-    }
+      -- See Configuration section for options
+      system_prompt = "In Elixir LiveViews and Components, always use the ~H sigil",
+    },
+    -- See Commands section for default commands if you want to lazy load on them
   },
-  { "rose-pine/neovim",      name = "rose-pine" },
+  -- {
+  --   "yetone/avante.nvim",
+  --   keys = {
+  --     {
+  --       ",aa",
+  --       function()
+  --         require("avante.api").ask()
+  --       end,
+  --       mode = { "n", "v" },
+  --       desc = "avante: ask",
+  --     },
+  --   },
+  --   event = "VeryLazy",
+  --   lazy = false,
+  --   version = false, -- set this to "*" if you want to always pull the latest change, false to update on release
+  --   opts = {
+  --     ---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
+  --     provider = "claude",                  -- Recommend using Claude
+  --     auto_suggestions_provider = "claude", -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
+  --     claude = {
+  --       endpoint = "https://api.anthropic.com",
+  --       model = "claude-3-5-sonnet-20241022",
+  --       temperature = 0,
+  --       max_tokens = 4096,
+  --     },
+  --     ---Specify the special dual_boost mode
+  --     ---1. enabled: Whether to enable dual_boost mode. Default to false.
+  --     ---2. first_provider: The first provider to generate response. Default to "openai".
+  --     ---3. second_provider: The second provider to generate response. Default to "claude".
+  --     ---4. prompt: The prompt to generate response based on the two reference outputs.
+  --     ---5. timeout: Timeout in milliseconds. Default to 60000.
+  --     ---How it works:
+  --     --- When dual_boost is enabled, avante will generate two responses from the first_provider and second_provider respectively. Then use the response from the first_provider as provider1_output and the response from the second_provider as provider2_output. Finally, avante will generate a response based on the prompt and the two reference outputs, with the default Provider as normal.
+  --     ---Note: This is an experimental feature and may not work as expected.
+  --     dual_boost = {
+  --       enabled = false,
+  --       first_provider = "openai",
+  --       second_provider = "claude",
+  --       prompt =
+  --       "Based on the two reference outputs below, generate a response that incorporates elements from both but reflects your own judgment and unique perspective. Do not provide any explanation, just give the response directly. Reference Output 1: [{{provider1_output}}], Reference Output 2: [{{provider2_output}}]",
+  --       timeout = 60000, -- Timeout in milliseconds
+  --     },
+  --     behaviour = {
+  --       auto_suggestions = false, -- Experimental stage
+  --       auto_set_highlight_group = true,
+  --       auto_set_keymaps = true,
+  --       auto_apply_diff_after_generation = false,
+  --       support_paste_from_clipboard = false,
+  --       minimize_diff = true, -- Whether to remove unchanged lines when applying a code block
+  --     },
+  --     mappings = {
+  --       --- @class AvanteConflictMappings
+  --       edit = ",ae",
+  --       diff = {
+  --         ours = "co",
+  --         theirs = "ct",
+  --         all_theirs = "ca",
+  --         both = "cb",
+  --         cursor = "cc",
+  --         next = "]x",
+  --         prev = "[x",
+  --       },
+  --       suggestion = {
+  --         accept = "<M-l>",
+  --         next = "<M-]>",
+  --         prev = "<M-[>",
+  --         dismiss = "<C-]>",
+  --       },
+  --       jump = {
+  --         next = "]]",
+  --         prev = "[[",
+  --       },
+  --       submit = {
+  --         normal = "<CR>",
+  --         insert = "<C-s>",
+  --       },
+  --       sidebar = {
+  --         apply_all = "A",
+  --         apply_cursor = "a",
+  --         switch_windows = "<Tab>",
+  --         reverse_switch_windows = "<S-Tab>",
+  --       },
+  --     },
+  --     -- visual mode hints
+  --     hints = { enabled = false },
+  --     windows = {
+  --       ---@type "right" | "left" | "top" | "bottom"
+  --       position = "right", -- the position of the sidebar
+  --       wrap = true,        -- similar to vim.o.wrap
+  --       width = 30,         -- default % based on available width
+  --       sidebar_header = {
+  --         enabled = true,   -- true, false to enable/disable the header
+  --         align = "center", -- left, center, right for title
+  --         rounded = true,
+  --       },
+  --       input = {
+  --         prefix = "> ",
+  --         height = 8, -- Height of the input window in vertical layout
+  --       },
+  --       edit = {
+  --         border = "rounded",
+  --         start_insert = true, -- Start insert mode when opening the edit window
+  --       },
+  --       ask = {
+  --         floating = false,    -- Open the 'AvanteAsk' prompt in a floating window
+  --         start_insert = true, -- Start insert mode when opening the ask window
+  --         border = "rounded",
+  --         ---@type "ours" | "theirs"
+  --         focus_on_apply = "ours", -- which diff to focus after applying
+  --       },
+  --     },
+  --     highlights = {
+  --       ---@type AvanteConflictHighlights
+  --       diff = {
+  --         current = "DiffText",
+  --         incoming = "DiffAdd",
+  --       },
+  --     },
+  --     --- @class AvanteConflictUserConfig
+  --     diff = {
+  --       autojump = true,
+  --       ---@type string | fun(): any
+  --       list_opener = "copen",
+  --       --- Override the 'timeoutlen' setting while hovering over a diff (see :help timeoutlen).
+  --       --- Helps to avoid entering operator-pending mode with diff mappings starting with `c`.
+  --       --- Disable by setting to -1.
+  --       override_timeoutlen = 500,
+  --     },
+  --   },
+  --   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+  --   build = "make",
+  --   -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+  --   dependencies = {
+  --     "stevearc/dressing.nvim",
+  --     "nvim-lua/plenary.nvim",
+  --     "MunifTanjim/nui.nvim",
+  --     --- The below dependencies are optional,
+  --     "hrsh7th/nvim-cmp",            -- autocompletion for avante commands and mentions
+  --     "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+  --     "zbirenbaum/copilot.lua",      -- for providers='copilot'
+  --     {
+  --       -- support for image pasting
+  --       "HakonHarnes/img-clip.nvim",
+  --       event = "VeryLazy",
+  --       opts = {
+  --         -- recommended settings
+  --         default = {
+  --           embed_image_as_base64 = false,
+  --           prompt_for_file_name = false,
+  --           drag_and_drop = {
+  --             insert_mode = true,
+  --           },
+  --           -- required for Windows users
+  --           use_absolute_path = true,
+  --         },
+  --       },
+  --     },
+  --   },
+  -- }
 })

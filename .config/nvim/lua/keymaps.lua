@@ -22,25 +22,39 @@ end
 
 nmap("<leader>s", ":w<cr>")
 
--- Because Telescope doesn't by default "sees" symbolic links
+-- Because Telescope doesn't by default "see" symbolic links
 -- nmap("<leader>v", ":e $MYVIMRC<cr><cmd>cd %:p:h<cr>")
 nmap("<leader>v", ":e ~/dotfiles/.config/nvim/init.lua<cr><cmd>cd %:p:h<cr>")
 
--- require('telescope').load_extension('fzf')
-nmap("<leader>f", "<CMD>lua require'telescope.builtin'.find_files({show_untracked = true})<CR>")
 nmap("<space>f", "<CMD>lua require'telescope.builtin'.find_files({show_untracked = true})<CR>")
-nmap("<space>/", "<CMD>lua require'telescope.builtin'.current_buffer_fuzzy_find({})<CR>")
-nmap("<c-p>", "<cmd>lua require('telescope.builtin').buffers({ sort_mru = true, ignore_current_buffer = true })<cr>")
 
--- Save and quit on space-q
-nmap("<space>q", ":wa<cr>:qa<cr>")
+-- Live grep from all currently open buffers
+-- nmap("<leader>o",
+--   "<cmd>lua require('telescope.builtin').live_grep({ grep_open_files = true, prompt_title = 'Live Grep (Open Buffers)' })<cr>")
+
+nmap("<space>/", "<CMD>lua require'telescope.builtin'.current_buffer_fuzzy_find({})<CR>")
+nmap("<leader>\\", "<CMD>lua require'telescope.builtin'.live_grep({})<CR>")
+nmap("<leader>p", "<cmd>lua require('telescope.builtin').buffers({ sort_mru = true, ignore_current_buffer = false })<cr>")
+nmap("<space>\\", ":lua vim.api.nvim_feedkeys(':AckBuffers ', 'n', true)<CR>")
+
+nmap("g<c-]>", "<c-w>v<c-]>")
+
+-- Ack for the last search.
+nmap("<leader>/", ":AckFromSearch<CR>")
+
+-- Save all (unless unnamed) and quit on space-q
+nmap("<space>q", "<cmd>silent! wa | qa!<CR>")
 
 -- Line jumping
 nmap("H", "g^")
 nmap("L", "g$")
 vmap("H", "g^")
+
 -- Do not include EOL when selecting till the end of the string
 vmap("L", "$h")
+
+-- Delete w/o clogging the paste register
+vmap("<leader>d", "\"_d")
 
 -- Move naturally over wrapped lines
 nmap("j", "gj")
@@ -61,10 +75,6 @@ nmap("<C-h>", ":lua require('Navigator').left()<CR>")
 nmap("<C-j>", ":lua require('Navigator').down()<CR>")
 nmap("<C-k>", ":lua require('Navigator').up()<CR>")
 nmap("<C-l>", ":lua require('Navigator').right()<CR>")
-
--- Ack
-nmap("<leader>/", ":AckFromSearch")
-nmap("<C-\\>", ":Ack<space>")
 
 -- Tests
 nmap("<space>n", ":wa<cr>:TestNearest<CR>")
@@ -94,7 +104,7 @@ nmap("<c-c>", ":nohls<CR>")
 vmap("p", "pgvy")
 
 -- Project notes
-nmap("<Leader>pn", ":sp .notes.md<cr>")
+nmap("<space>pn", ":sp .notes.md<cr>")
 
 -- Luasnip
 vim.cmd [[
@@ -110,7 +120,37 @@ snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>
 " For changing choices in choiceNodes (not strictly necessary for a basic setup).
 imap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
 smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
+
+" noremap <A-LeftMouse> <LeftMouse>gF
 ]]
+
+-- alt-click to jump to the file/line under the cursor
+vim.keymap.set("n", "<A-LeftMouse>", function()
+  -- Simulate cursor move on click
+  vim.api.nvim_feedkeys(
+    vim.api.nvim_replace_termcodes("<LeftMouse>", true, false, true),
+    "n",
+    false
+  )
+
+  vim.defer_fn(function()
+    local word = vim.fn.expand("<cWORD>")
+
+    -- Remove leading [ or other punctuation
+    word = word:gsub("^[%[%(%{<]+", "")
+    word = word:gsub("[%]%)}>,;]+$", "")
+
+    -- Try to match "path/to/file.ex:123"
+    local fname, lineno = word:match("([^:%s]+):(%d+)")
+    if fname then
+      vim.cmd("tabnext 1")
+      vim.cmd("edit " .. fname)
+      vim.cmd(lineno)
+    else
+      print("No file:line found under cursor")
+    end
+  end, 10) -- slight delay for <LeftMouse> to move the cursor
+end, { noremap = true })
 
 -- Open custom snippets for current filetype
 nmap("<space><leader>s", ":execute 'edit' expand(stdpath('config')..'/snippets/'..(&filetype)..'.snippets')<cr>")
@@ -132,19 +172,22 @@ imap("<C-o>", "<C-x><C-o>")
 
 -- Terminal behaviour
 tmap("<esc>", "<c-\\><c-n>")
-tmap("gt", "<c-\\><c-n>gt")
-tmap("gT", "<c-\\><c-n>gT")
+-- tmap("gt", "<c-\\><c-n>gt")
+-- tmap("gT", "<c-\\><c-n>gT")
+-- tmap("gg", "<c-\\><c-n>gg")
 
 -- Terminal window navigation
-tmap("<c-h>", "<c-\\><c-n><c-w>h")
-tmap("<c-j>", "<c-\\><c-n><c-w>j")
-tmap("<c-k>", "<c-\\><c-n><c-w>k")
-tmap("<c-l>", "<c-\\><c-n><c-w>l")
-tmap("<c-f>", "<c-\\><c-n><c-f>")
-tmap("<c-b>", "<c-\\><c-n><c-b>")
+-- tmap("<c-h>", "<c-\\><c-n><c-w>h")
+-- tmap("<c-j>", "<c-\\><c-n><c-w>j")
+-- tmap("<c-k>", "<c-\\><c-n><c-w>k")
+-- tmap("<c-l>", "<c-\\><c-n><c-w>l")
+-- tmap("<c-f>", "<c-\\><c-n><c-f>")
+-- tmap("<c-b>", "<c-\\><c-n><c-b>")
+-- tmap("<c-g><c-g>", "<c-\\><c-n><c-g><c-g>")
 
--- Ack for the last search.
-nmap("<leader>/", ":AckFromSearch<CR>")
+-- Why is this not working? You don't see anything unless you start typing:
+-- nmap("<space>\\", ":AckBuffers ")
+-- work-around:
 
 -- Toggle QF window
 nmap("<leader>u", "<cmd>lua require'quickfix'.toggle_qf()<cr>")
@@ -159,42 +202,28 @@ nmap("<space>c", "<cmd>cd %:p:h<cr>")
 -- nmap("<cr>", "zz")
 
 -- Zen mode by hitting enter
-nmap("<cr>", ":ZenMode<cr>")
+-- nmap("<cr>", ":ZenMode<cr>")
 
 nmap("1z", ":setlocal foldlevel=1<cr>")
 nmap("2z", ":setlocal foldlevel=2<cr>")
 
 nmap("<c-w><c-]>", ":vsplit<cr><c-]>")
 
-vim.cmd [[
-au TabLeave * let g:lasttab = tabpagenr()
+nmap("<space>is", ":tabnew | let t:tab_title = 'phx.server' | terminal iex -S mix phx.server<cr>")
 
-function! DeleteHiddenBuffers()
-  let tpbl=[]
-  let closed = 0
-  call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
-  for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
-    if getbufvar(buf, '&mod') == 0
-      silent execute 'bwipeout' buf
-      let closed += 1
-    endif
-  endfor
-  echo "Closed ".closed." hidden buffers"
-endfunction
-]]
+-- Center on enter
+nmap("<cr>", "zz")
 
--- Close all tabs exept current
-nmap("<leader>T", ":tabonly<cr>:call DeleteHiddenBuffers()<cr>")
-
--- Switch between 2 recent tabs
-nmap("<leader><leader>", ":exe 'tabn '.g:lasttab<cr>")
-
-nmap("<leader>t", ":tabnew<cr>")
+vim.api.nvim_set_keymap("n", "<space>c", ":!", { noremap = true })
 
 -- GitHub copilot: don't use tab to accept suggestions, as it interferes with snippets.
 -- Instead, press ctrl + enter.
 vim.api.nvim_set_keymap('i', '<c-cr>', 'copilot#Accept("")',
   { script = true, expr = true, silent = true })
+
+vim.keymap.set('i', '<C-T>', '<Plug>(copilot-accept-line)')
+
+-- vim.api.nvim_set_keymap('i', '<c-t>', '<Plug>(copilot-accept-line)', { script = true, expr = true, silent = true })
 -- this version would also exit insert mode, but it doesn't seem practical
 -- vim.api.nvim_set_keymap('i', '<c-cr>', 'copilot#Accept("") . "<Esc>"', { script = true, expr = true, silent = true })
 vim.g.copilot_no_tab_map = true
@@ -216,9 +245,11 @@ augroup netrw_enter
   autocmd filetype netrw call NetrwEnter()
 augroup END
 
-autocmd FileType foo let b:surround_45 = "%{\r}"
-
+" typing % in visual mode will wrap the selection in %{} (requires vim-surround)
 let g:surround_37 = "%{\r}"
+
+" typing # in visual mode will wrap the selection in #{} (requires vim-surround)
+let g:surround_35 = "#{\r}"
 
 " don't clobber the jumplist with } and {, source: https://superuser.com/questions/836784/in-vim-dont-store-motions-in-jumplist
 nnoremap <silent> } :<C-u>execute "keepjumps norm! " . v:count1 . "}"<CR>
@@ -236,6 +267,9 @@ vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 vim.keymap.set("i", "<c-\\>", " |> dbg<esc>")
 
+-- move back a character w/o leaving insert mode
+vim.keymap.set("i", "<c-b>", "<left>")
+
 -- vim.keymap.set("n", "<C-e>",
 --   function()
 --     local result = vim.treesitter.get_captures_at_cursor(0)
@@ -243,5 +277,31 @@ vim.keymap.set("i", "<c-\\>", " |> dbg<esc>")
 --   end,
 --   { noremap = true, silent = false }
 -- )
+
+-- next buffer
+-- vim.keymap.set("n", "<c-n>", ":bn<cr>", { silent = true })
+-- vim.keymap.set("n", "<c-p>", ":bp<cr>", { silent = true })
+
+-- vim-qf
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'qf',
+  callback = function()
+    -- Define your quickfix-specific mappings here
+    vim.keymap.set('n', '{', '<Plug>(qf_previous_file)', { buffer = true })
+    vim.keymap.set('n', '}', '<Plug>(qf_next_file)', { buffer = true })
+  end
+})
+
+-- Close all buffers and windows in current tab
+vim.api.nvim_create_user_command('CloseTab', function()
+  -- Close all buffers in the current tab
+  vim.cmd('tabdo bdelete')
+  -- Close the current tab
+  vim.cmd('tabclose')
+end, { desc = 'Close all buffers and windows in current tab' })
+
+
+-- clashing:
+-- vmap("<space>r", ":'<,'>!bash<cr>")
 
 return false

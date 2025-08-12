@@ -25,7 +25,6 @@ vim.o.exrc                 = true
 -----------------------------------------------------------
 -- Neovim UI
 -----------------------------------------------------------
--- opt.number = true           -- Show line number
 opt.showmatch              = true     -- Highlight matching parenthesis
 opt.foldmethod             = 'indent' -- Enable folding (default 'foldmarker')
 opt.splitright             = true     -- Vertical split to the right
@@ -34,8 +33,7 @@ opt.ignorecase             = true     -- Ignore case letters when search
 opt.smartcase              = true     -- Ignore lowercase for the whole pattern
 opt.linebreak              = true     -- Wrap on word boundary
 opt.termguicolors          = true     -- Enable 24-bit RGB colors
-opt.cursorline             = true     -- Highlight current line
--- opt.laststatus=3            -- Set global statusline
+-- opt.cursorline             = false     -- Don't highlight current line
 
 -----------------------------------------------------------
 -- Tabs, indent
@@ -66,20 +64,21 @@ g.netrw_localcopydircmd    = 'cp -r'
 g.ackprg                   = 'ag --vimgrep --smart-case'
 
 -- vindent.vim
-g.vindent_motion_OO_prev   = '[i' -- jump to prev block of same indent.
-g.vindent_motion_OO_next   = ']i' -- jump to next block of same indent.
-g.vindent_motion_more_prev = '[+' -- jump to prev line with more indent.
-g.vindent_motion_more_next = ']+' -- jump to next line with more indent.
-g.vindent_motion_less_prev = '[-' -- jump to prev line with less indent.
-g.vindent_motion_less_next = ']-' -- jump to next line with less indent.
-g.vindent_motion_diff_prev = '[;' -- jump to prev line with different indent.
-g.vindent_motion_diff_next = '];' -- jump to next line with different indent.
-g.vindent_motion_XX_ss     = '[p' -- jump to start of the current block scope.
-g.vindent_motion_XX_se     = ']p' -- jump to end   of the current block scope.
-g.vindent_object_XX_ii     = 'ii' -- select current block.
-g.vindent_object_XX_ai     = 'aI' -- select current block + one extra line  at beginning.
-g.vindent_object_XX_aI     = 'ai' -- select current block + two extra lines at beginning and end.
-g.vindent_jumps            = 1    -- make vindent motion count as a |jump-motion| (works with |jumplist|).
+g.vindent_motion_OO_prev   = '<c-p>' -- jump to prev block of same indent.
+g.vindent_motion_OO_next   = '<c-n>' -- jump to next block of same indent.
+g.vindent_motion_more_prev = '[+'    -- jump to prev line with more indent.
+g.vindent_motion_more_next = ']+'    -- jump to next line with more indent.
+g.vindent_motion_less_prev = '<M-u>' -- jump to prev line with less indent.
+-- g.vindent_motion_less_prev = '[-' -- jump to prev line with less indent.
+g.vindent_motion_less_next = '<M-d>' -- jump to next line with less indent.
+g.vindent_motion_diff_prev = '[;'    -- jump to prev line with different indent.
+g.vindent_motion_diff_next = '];'    -- jump to next line with different indent.
+g.vindent_motion_XX_ss     = '[p'    -- jump to start of the current block scope.
+g.vindent_motion_XX_se     = ']p'    -- jump to end   of the current block scope.
+g.vindent_object_XX_ii     = 'ii'    -- select current block.
+g.vindent_object_XX_ai     = 'aI'    -- select current block + one extra line  at beginning.
+g.vindent_object_XX_aI     = 'ai'    -- select current block + two extra lines at beginning and end.
+g.vindent_jumps            = 1       -- make vindent motion count as a |jump-motion| (works with |jumplist|).
 
 -- wipe netrw buffers when closed
 -- https://www.reddit.com/r/vim/comments/g45w7q/let_gnetrw_altfile_1_has_no_effect/
@@ -105,7 +104,8 @@ g.copilot_filetypes        = {
   heex = true,
   yaml = true,
   css = true,
-  toml = true
+  toml = true,
+  snippets = true
 }
 
 g.user_emmet_mode          = 'i' -- Use insert mode for emmet
@@ -145,5 +145,10 @@ local disabled_built_ins   = {
 for _, plugin in pairs(disabled_built_ins) do
   g["loaded_" .. plugin] = 1
 end
+
+-- Prevent syntax highlight flickering: https://github.com/neovim/neovim/issues/32660
+vim.g._ts_force_sync_parsing = true
+
+
 
 return false

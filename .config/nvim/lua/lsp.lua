@@ -41,8 +41,7 @@ lspconfig.dockerls.setup {
 
 lspconfig.jsonls.setup {}
 
--- lspconfig.harper_ls.setup {}
-
+-- html-lsp
 lspconfig.html.setup {
   capabilities = vim.lsp.protocol.make_client_capabilities(),
   on_attach = on_attach,
@@ -69,7 +68,7 @@ lspconfig.elixirls.setup {
     -- I also choose to turn off the auto dep fetching feature.
     -- It often get's into a weird state that requires deleting
     -- the .elixir_ls directory and restarting your editor.
-    fetchDeps = false
+    fetchDeps = false,
   }
 }
 

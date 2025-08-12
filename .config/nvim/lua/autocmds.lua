@@ -49,19 +49,7 @@ autocmd('BufLeave', {
 -- Forcefully getting <c-\> back from vim-tmux-navigator
 autocmd('VimEnter', {
   pattern = '',
-  command = 'nnoremap <C-\\> :Ack<space>'
-})
-
--- Forcefully getting <c-\> back from vim-tmux-navigator
-autocmd('WinLeave', {
-  pattern = '',
-  command = 'set nocursorline'
-})
-
--- Forcefully getting <c-\> back from vim-tmux-navigator
-autocmd('WinEnter', {
-  pattern = '',
-  command = 'set cursorline'
+  command = 'nnoremap <c-\\> :Ack<space>'
 })
 
 -- Autosave files on losing focus
@@ -79,6 +67,39 @@ autocmd('FileType', {
       end
     })
   end
+})
+
+-- Automatically save buffer when leaving its window (only if modified)
+vim.api.nvim_create_autocmd("BufLeave", {
+  pattern = "*",
+  callback = function()
+    if vim.bo.modified then
+      vim.cmd("silent! write")
+    end
+  end
+})
+
+vim.cmd([[
+  " Disable by default
+  set nocursorline
+
+  " Enable only in active window
+  augroup CursorLineToggle
+    autocmd!
+    autocmd WinEnter,BufEnter * setlocal cursorline
+    autocmd WinLeave,BufLeave * setlocal nocursorline
+  augroup END
+
+  " Set the color for the cursor line
+  highlight CursorLine guibg=black
+]])
+
+-- Disable horizontal scrolling in terminal buffers
+vim.api.nvim_create_autocmd("TermOpen", {
+  pattern = "*",
+  callback = function()
+    vim.opt_local.wrap = true
+  end,
 })
 
 return false
