@@ -67,12 +67,12 @@ ls.add_snippets("elixir", {
 })
 
 -- Disable terminal buffers from showing up in the buffer list
-vim.api.nvim_create_autocmd("TermOpen", {
-  pattern = "*",
-  callback = function()
-    vim.opt_local.buflisted = false
-  end,
-})
+-- vim.api.nvim_create_autocmd("TermOpen", {
+--   pattern = "*",
+--   callback = function()
+--     vim.opt_local.buflisted = false
+--   end,
+-- })
 
 -- local function sort_alias_block(args)
 --   local bufnr = args.buf
