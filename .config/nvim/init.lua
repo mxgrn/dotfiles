@@ -8,7 +8,7 @@ require('colors')
 require('lsp')
 require('quickfix')
 require('tabs')
-require('center_on_jump')
+-- require('center_on_jump')
 require('elixir_map_key_toggle')
 
 -- Auto-reload init.lua when saved.

@@ -112,7 +112,7 @@ alias -s git="git clone"
 ################
 
 alias mc='iex -S mix'
-alias ms='mix phoenix.server'
+alias ms='mix setup'
 alias mem='mix ecto.migrate'
 alias mec='mix ecto.create'
 alias md='mix deps.get'

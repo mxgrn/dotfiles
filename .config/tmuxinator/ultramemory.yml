@@ -48,7 +48,7 @@ windows:
   - server:
       layout: main-vertical
       panes:
-        - ./bin/expose.sh
+        - just
         - iex -S mix phx.server
 
   - editor: vim

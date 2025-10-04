@@ -323,7 +323,7 @@ vim.api.nvim_create_user_command('CloseTab', function()
   vim.cmd('tabclose')
 end, { desc = 'Close all buffers and windows in current tab' })
 
-vim.keymap.set('n', '_', ':ToggleMapKeys<CR>', { desc = 'Converts a map from string keys to atom keys and back' })
+vim.keymap.set('n', '_', ':ToggleElixirMapKeys<CR>', { desc = 'Converts a map from string keys to atom keys and back' })
 
 
 

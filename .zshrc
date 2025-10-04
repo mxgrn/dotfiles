@@ -81,8 +81,8 @@ eval "$(direnv hook zsh)"
 
 eval "$(atuin init zsh --disable-up-arrow)"
 
-export ASDF_DATA_DIR="/Users/mxgrn/.asdf"
-export PATH="$ASDF_DATA_DIR/shims:$PATH"
+# export ASDF_DATA_DIR="/Users/mxgrn/.asdf"
+# export PATH="$ASDF_DATA_DIR/shims:$PATH"
 
 # Load local zshrc which will not be committed to git
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
@@ -91,7 +91,7 @@ export PATH="$HOME/.npm-global/bin:$PATH"
 
 export CLOAK_KEY=lltjQNosz5rgCM14cVFNFB/wYmIaRk6DNzZhUgSiLEs=
 
-export ASDF_DIR=~/.asdf
+# export ASDF_DIR=~/.asdf
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/mxgrn/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/mxgrn/Downloads/google-cloud-sdk/path.zsh.inc'; fi
@@ -100,5 +100,28 @@ if [ -f '/Users/mxgrn/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users
 if [ -f '/Users/mxgrn/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/mxgrn/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
 PATH="$PATH":"$HOME/.local/scripts/"
-bindkey -s ^f "tmux-sessionizer\n"
+
+# Enables tmux-sessionizer by <option-f>
+bindkey -s '\ef' 'tmux-sessionizer\n'
+
+# Edit a script in neovim
+ebin() {
+  if [ -z "$1" ]; then
+    echo "Usage: ebin <script>"
+    return 1
+  fi
+
+  script=$(which "$1")
+  nvim "$script"
+}
+
 export PATH="/Applications/Postgres.app/Contents/Versions/17/bin:$PATH"
+
+# Fix editing the command line in vim (wouldn't work in tmux)
+bindkey '^X^E' edit-command-line
+
+# Move from (default) <c-s> to <c-]> to pause terminal output (resumes with <c-q>)
+stty stop ^]
+
+
+eval "$(mise activate zsh)"

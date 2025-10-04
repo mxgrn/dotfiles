@@ -22,6 +22,7 @@ alias -g HI='~/Inbox'
 alias -g HD='~/Documents'
 
 alias -g F='~/code/mxgrn/fragmenter'
+alias -g GR='~/code/mxgrn/gramex'
 alias -g L='~/code/mxgrn/lisker'
 alias -g F='~/code/mxgrn/fragmenter'
 alias -g FM='~/code/mxgrn/fragmenter-mobile'
@@ -35,7 +36,7 @@ alias -g AT="~/code/mxgrn/ash_table"
 alias -g PL="~/code/temp/phx_latest"
 alias -g B="~/code/mxgrn/botpresto"
 alias -g UM="~/code/mxgrn/ultramemory"
-alias -g LF="~/code/mxgrn/lexifarm"
+alias -g LC="~/code/mxgrn/lexicorn"
 
 # Jump
 alias -g J="~/code/jump/Jump/api"

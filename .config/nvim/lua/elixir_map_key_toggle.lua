@@ -152,12 +152,15 @@ local function toggle_elixir_map_keys()
 
   local key_type = is_string_key and "atom" or "string"
   vim.notify("Toggled to " .. key_type .. "-key map", vim.log.levels.INFO)
+
+  -- Make repeatable with dot command
+  pcall(vim.fn['repeat#set'], ':ToggleElixirMapKeys\r')
 end
 
 -- Create the command
 vim.api.nvim_create_user_command('ToggleElixirMapKeys', toggle_elixir_map_keys, {})
 
 -- Optional: Add a keybinding (e.g., <leader>tm for "toggle map")
-vim.keymap.set('n', '<leader>tm', toggle_elixir_map_keys, { desc = 'Toggle Elixir map keys' })
+-- vim.keymap.set('n', '<leader>tm', toggle_elixir_map_keys, { desc = 'Toggle Elixir map keys' })
 
 return false

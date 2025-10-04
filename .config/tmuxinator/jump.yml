@@ -45,8 +45,4 @@ startup_pane: 1
 # attach: false
 
 windows:
-  - server: iex -S mix phx.server
-
   - editor: vim
-
-  - terminal:
