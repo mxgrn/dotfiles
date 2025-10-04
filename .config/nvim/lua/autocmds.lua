@@ -50,6 +50,7 @@ autocmd('BufLeave', {
 autocmd('VimEnter', {
   pattern = '',
   command = 'nnoremap <c-\\> :Ack<space>'
+  -- command = 'nnoremap <c-\\> :FzfLua grep<cr>'
 })
 
 -- Autosave files on losing focus

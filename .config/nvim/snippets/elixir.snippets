@@ -5,7 +5,7 @@ snippet ti Tap inspect
 	|> tap(&IO.dbg(&1, pretty: true, label: "!!! $1"))
 
 snippet td Tap debug
-	|> tap(&dbg(&1))
+	|> tap(&dbg/1)
 
 snippet # String interpolation
   #{${1}}${2}

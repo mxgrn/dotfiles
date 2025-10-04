@@ -64,8 +64,8 @@ g.netrw_localcopydircmd    = 'cp -r'
 g.ackprg                   = 'ag --vimgrep --smart-case'
 
 -- vindent.vim
-g.vindent_motion_OO_prev   = '<c-p>' -- jump to prev block of same indent.
-g.vindent_motion_OO_next   = '<c-n>' -- jump to next block of same indent.
+g.vindent_motion_OO_prev   = '<M-p>' -- jump to prev block of same indent.
+g.vindent_motion_OO_next   = '<M-n>' -- jump to next block of same indent.
 g.vindent_motion_more_prev = '[+'    -- jump to prev line with more indent.
 g.vindent_motion_more_next = ']+'    -- jump to next line with more indent.
 g.vindent_motion_less_prev = '<M-u>' -- jump to prev line with less indent.

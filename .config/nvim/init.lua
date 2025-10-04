@@ -1,4 +1,4 @@
--- must be required _before_ plugins (otherwise vindent stops working, for egample)
+-- must be required _before_ plugins (otherwise vindent stops working, for example)
 -- don't forget to run stow --adopt . when adding a new file here
 require('options')
 require('plugins')
@@ -8,6 +8,8 @@ require('colors')
 require('lsp')
 require('quickfix')
 require('tabs')
+require('center_on_jump')
+require('elixir_map_key_toggle')
 
 -- Auto-reload init.lua when saved.
 -- If you need the above modules to also be re-evaluated, the last line in each of them should be `return false`.
@@ -371,3 +373,38 @@ vim.keymap.set('n', 'dSi', function()
   unwrap_and_dedent_same_indent()
   pcall(vim.fn['repeat#set'], 'dSi', -1)
 end, { noremap = true, silent = true, desc = 'Unwrap lines and dedent inner block to current indent' })
+
+if vim.fn.executable("rg") == 1 then
+  vim.o.grepprg = "rg -i --vimgrep --no-heading --smart-case"
+end
+
+-- init.lua
+vim.api.nvim_create_user_command("RG", function(opts)
+  local pat = opts.args
+  if pat == "" then return end
+  local cmd = { "rg", "--vimgrep", "--no-heading", "--smart-case", "-e", pat, "." }
+  local out = vim.fn.systemlist(cmd)
+  if vim.v.shell_error ~= 0 then
+    vim.notify("rg failed", vim.log.levels.WARN); return
+  end
+  vim.fn.setqflist({}, " ", { title = "rg: " .. pat, lines = out })
+  vim.cmd("copen")
+end, { nargs = 1, complete = "file" })
+
+-- Recompile on each Elixir file save
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = { "*.ex", "*.heex" },
+  callback = function()
+    -- run in background; no blocking, no noisy UI
+    vim.fn.jobstart({ "mix", "compile" }, { detach = true })
+  end
+})
+
+-- vim.lsp.config('expert', {
+--   cmd = { 'expert' },
+--   root_markers = { 'mix.exs', '.git' },
+--   filetypes = { 'elixir', 'eelixir', 'heex' },
+-- })
+--
+--
+-- vim.lsp.enable 'expert'

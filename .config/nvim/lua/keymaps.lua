@@ -32,10 +32,26 @@ nmap("<space>f", "<CMD>lua require'telescope.builtin'.find_files({show_untracked
 -- nmap("<leader>o",
 --   "<cmd>lua require('telescope.builtin').live_grep({ grep_open_files = true, prompt_title = 'Live Grep (Open Buffers)' })<cr>")
 
-nmap("<space>/", "<CMD>lua require'telescope.builtin'.current_buffer_fuzzy_find({})<CR>")
-nmap("<leader>\\", "<CMD>lua require'telescope.builtin'.live_grep({})<CR>")
-nmap("<leader>p", "<cmd>lua require('telescope.builtin').buffers({ sort_mru = true, ignore_current_buffer = false })<cr>")
-nmap("<space>\\", ":lua vim.api.nvim_feedkeys(':AckBuffers ', 'n', true)<CR>")
+
+-- Live grep from all currently open buffers
+vim.keymap.set("n", "<space>/", function()
+  local paths = {}
+  for _, b in ipairs(vim.api.nvim_list_bufs()) do
+    local name = vim.api.nvim_buf_get_name(b)
+    if vim.bo[b].buflisted and name ~= "" and not name:match("^%w+://") and vim.loop.fs_stat(name) then
+      table.insert(paths, name)
+    end
+  end
+  require("fzf-lua").live_grep({ search_paths = paths })
+end, { desc = "fzf-lua: live_grep open buffers" })
+
+-- nmap("<space>/", "<CMD>lua require'telescope.builtin'.current_buffer_fuzzy_find({})<CR>")
+-- nmap("<leader>\\", "<CMD>lua require'telescope.builtin'.live_grep({})<CR>")
+-- nmap("<c-p>", "<cmd>lua require('telescope.builtin').buffers({ sort_mru = true, ignore_current_buffer = true })<cr>")
+nmap("<c-p>", "<cmd>lua FzfLua.buffers({})<cr>")
+nmap("<space>f", "<cmd>lua FzfLua.files({})<cr>")
+
+-- nmap("<space>\\", ":lua vim.api.nvim_feedkeys(':AckBuffers ', 'n', true)<CR>")
 
 nmap("g<c-]>", "<c-w>v<c-]>")
 
@@ -105,6 +121,8 @@ vmap("p", "pgvy")
 
 -- Project notes
 nmap("<space>pn", ":sp .notes.md<cr>")
+
+nmap("vig", "ggVG")
 
 -- Luasnip
 vim.cmd [[
@@ -209,7 +227,12 @@ nmap("2z", ":setlocal foldlevel=2<cr>")
 
 nmap("<c-w><c-]>", ":vsplit<cr><c-]>")
 
-nmap("<space>is", ":tabnew | let t:tab_title = 'phx.server' | terminal iex -S mix phx.server<cr>")
+vim.api.nvim_create_user_command('PhxServer', function()
+  vim.cmd("let t:tab_title = 'phx.server'")
+  vim.cmd('terminal iex -S mix phx.server')
+end, {})
+
+nmap('<space>is', ':tabnew | PhxServer<cr>')
 
 -- Center on enter
 nmap("<cr>", "zz")
@@ -299,6 +322,9 @@ vim.api.nvim_create_user_command('CloseTab', function()
   -- Close the current tab
   vim.cmd('tabclose')
 end, { desc = 'Close all buffers and windows in current tab' })
+
+vim.keymap.set('n', '_', ':ToggleMapKeys<CR>', { desc = 'Converts a map from string keys to atom keys and back' })
+
 
 
 -- clashing:

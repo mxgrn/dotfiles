@@ -5,14 +5,18 @@ vim.cmd [[
 
   hi Folded guibg=NONE guifg=gray
 
-  " slightly darker background on active windows
   hi Normal guifg=#cdd6f4 guibg=#131313
+  hi NormalNC guifg=#cdd6f4 guibg=#131313
+
+
+  " slightly darker background on active windows
+  " hi Normal guifg=#cdd6f4 guibg=#131313
+
+  " slightly lighter background on inactive windows
+  " hi NormalNC guifg=#cdd6f4 guibg=#282828
 
   " Same color for nyngwang/NeoZoom.lua
   hi NormalFloat guifg=#cdd6f4 guibg=#1c1c1c
-
-  " slightly lighter background on inactive windows
-  hi NormalNC guifg=#cdd6f4 guibg=#282828
 
   hi VertSplit guifg=#282828 guibg=#1c1c1c
 
@@ -35,7 +39,7 @@ vim.cmd [[
   " Beautiful:
   " hi CursorLine guibg=#002f2f
   " hi CursorLine guibg=#003047
-  hi CursorLine guibg=black
+  " hi CursorLine guibg=black
   " hi CursorLine guibg=#303030
   " hi CursorColumn guibg=black
 
