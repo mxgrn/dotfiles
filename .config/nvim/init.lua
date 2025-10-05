@@ -10,6 +10,7 @@ require('quickfix')
 require('tabs')
 -- require('center_on_jump')
 require('elixir_map_key_toggle')
+require('elixir_path_copy')
 
 -- Auto-reload init.lua when saved.
 -- If you need the above modules to also be re-evaluated, the last line in each of them should be `return false`.
