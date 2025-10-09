@@ -149,6 +149,4 @@ end
 -- Prevent syntax highlight flickering: https://github.com/neovim/neovim/issues/32660
 vim.g._ts_force_sync_parsing = true
 
-
-
 return false

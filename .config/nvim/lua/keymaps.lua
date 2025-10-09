@@ -32,6 +32,8 @@ nmap("<space>f", "<CMD>lua require'telescope.builtin'.find_files({show_untracked
 -- nmap("<leader>o",
 --   "<cmd>lua require('telescope.builtin').live_grep({ grep_open_files = true, prompt_title = 'Live Grep (Open Buffers)' })<cr>")
 
+-- Elixir
+vim.keymap.set("n", "<space>ef", ":ElixirCopyFuncFqn<cr>")
 
 -- Live grep from all currently open buffers
 vim.keymap.set("n", "<space>/", function()

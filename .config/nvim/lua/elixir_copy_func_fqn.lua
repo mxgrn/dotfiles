@@ -1,3 +1,4 @@
+-- Copy fully qualified names in Elixir with :ElixirCopyFuncFqn
 local M = {}
 
 local function get_node_text(node, bufnr)
