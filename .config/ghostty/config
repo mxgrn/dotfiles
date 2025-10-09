@@ -76,4 +76,4 @@ keybind = super+t=text:\x13c
 keybind = super+shift+alt+Equal=text:\x13\x0c
 keybind = super+shift+alt+Minus=text:\x13\x08
 
-# custom-shader = ~/.config/ghostty/shaders/shader.glsl
+custom-shader = ~/.config/ghostty/shaders/shader.glsl
