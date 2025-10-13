@@ -22,6 +22,7 @@ vim.g['test#custom_strategies'] = {
     -- Create new buffer and run tests
     vim.cmd('enew')
     vim.fn.termopen(cmd)
+    vim.cmd('startinsert')
   end
 }
 
