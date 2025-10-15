@@ -22,10 +22,30 @@ vim.g['test#custom_strategies'] = {
     -- Create new buffer and run tests
     vim.cmd('enew')
     vim.fn.termopen(cmd)
-    vim.cmd('startinsert')
+    if vim.g.start_insert_on_open then
+      vim.cmd('startinsert')
+    end
   end
 }
 
 vim.g['test#strategy'] = 'custom_basic'
+
+vim.api.nvim_create_user_command("ToggleStartVimTestInInsert", function()
+  vim.g.start_insert_on_open = not vim.g.start_insert_on_open
+  if vim.g.start_insert_on_open then
+    print("TestsStartInsert ON")
+  else
+    print("TestsStartInsert OFF")
+  end
+end, {})
+
+local opts = { noremap = true, silent = true }
+
+vim.api.nvim_set_keymap('n', '<space>n', ':wa<CR>:TestNearest<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>t', ':wa<CR>:TestLast<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>T', ':wa<CR>:TestSuite<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>s', ':wa<CR>:TestFile<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>v', ':wa<CR>:TestVisit<CR>', opts)
+vim.api.nvim_set_keymap('n', '<leader>T', ':ToggleStartVimTestInInsert<CR>', opts)
 
 return false

@@ -55,8 +55,6 @@ nmap("<space>f", "<cmd>lua FzfLua.files({})<cr>")
 
 -- nmap("<space>\\", ":lua vim.api.nvim_feedkeys(':AckBuffers ', 'n', true)<CR>")
 
-nmap("g<c-]>", "<c-w>v<c-]>")
-
 -- Ack for the last search.
 nmap("<leader>/", ":AckFromSearch<CR>")
 
@@ -93,13 +91,6 @@ nmap("<C-h>", ":lua require('Navigator').left()<CR>")
 nmap("<C-j>", ":lua require('Navigator').down()<CR>")
 nmap("<C-k>", ":lua require('Navigator').up()<CR>")
 nmap("<C-l>", ":lua require('Navigator').right()<CR>")
-
--- Tests
-nmap("<space>n", ":wa<cr>:TestNearest<CR>")
-nmap("<space>t", ":wa<cr>:TestLast<CR>")
-nmap("<space>T", ":wa<cr>:TestSuite<CR>")
-nmap("<space>s", ":wa<cr>:TestFile<CR>")
-nmap("<space>v", ":wa<cr>:TestVisit<CR>")
 
 -- Buffers
 nmap("<space>k", ":close<CR>")
