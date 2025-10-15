@@ -148,8 +148,8 @@ vim.keymap.set("n", "<A-LeftMouse>", function()
     local word = vim.fn.expand("<cWORD>")
 
     -- Remove leading [ or other punctuation
-    word = word:gsub("^[%[%(%{<]+", "")
-    word = word:gsub("[%]%)}>,;]+$", "")
+    word = word:gsub("^[%[%(%{<%.]+", "")
+    word = word:gsub("[%]%)}>,;:]+$", "")
 
     -- Try to match "path/to/file.ex:123"
     local fname, lineno = word:match("([^:%s]+):?(%d*)")
