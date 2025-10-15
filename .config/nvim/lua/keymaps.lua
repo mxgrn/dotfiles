@@ -152,13 +152,16 @@ vim.keymap.set("n", "<A-LeftMouse>", function()
     word = word:gsub("[%]%)}>,;]+$", "")
 
     -- Try to match "path/to/file.ex:123"
-    local fname, lineno = word:match("([^:%s]+):(%d+)")
+    local fname, lineno = word:match("([^:%s]+):?(%d*)")
+
     if fname then
       vim.cmd("tabnext 1")
       vim.cmd("edit " .. fname)
-      vim.cmd(lineno)
+      if lineno ~= "" then
+        vim.cmd(lineno)
+      end
     else
-      print("No file:line found under cursor")
+      print("No file found under cursor")
     end
   end, 10) -- slight delay for <LeftMouse> to move the cursor
 end, { noremap = true })
