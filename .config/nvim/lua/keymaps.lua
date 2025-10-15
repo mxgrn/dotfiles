@@ -147,23 +147,29 @@ vim.keymap.set("n", "<A-LeftMouse>", function()
   vim.defer_fn(function()
     local word = vim.fn.expand("<cWORD>")
 
-    -- Remove leading [ or other punctuation
+    -- Strip punctuation like .[ or trailing ]
     word = word:gsub("^[%[%(%{<%.]+", "")
     word = word:gsub("[%]%)}>,;:]+$", "")
 
-    -- Try to match "path/to/file.ex:123"
-    local fname, lineno = word:match("([^:%s]+):?(%d*)")
+    -- Match variants:
+    --   lib/foo.ex
+    --   lib/foo.ex:42
+    --   lib/foo.ex:42: MyApp.Foo.bar/1
+    local fname, lineno = word:match("([^:%s]+):(%d+)")
+    if not fname then
+      fname = word:match("([^:%s]+)$")
+    end
 
-    if fname then
+    if fname and vim.fn.filereadable(fname) == 1 then
       vim.cmd("tabnext 1")
       vim.cmd("edit " .. fname)
-      if lineno ~= "" then
+      if lineno then
         vim.cmd(lineno)
       end
     else
-      print("No file found under cursor")
+      print("File not found: " .. (fname or "(none)"))
     end
-  end, 10) -- slight delay for <LeftMouse> to move the cursor
+  end, 10)
 end, { noremap = true })
 
 -- Open custom snippets for current filetype
