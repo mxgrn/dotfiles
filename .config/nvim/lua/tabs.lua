@@ -45,7 +45,7 @@ endfunction
 
 
 -- Close all tabs exept current
-nmap("<leader>T", ":tabonly<cr>:call DeleteHiddenBuffers()<cr>")
+-- nmap("<leader>T", ":tabonly<cr>:call DeleteHiddenBuffers()<cr>")
 
 -- Switch between 2 recent tabs
 nmap("<c-g><c-g>", ":exe 'tabn '.g:lasttab<cr>")

@@ -38,9 +38,6 @@ export PATH="/usr/local/opt/qt/bin:$PATH"
 
 export PATH="/Users/mxgrn/.local/bin:$PATH"
 
-# . /opt/homebrew/opt/asdf/libexec/asdf.sh
-# export PATH="/opt/homebrew/opt/postgresql@10/bin:$PATH"
-
 # export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
 # FZF preview colors (adapted from https://github.com/junegunn/fzf/blob/master/ADVANCED.md)
@@ -54,13 +51,13 @@ fi
 export FLYCTL_INSTALL="/Users/mxgrn/.fly"
 export PATH="$FLYCTL_INSTALL/bin:$PATH"
 
-source <(fzf --zsh)
+# source <(fzf --zsh)
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
-[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
+# [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
 # Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
+# [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="/opt/homebrew/opt/curl/bin:$PATH"
@@ -68,30 +65,18 @@ export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 export PATH=$PATH:/Users/mxgrn/code/temp/roc_nightly-macos_apple_silicon-2023-03-31-424b4aa
 export PATH=$PATH:/Users/mxgrn/.cargo/bin
 
-export DIRENV_LOG_FORMAT=
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
-eval "$(direnv hook zsh)"
-
 
 . "$HOME/.atuin/bin/env"
 
 eval "$(atuin init zsh --disable-up-arrow)"
 
-# export ASDF_DATA_DIR="/Users/mxgrn/.asdf"
-# export PATH="$ASDF_DATA_DIR/shims:$PATH"
-
 # Load local zshrc which will not be committed to git
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
 export PATH="$HOME/.npm-global/bin:$PATH"
-
-export CLOAK_KEY=lltjQNosz5rgCM14cVFNFB/wYmIaRk6DNzZhUgSiLEs=
-
-# export ASDF_DIR=~/.asdf
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/mxgrn/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/mxgrn/Downloads/google-cloud-sdk/path.zsh.inc'; fi
@@ -123,5 +108,6 @@ bindkey '^X^E' edit-command-line
 # Move from (default) <c-s> to <c-]> to pause terminal output (resumes with <c-q>)
 stty stop ^]
 
-
 eval "$(mise activate zsh)"
+
+# MIX_OS_DEPS_COMPILE_PARTITION_COUNT=$(( $(sysctl -n hw.physicalcpu) / 2 ))
