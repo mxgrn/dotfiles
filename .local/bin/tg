@@ -1,0 +1,39 @@
+#!/usr/bin/env zsh
+
+# Telegram Bot API helper
+# Usage:
+#   tg getWebhookInfo <bot_token>
+#   tg setWebhook <bot_token> <url>
+
+API_BASE="https://api.telegram.org"
+
+if [[ $# -lt 2 ]]; then
+  echo "Usage:"
+  echo "  tg getWebhookInfo <bot_token>"
+  echo "  tg setWebhook <bot_token> <url>"
+  exit 1
+fi
+
+cmd=$1
+token=$2
+
+case "$cmd" in
+  getWebhookInfo)
+    curl -s "${API_BASE}/bot${token}/getWebhookInfo" | jq .
+    ;;
+  setWebhook)
+    if [[ $# -ne 3 ]]; then
+      echo "Usage: tg setWebhook <bot_token> <url>"
+      exit 1
+    fi
+    url=$3
+    curl -s -X POST "${API_BASE}/bot${token}/setWebhook" \
+      -d "url=${url}" | jq .
+    ;;
+  *)
+    echo "Unknown command: $cmd"
+    echo "Available commands: getWebhookInfo, setWebhook"
+    exit 1
+    ;;
+esac
+
