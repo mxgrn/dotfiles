@@ -22,15 +22,7 @@ end
 
 nmap("<leader>s", ":w<cr>")
 
--- Because Telescope doesn't by default "see" symbolic links
--- nmap("<leader>v", ":e $MYVIMRC<cr><cmd>cd %:p:h<cr>")
 nmap("<leader>v", ":e ~/dotfiles/.config/nvim/init.lua<cr><cmd>cd %:p:h<cr>")
-
-nmap("<space>f", "<CMD>lua require'telescope.builtin'.find_files({show_untracked = true})<CR>")
-
--- Live grep from all currently open buffers
--- nmap("<leader>o",
---   "<cmd>lua require('telescope.builtin').live_grep({ grep_open_files = true, prompt_title = 'Live Grep (Open Buffers)' })<cr>")
 
 -- Elixir
 vim.keymap.set("n", "<space>ef", ":ElixirCopyFuncFqn<cr>")

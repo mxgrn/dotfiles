@@ -22,10 +22,6 @@ require("lazy").setup({
   --   ---@type quicker.SetupOptions
   --   opts = {},
   -- },
-  {
-    "LintaoAmons/bookmarks.nvim",
-    tag = "v1.4.2"
-  },
   "mbbill/undotree",
   -- {
   --   "mhanberg/output-panel.nvim",
@@ -200,54 +196,6 @@ require("lazy").setup({
     -- end,
   },
 
-
-  -- Very confusing results
-  -- 'natecraddock/telescope-zf-native.nvim',
-
-  -- Favor file names over paths when fuzzy-searching
-  -- 'nvim-telescope/telescope-fzy-native.nvim',
-
-  -- Telescope
-  {
-    'nvim-telescope/telescope.nvim',
-    config = function()
-      -- Looks like Telescope is great by default
-      -- require("telescope").load_extension("zf-native")
-      -- require('telescope').load_extension('fzy_native')
-
-      require('telescope').setup {
-        defaults = {
-          -- preview = false,
-          -- theme = "ivy",
-          mappings = {
-            i = {
-              -- Close Telescope window on Esc
-              ["<esc>"] = require("telescope.actions").close,
-            },
-          },
-        },
-
-        pickers = {
-          find_files = {
-            -- Show hidden files
-            hidden = true,
-            -- theme = "ivy",
-          }
-        }
-      }
-    end
-  },
-
-  -- {
-  --   'nvim-telescope/telescope-fzf-native.nvim',
-  --   run =
-  --   'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
-  --   config = function()
-  --   end
-  -- },
-
-  -- File type icons in Telescope
-  'nvim-tree/nvim-web-devicons',
 
   -- Comment stuff like a pro
   {
@@ -461,23 +409,6 @@ require("lazy").setup({
 
   -- time tracking
   { 'wakatime/vim-wakatime', lazy = false },
-
-  {
-    "danielfalk/smart-open.nvim",
-    branch = "0.2.x",
-    config = function()
-      require("telescope").load_extension("smart_open")
-    end,
-    dependencies = {
-      "kkharji/sqlite.lua",
-      -- Only required if using match_algorithm fzf
-      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-      -- Optional.  If installed, native fzy will be used when match_algorithm is fzy
-      { "nvim-telescope/telescope-fzy-native.nvim" },
-    },
-  },
-
-  { "rose-pine/neovim",      name = "rose-pine" },
 
   "IndianBoy42/tree-sitter-just",
   -- Cursor trail
