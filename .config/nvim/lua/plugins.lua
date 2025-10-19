@@ -310,9 +310,6 @@ require("lazy").setup({
   -- Never lose your undo history: :UndotreeToggle
   'mbbill/undotree',
 
-  -- Project-wide search: :Ack foo
-  'mileszs/ack.vim',
-
   -- Grepping in open buffers, e.g.:
   -- :Bsgrep[!] {pattern}
   'jeetsukumaran/vim-buffersaurus',
