@@ -34,6 +34,21 @@ vim.cmd([[
   command! LuaSnipEdit :lua require("luasnip.loaders").edit_snippet_files()
 ]])
 
+-- Fix LuaSnip behaviour: https://github.com/L3MON4D3/LuaSnip/issues/258#issuecomment-1429989436
+-- This is a workaround for the snippet "session" not finishing when exiting insert mode.
+-- 2025-10-19 - still needed
+vim.api.nvim_create_autocmd('ModeChanged', {
+  pattern = '*',
+  callback = function()
+    if ((vim.v.event.old_mode == 's' and vim.v.event.new_mode == 'n') or vim.v.event.old_mode == 'i')
+        and require('luasnip').session.current_nodes[vim.api.nvim_get_current_buf()]
+        and not require('luasnip').session.jump_active
+    then
+      require('luasnip').unlink_current()
+    end
+  end
+})
+
 -- Misc experiments
 
 -- Creates a scratch buffer for Lua code.
