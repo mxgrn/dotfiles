@@ -87,7 +87,7 @@ if [ -f '/Users/mxgrn/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '
 PATH="$PATH":"$HOME/.local/scripts/"
 
 # Enables tmux-sessionizer by <option-f>
-bindkey -s '\ef' 'tmux-sessionizer\n'
+# bindkey -s '\ef' 'tmux-sessionizer\n'
 
 # Edit a script in neovim
 ebin() {
@@ -110,4 +110,5 @@ stty stop ^]
 
 eval "$(mise activate zsh)"
 
-# MIX_OS_DEPS_COMPILE_PARTITION_COUNT=$(( $(sysctl -n hw.physicalcpu) / 2 ))
+# 2025-10-19 This breaks Elixir LS
+# export MIX_OS_DEPS_COMPILE_PARTITION_COUNT=$(( $(sysctl -n hw.physicalcpu) / 2 ))
