@@ -33,3 +33,23 @@ vim.cmd([[
 
   command! LuaSnipEdit :lua require("luasnip.loaders").edit_snippet_files()
 ]])
+
+-- Misc experiments
+
+-- Creates a scratch buffer for Lua code.
+vim.api.nvim_create_user_command("ScratchLua", function()
+  vim.cmd("new")
+  vim.bo.buftype = "nofile"
+  vim.bo.bufhidden = "hide"
+  vim.bo.swapfile = false
+  vim.bo.filetype = "lua"
+end, {})
+
+-- Opens :G (fugitive) focused on current file
+vim.keymap.set("n", "<leader>gd", function()
+  local fname = vim.fn.expand("%:t")
+  vim.cmd("Git")
+  vim.schedule(function()
+    vim.fn.search(fname, "w")
+  end)
+end, { desc = "Open :G focused on current file" })
