@@ -401,7 +401,15 @@ require("lazy").setup({
   {
     "ibhagwan/fzf-lua",
     config = function()
-      require('fzf-lua').setup({ "telescope" })
+      require('fzf-lua').setup({
+        "telescope",
+        actions = {
+          files = {
+            -- toggle searching hidden files and dirs with Ctrl-H
+            ["ctrl-h"] = FzfLua.actions.toggle_hidden,
+          },
+        },
+      })
     end
   },
 

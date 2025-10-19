@@ -49,8 +49,7 @@ autocmd('BufLeave', {
 -- Forcefully getting <c-\> back from vim-tmux-navigator
 autocmd('VimEnter', {
   pattern = '',
-  command = 'nnoremap <c-\\> :Ack<space>'
-  -- command = 'nnoremap <c-\\> :FzfLua grep<cr>'
+  command = 'nnoremap <c-\\> :FzfLua grep<cr>'
 })
 
 -- Autosave files on losing focus

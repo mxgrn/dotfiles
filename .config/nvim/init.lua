@@ -14,6 +14,7 @@ require('vim_test')
 require('projectionist')
 require('phoenix_jump_from_clipboard')
 require('unwrap_and_dedent')
+require('fzf_lua')
 
 -- Elixir
 require('elixir_map_key_toggle')

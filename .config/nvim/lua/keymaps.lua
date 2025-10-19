@@ -47,21 +47,10 @@ vim.keymap.set("n", "<space>/", function()
   require("fzf-lua").live_grep({ search_paths = paths })
 end, { desc = "fzf-lua: live_grep open buffers" })
 
-vim.keymap.set("n", "<leader>/", function()
-  local last_search = vim.fn.getreg('/')
-      :gsub("\\[<>]", "") -- Strip word boundaries
 
-  require("fzf-lua").grep({
-    search = last_search,
-    rg_opts = "--hidden --glob '!.git' --line-number --column --no-heading --color=always",
-  })
-end, { desc = "Grep for last search" })
-
--- nmap("<space>/", "<CMD>lua require'telescope.builtin'.current_buffer_fuzzy_find({})<CR>")
--- nmap("<leader>\\", "<CMD>lua require'telescope.builtin'.live_grep({})<CR>")
--- nmap("<c-p>", "<cmd>lua require('telescope.builtin').buffers({ sort_mru = true, ignore_current_buffer = true })<cr>")
-nmap("<c-p>", "<cmd>lua FzfLua.buffers({})<cr>")
-nmap("<space>f", "<cmd>lua FzfLua.files({})<cr>")
+-- vim.keymap.set("n", "<leader>/", ":FzfLua grep_visual<cr>")
+-- nmap("<c-p>", "<cmd>lua FzfLua.buffers({})<cr>")
+-- nmap("<space>f", "<cmd>lua FzfLua.files({})<cr>")
 
 -- Save all (unless unnamed) and quit on space-q
 nmap("<space>q", "<cmd>silent! wa | qa!<CR>")
