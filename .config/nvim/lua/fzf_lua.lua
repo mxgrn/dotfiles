@@ -1,12 +1,13 @@
 -- Grep whatever is in current hlsearch
 vim.keymap.set("n", "<leader>/", function()
   local pat = vim.fn.getreg("/")
-  -- strip Vim-specific regex flags like \V, \v, \c, etc.
-  pat = pat:gsub("^\\[vVcCmM]", "")
-  -- done — pass literally
+  pat = pat
+      :gsub("^\\[vVcCmM]", "")
+      :gsub("\\<", "")
+      :gsub("\\>", "")
   require("fzf-lua").grep({
     search = pat,
-    literal = true, -- always treat pattern as plain text
+    literal = true,
   })
 end, { desc = "grep for last search pattern" })
 
