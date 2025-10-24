@@ -69,3 +69,22 @@ vim.keymap.set("n", "<leader>gd", function()
     vim.fn.search(fname, "w")
   end)
 end, { desc = "Open :G focused on current file" })
+
+vim.api.nvim_create_user_command('ToggleMaximize', function()
+  if vim.t.maximized then
+    vim.o.winminwidth = vim.t.saved_winminwidth
+    vim.o.winminheight = vim.t.saved_winminheight
+    vim.cmd('wincmd =')
+    vim.api.nvim_win_set_option(0, 'winhl', '')
+    vim.t.maximized = false
+  else
+    vim.t.saved_winminwidth = vim.o.winminwidth
+    vim.t.saved_winminheight = vim.o.winminheight
+    vim.o.winminwidth = 0
+    vim.o.winminheight = 0
+    vim.cmd('wincmd |')
+    vim.cmd('wincmd _')
+    vim.api.nvim_win_set_option(0, 'winhl', 'StatusLine:MaximizedStatusLine')
+    vim.t.maximized = true
+  end
+end, {})

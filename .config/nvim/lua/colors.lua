@@ -8,12 +8,11 @@ vim.cmd [[
   hi Normal guifg=#cdd6f4 guibg=#131313
   hi NormalNC guifg=#cdd6f4 guibg=#131313
 
-
   " slightly darker background on active windows
   " hi Normal guifg=#cdd6f4 guibg=#131313
 
   " slightly lighter background on inactive windows
-  " hi NormalNC guifg=#cdd6f4 guibg=#282828
+  hi NormalNC guifg=#cdd6f4 guibg=#1e1e1e
 
   " Same color for nyngwang/NeoZoom.lua
   hi NormalFloat guifg=#cdd6f4 guibg=#1c1c1c
@@ -62,5 +61,10 @@ vim.cmd [[
   " autocmd InsertLeave * highlight CursorLine guibg=#005f5f
   " autocmd InsertLeave * highlight CursorLine guibg=#003047
 ]]
+
+vim.api.nvim_set_hl(0, 'MaximizedStatusLine', {
+  fg = '#f0a070', -- Slightly brighter text
+  bg = '#282828' -- Same as for active window
+})
 
 return false
