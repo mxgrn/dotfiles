@@ -46,44 +46,72 @@ local function replace_node(bufnr, node, new_text)
   end
 end
 
--- Toggle between string-key and atom-key Elixir maps (only the cursor's immediate map level)
+-- Toggle between string ↔ atom (repeatable)
+local function toggle_string_atom(bufnr, node)
+  if not node then return false end
+
+  local node_type = node:type()
+  local text = get_node_text(node, bufnr)
+
+  -- Climb up if cursor is inside quoted_content (part of a string)
+  if node_type == "quoted_content" then
+    node = node:parent()
+    node_type = node:type()
+    text = get_node_text(node, bufnr)
+  end
+
+  -- Case 1: :foo → "foo"
+  if node_type == "atom" or text:match("^:%w+$") then
+    local key = text:gsub("^:", "")
+    replace_node(bufnr, node, '"' .. key .. '"')
+    vim.notify("Toggled atom → string", vim.log.levels.INFO)
+    pcall(vim.fn["repeat#set"], ":ToggleElixirMapKeys\r")
+    return true
+  end
+
+  -- Case 2: "foo" → :foo
+  if node_type == "string" or text:match('^".+"$') then
+    local inner = text:match('^"(.*)"$') or text
+    if inner:match("^[%w_]+$") then
+      replace_node(bufnr, node, ":" .. inner)
+      vim.notify("Toggled string → atom", vim.log.levels.INFO)
+      pcall(vim.fn["repeat#set"], ":ToggleElixirMapKeys\r")
+      return true
+    end
+  end
+
+  return false
+end
+
+-- Main toggle function
 local function toggle_elixir_map_keys()
   local ts = vim.treesitter
   local node = ts.get_node()
-
   if not node then
     vim.notify("No treesitter node found", vim.log.levels.WARN)
     return
   end
 
-  -- Find the map node containing the cursor
-  while node and node:type() ~= "map" do
-    node = node:parent()
+  local bufnr = vim.api.nvim_get_current_buf()
+
+  -- Find enclosing map
+  local map_node = node
+  while map_node and map_node:type() ~= "map" do
+    map_node = map_node:parent()
   end
 
-  if not node or node:type() ~= "map" then
-    vim.notify("Cursor not inside a map", vim.log.levels.WARN)
+  if not map_node or map_node:type() ~= "map" then
+    -- Not inside a map → fallback to string/atom toggle
+    local success = toggle_string_atom(bufnr, node)
+    if not success then
+      vim.notify("Not inside a map, and cursor not on atom/string", vim.log.levels.WARN)
+    end
     return
   end
 
-  local bufnr = vim.api.nvim_get_current_buf()
-
-  -- Debug: inspect the map structure
-  local function debug_node(n, depth)
-    depth = depth or 0
-    local indent = string.rep("  ", depth)
-    print(indent .. n:type())
-    for child in n:iter_children() do
-      debug_node(child, depth + 1)
-    end
-  end
-
-  -- Uncomment to debug:
-  -- debug_node(node)
-
-  -- Find map_content node
+  -- otherwise continue with your map key toggle logic (unchanged)
   local map_content = nil
-  for child in node:iter_children() do
+  for child in map_node:iter_children() do
     if child:type() == "map_content" then
       map_content = child
       break
@@ -95,23 +123,16 @@ local function toggle_elixir_map_keys()
     return
   end
 
-  -- Get all direct key-value pairs from map_content
-  -- Structure can be either:
-  -- 1. map_content -> binary_operator nodes (for "key" => value syntax)
-  -- 2. map_content -> keywords -> pair nodes (for key: value syntax)
   local pairs = {}
   local is_keyword_syntax = false
-
   for child in map_content:iter_children() do
     if child:type() == "binary_operator" then
-      -- Check if it's an => operator
       local op_text = get_node_text(child, bufnr)
       if op_text:match("^.-=>") then
         table.insert(pairs, child)
       end
     elseif child:type() == "keywords" then
       is_keyword_syntax = true
-      -- Get pairs from within keywords node
       for pair_node in child:iter_children() do
         if pair_node:type() == "pair" then
           table.insert(pairs, pair_node)
@@ -125,74 +146,53 @@ local function toggle_elixir_map_keys()
     return
   end
 
-  -- Build the new map content based on syntax type
   if is_keyword_syntax then
-    -- Convert key: value to "key" => value
-    -- Structure: pair -> keyword, value
     local new_pairs = {}
-
-    for i, pair in ipairs(pairs) do
-      local pair_children = get_direct_children(pair)
-      local keyword_node = nil
-      local value_node = nil
-
-      for _, child in ipairs(pair_children) do
-        if child:type() == "keyword" then
-          keyword_node = child
-        elseif keyword_node and child:type() ~= "," then
-          value_node = child
+    for _, pair in ipairs(pairs) do
+      local children = get_direct_children(pair)
+      local key_node, value_node
+      for _, c in ipairs(children) do
+        if c:type() == "keyword" then
+          key_node = c
+        elseif key_node and c:type() ~= "," then
+          value_node = c
           break
         end
       end
-
-      if keyword_node and value_node then
-        local key_text = get_node_text(keyword_node, bufnr)
-        -- Remove trailing colon and any whitespace
-        key_text = key_text:gsub(":%s*$", "")
+      if key_node and value_node then
+        local key_text = get_node_text(key_node, bufnr):gsub(":%s*$", "")
         local value_text = get_node_text(value_node, bufnr)
         table.insert(new_pairs, '"' .. key_text .. '" => ' .. value_text)
       end
     end
 
     if #new_pairs > 0 then
-      -- Find the keywords node and replace it
-      local keywords_node = nil
+      local keywords_node
       for child in map_content:iter_children() do
         if child:type() == "keywords" then
           keywords_node = child
           break
         end
       end
-
       if keywords_node then
-        local new_text = table.concat(new_pairs, ", ")
-        replace_node(bufnr, keywords_node, new_text)
+        replace_node(bufnr, keywords_node, table.concat(new_pairs, ", "))
       end
     end
-
     vim.notify("Toggled to string-key map", vim.log.levels.INFO)
   else
-    -- Convert "key" => value to key: value
-    -- Structure: binary_operator -> string (key), "=>", value
     local new_pairs = {}
-
-    for i, binary_op in ipairs(pairs) do
+    for _, binary_op in ipairs(pairs) do
       local op_children = get_direct_children(binary_op)
-
-      -- First child should be the key (string), last should be the value
       local key_node = op_children[1]
       local value_node = op_children[#op_children]
-
       if key_node and key_node:type() == "string" and value_node then
-        -- Extract quoted_content from string node
-        local quoted_content = nil
-        for child in key_node:iter_children() do
-          if child:type() == "quoted_content" then
-            quoted_content = child
+        local quoted_content
+        for c in key_node:iter_children() do
+          if c:type() == "quoted_content" then
+            quoted_content = c
             break
           end
         end
-
         if quoted_content then
           local key_text = get_node_text(quoted_content, bufnr)
           local value_text = get_node_text(value_node, bufnr)
@@ -202,21 +202,14 @@ local function toggle_elixir_map_keys()
     end
 
     if #new_pairs > 0 then
-      local new_text = table.concat(new_pairs, ", ")
-      replace_node(bufnr, map_content, new_text)
+      replace_node(bufnr, map_content, table.concat(new_pairs, ", "))
     end
-
     vim.notify("Toggled to atom-key map", vim.log.levels.INFO)
   end
 
-  -- Make repeatable with dot command
   pcall(vim.fn['repeat#set'], ':ToggleElixirMapKeys\r')
 end
 
--- Create the command
 vim.api.nvim_create_user_command('ToggleElixirMapKeys', toggle_elixir_map_keys, {})
-
--- Optional: Add a keybinding (e.g., <leader>tm for "toggle map")
--- vim.keymap.set('n', '<leader>tm', toggle_elixir_map_keys, { desc = 'Toggle Elixir map keys' })
 
 return false
