@@ -284,7 +284,7 @@ require("lazy").setup({
     config = function()
       -- Work-around for the warning, see: https://github.com/ggandor/leap.nvim/issues/279
       vim.keymap.set({ 'n', 'x', 'o' }, 's', '<Plug>(leap-forward)')
-      vim.keymap.set({ 'n', 'x', 'o' }, 'S', '<Plug>(leap-backward)')
+      vim.keymap.set({ 'n', 'x', 'o' }, 'gS', '<Plug>(leap-backward)')
       vim.keymap.set({ 'n', 'x', 'o' }, 'gs', '<Plug>(leap-from-window)')
 
       require('leap').opts.safe_labels = {}
