@@ -11,6 +11,7 @@ alias -g CT="~/code/temp"
 alias -g CL='~/code/labs'
 alias -g CM='~/code/mxgrn'
 alias -g CP='~/code/playground'
+alias -g CO='~/code/opensource'
 
 alias -g CR='~/code/reference'
 alias -g CRPL='~/code/reference/phx_latest'
@@ -45,3 +46,7 @@ alias -g alt="../../alt"
 
 alias T='~/temp'
 
+alias LB='ssh lb'
+alias DB='ssh db'
+alias A1='ssh app1'
+alias A2='ssh app2'
