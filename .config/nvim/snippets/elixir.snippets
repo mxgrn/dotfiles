@@ -7,6 +7,12 @@ snippet ti Tap inspect
 snippet td Tap debug
 	|> tap(&dbg/1)
 
+snippet tap tap function
+  |> tap(fn ${1:arg} -> $2 end)
+
+snippet then then function
+  |> then(fn ${1:arg} -> $2 end)
+
 snippet # String interpolation
   #{${1}}${2}
 
