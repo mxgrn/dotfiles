@@ -52,6 +52,7 @@ export FLYCTL_INSTALL="/Users/mxgrn/.fly"
 export PATH="$FLYCTL_INSTALL/bin:$PATH"
 
 # source <(fzf --zsh)
+
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 # [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
@@ -100,7 +101,7 @@ ebin() {
   nvim "$script"
 }
 
-export PATH="/Applications/Postgres.app/Contents/Versions/17/bin:$PATH"
+# export PATH="/Applications/Postgres.app/Contents/Versions/17/bin:$PATH"
 
 # Fix editing the command line in vim (wouldn't work in tmux)
 bindkey '^X^E' edit-command-line
@@ -112,3 +113,6 @@ eval "$(mise activate zsh)"
 
 # 2025-10-19 This breaks Elixir LS
 # export MIX_OS_DEPS_COMPILE_PARTITION_COUNT=$(( $(sysctl -n hw.physicalcpu) / 2 ))
+
+# opencode
+export PATH=/Users/mxgrn/.opencode/bin:$PATH

@@ -76,4 +76,8 @@ keybind = super+t=text:\x13c
 keybind = super+shift+alt+Equal=text:\x13\x0c
 keybind = super+shift+alt+Minus=text:\x13\x08
 
+# cmd+` to go to the next session
+keybind = super+`=text:\x13\x0e
+
 custom-shader = ~/.config/ghostty/shaders/shader.glsl
+keybind = shift+enter=text:\x1b\r

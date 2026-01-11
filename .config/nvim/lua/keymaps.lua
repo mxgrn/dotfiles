@@ -313,11 +313,7 @@ end, { desc = 'Close all buffers and windows in current tab' })
 
 vim.keymap.set('n', '_', ':ToggleElixirMapKeys<CR>', { desc = 'Converts a map from string keys to atom keys and back' })
 
-
-vim.keymap.set('n', '<c-w><c-w>', ':ToggleMaximize<CR>',
+vim.keymap.set('n', '<c-cr>', ':ToggleMaximize<CR>',
   { silent = true, desc = 'Toggles maximizing the current window' })
-
--- clashing:
--- vmap("<space>r", ":'<,'>!bash<cr>")
 
 return false

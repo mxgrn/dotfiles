@@ -153,6 +153,7 @@ require("lazy").setup({
   -- Treesitter interface
   {
     'nvim-treesitter/nvim-treesitter',
+    -- event = { "BufReadPost", "BufNewFile" },
     config = function()
       require 'nvim-treesitter.configs'.setup {
         -- WIP
@@ -284,9 +285,16 @@ require("lazy").setup({
     config = function()
       -- Work-around for the warning, see: https://github.com/ggandor/leap.nvim/issues/279
       vim.keymap.set({ 'n', 'x', 'o' }, 's', '<Plug>(leap-forward)')
-      vim.keymap.set({ 'n', 'x', 'o' }, 'gS', '<Plug>(leap-backward)')
-      vim.keymap.set({ 'n', 'x', 'o' }, 'gs', '<Plug>(leap-from-window)')
+      vim.keymap.set({ 'n', 'x', 'o' }, 'gs', '<Plug>(leap-backward)')
+      vim.keymap.set({ 'n', 'x', 'o' }, 'gS', '<Plug>(leap-from-window)')
 
+      -- Un-color the search area
+      vim.api.nvim_set_hl(0, 'LeapBackdrop', { link = 'Comment' })
+
+      -- Disable "preview" (hihlighting possible targets after first char)
+      require('leap').opts.preview = false
+
+      -- Disable autojump to the first match
       require('leap').opts.safe_labels = {}
     end
   },
@@ -310,23 +318,24 @@ require("lazy").setup({
 
   'neovim/nvim-lspconfig',
 
-  {
-    'andymass/vim-matchup',
-    config = function()
-      vim.cmd [[
-        let g:matchup_matchparen_offscreen = {}
-        " If you want the matching line to appear on the top (overriding 'treesitter-context'), do this instead:
-        " let g:matchup_matchparen_offscreen = { 'method': 'popup' }
-
-        " Changing opening tag changes closing tag at quitting the insert mode
-        let g:matchup_transmute_enabled = 1
-
-        " Only highlight the current match, not what we have under the cursor
-        hi MatchParenCur cterm=none gui=none
-        hi MatchWordCur cterm=none gui=none
-      ]]
-    end,
-  },
+  -- Disabling on 2025-11-29 due to performance issues
+  -- {
+  --   'andymass/vim-matchup',
+  --   config = function()
+  --     vim.cmd [[
+  --       let g:matchup_matchparen_offscreen = {}
+  --       " If you want the matching line to appear on the top (overriding 'treesitter-context'), do this instead:
+  --       " let g:matchup_matchparen_offscreen = { 'method': 'popup' }
+  --
+  --       " Changing opening tag changes closing tag at quitting the insert mode
+  --       let g:matchup_transmute_enabled = 1
+  --
+  --       " Only highlight the current match, not what we have under the cursor
+  --       hi MatchParenCur cterm=none gui=none
+  --       hi MatchWordCur cterm=none gui=none
+  --     ]]
+  --   end,
+  -- },
 
   -- Snippets
   {
@@ -404,7 +413,7 @@ require("lazy").setup({
 
   {
     "olimorris/codecompanion.nvim",
-    opts = {},
+    opts = { ignore_warnings = true },
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
@@ -415,30 +424,18 @@ require("lazy").setup({
   { 'wakatime/vim-wakatime', lazy = false },
 
   "IndianBoy42/tree-sitter-just",
-  -- Cursor trail
-  -- {
-  --   "sphamba/smear-cursor.nvim",
-  --
-  --   opts = {
-  --     -- Smear cursor when switching buffers or windows.
-  --     smear_between_buffers = true,
-  --
-  --     -- Smear cursor when moving within line or to neighbor lines.
-  --     -- Use `min_horizontal_distance_smear` and `min_vertical_distance_smear` for finer control
-  --     smear_between_neighbor_lines = true,
-  --
-  --     -- Draw the smear in buffer space instead of screen space when scrolling
-  --     scroll_buffer_space = true,
-  --
-  --     -- Set to `true` if your font supports legacy computing symbols (block unicode symbols).
-  --     -- Smears will blend better on all backgrounds.
-  --     legacy_computing_symbols_support = false,
-  --
-  --     -- Smear cursor in insert mode.
-  --     -- See also `vertical_bar_cursor_insert_mode` and `distance_stop_animating_vertical_bar`.
-  --     smear_insert_mode = true,
-  --   },
-  -- }
 
+  -- Too little value (for now only clicking files in its output).
+  -- DnD'ing of files doesn't work, expectedly.
+  -- {
+  --   "greggh/claude-code.nvim",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim", -- Required for git operations
+  --   },
+  --   config = function()
+  --     require("claude-code").setup()
+  --   end
+  -- }
+  'coder/claudecode.nvim',
   -- TODO: try out 'dmtrKovalenko/fff.nvim'
 })

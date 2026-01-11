@@ -48,7 +48,7 @@ endfunction
 -- nmap("<leader>T", ":tabonly<cr>:call DeleteHiddenBuffers()<cr>")
 
 -- Switch between 2 recent tabs
-nmap("<c-g><c-g>", ":exe 'tabn '.g:lasttab<cr>")
+-- nmap("<c-g><c-g>", ":exe 'tabn '.g:lasttab<cr>")
 
 for i = 1, 9 do
   vim.keymap.set("n", "<A-" .. i .. ">", ":tabnext " .. i .. "<CR>")

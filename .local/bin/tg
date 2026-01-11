@@ -18,6 +18,9 @@ cmd=$1
 token=$2
 
 case "$cmd" in
+  getMe)
+    curl -s "${API_BASE}/bot${token}/getMe" | jq .
+    ;;
   getWebhookInfo)
     curl -s "${API_BASE}/bot${token}/getWebhookInfo" | jq .
     ;;

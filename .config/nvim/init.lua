@@ -11,6 +11,8 @@ require('lsp')
 require('quickfix')
 require('tabs')
 require('vim_test')
+require('vim_test_persist').setup()
+require("toggle_maximize").setup()
 require('projectionist')
 require('phoenix_jump_from_clipboard')
 require('unwrap_and_dedent')
@@ -70,21 +72,57 @@ vim.keymap.set("n", "<leader>gd", function()
   end)
 end, { desc = "Open :G focused on current file" })
 
-vim.api.nvim_create_user_command('ToggleMaximize', function()
-  if vim.t.maximized then
-    vim.o.winminwidth = vim.t.saved_winminwidth
-    vim.o.winminheight = vim.t.saved_winminheight
-    vim.cmd('wincmd =')
-    vim.api.nvim_win_set_option(0, 'winhl', '')
-    vim.t.maximized = false
-  else
-    vim.t.saved_winminwidth = vim.o.winminwidth
-    vim.t.saved_winminheight = vim.o.winminheight
-    vim.o.winminwidth = 0
-    vim.o.winminheight = 0
-    vim.cmd('wincmd |')
-    vim.cmd('wincmd _')
-    vim.api.nvim_win_set_option(0, 'winhl', 'StatusLine:MaximizedStatusLine')
-    vim.t.maximized = true
+-- vim.api.nvim_create_user_command('ToggleMaximize', function()
+--   if vim.t.maximized then
+--     vim.o.winminwidth = vim.t.saved_winminwidth
+--     vim.o.winminheight = vim.t.saved_winminheight
+--     vim.cmd('wincmd =')
+--     vim.api.nvim_win_set_option(0, 'winhl', '')
+--     vim.t.maximized = false
+--   else
+--    vim.t.saved_winminwidth = vim.o.winminwidth
+--     vim.t.saved_winminheight = vim.o.winminheight
+--     vim.o.winminwidth = 0
+--     vim.o.winminheight = 0
+--     vim.cmd('wincmd |')
+--     vim.cmd('wincmd _')
+--     vim.api.nvim_win_set_option(0, 'winhl', 'StatusLine:MaximizedStatusLine')
+--     vim.t.maximized = true
+--   end
+-- end, {})
+
+
+-- Try to infer the test suite, so that :TestSuite works without opening a test file
+
+if vim.g["test#last_position"] ~= nil then
+  return
+end
+
+local patterns = {
+  { dir = "test", pattern = "*_test.exs" },
+}
+
+local function trim(s)
+  return (s:gsub("^%s+", ""):gsub("%s+$", ""))
+end
+
+for _, p in ipairs(patterns) do
+  -- find <dir> -iname <pattern> -print -quit
+  local cmd = string.format(
+    "find %s -iname %q -print -quit 2>/dev/null",
+    vim.fn.shellescape(p.dir),
+    p.pattern
+  )
+
+  local output = vim.fn.system(cmd)
+  local path = trim(output)
+
+  if path ~= "" then
+    vim.g["test#last_position"] = {
+      file = path,
+      col = 1,
+      line = 1,
+    }
+    return
   end
-end, {})
+end
