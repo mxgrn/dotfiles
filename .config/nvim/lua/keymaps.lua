@@ -26,6 +26,7 @@ nmap("<leader>v", ":e ~/dotfiles/.config/nvim/init.lua<cr><cmd>cd %:p:h<cr>")
 
 -- Elixir
 vim.keymap.set("n", "<space>ef", ":ElixirCopyFuncFqn<cr>")
+vim.keymap.set("n", "<space>el", ":ElixirCopyLineWithFile<cr>")
 
 -- Live grep from all currently open buffers
 vim.keymap.set("n", "<space>/", function()
@@ -204,9 +205,6 @@ nmap("<space>g", "<cmd>G<cr>")
 -- Manual cd into current file's dir
 nmap("<space>c", "<cmd>cd %:p:h<cr>")
 
--- Center by hitting enter
--- nmap("<cr>", "zz")
-
 -- Zen mode by hitting enter
 -- nmap("<cr>", ":ZenMode<cr>")
 
@@ -222,8 +220,9 @@ end, {})
 
 nmap('<space>is', ':tabnew | PhxServer<cr>')
 
--- Center on enter
+-- Center on enter, shift+enter to top
 nmap("<cr>", "zz")
+nmap("<leader><cr>", "zt")
 
 vim.api.nvim_set_keymap("n", "<space>c", ":!", { noremap = true })
 

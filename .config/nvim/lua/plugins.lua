@@ -13,6 +13,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   "romainl/vim-qf",
+  "barrettruth/diffs.nvim",
 
   -- QW ehnancements. I'm missing inline search by file names.
   -- {
@@ -23,6 +24,54 @@ require("lazy").setup({
   --   opts = {},
   -- },
   "mbbill/undotree",
+
+  -- Going back and forth in time (c-j / c-k) through the commit history.
+  -- Start with :Tardis. C-m to show the commit message.
+  {
+    'fredehoey/tardis.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    config = true,
+
+  },
+  -- Throws an error: https://github.com/aaronhallaert/advanced-git-search.nvim/issues/98
+  -- {
+  --   "aaronhallaert/advanced-git-search.nvim",
+  --   cmd = { "AdvancedGitSearch" },
+  --   config = function()
+  --     require("advanced_git_search.fzf").setup {
+  --       -- Browse command to open commits in browser. Default fugitive GBrowse.
+  --       -- {commit_hash} is the placeholder for the commit hash.
+  --       browse_command = "GBrowse {commit_hash}",
+  --       -- when {commit_hash} is not provided, the commit will be appended to the specified command seperated by a space
+  --       -- browse_command = "GBrowse",
+  --       -- => both will result in calling `:GBrowse commit`
+  --
+  --       -- fugitive or diffview
+  --       diff_plugin = "fugitive",
+  --       -- customize git in previewer
+  --       -- e.g. flags such as { "--no-pager" }, or { "-c", "delta.side-by-side=false" }
+  --       git_flags = {},
+  --       -- customize git diff in previewer
+  --       -- e.g. flags such as { "--raw" }
+  --       git_diff_flags = {},
+  --       git_log_flags = {},
+  --       -- Show builtin git pickers when executing "show_custom_functions" or :AdvancedGitSearch
+  --       show_builtin_git_pickers = false,
+  --       entry_default_author_or_date = "author", -- one of "author", "date" or "both"
+  --       keymaps = {
+  --         -- following keymaps can be overridden
+  --         toggle_date_author = "<C-w>",
+  --         open_commit_in_browser = "<C-o>",
+  --         copy_commit_hash = "<C-y>",
+  --         copy_commit_patch = "<C-p>", -- telescope only
+  --         show_entire_commit = "<C-e>",
+  --       }
+  --     }
+  --   end,
+  --   dependencies = {
+  --     -- Insert Dependencies here
+  --   },
+  -- },
   -- {
   --   "mhanberg/output-panel.nvim",
   --   event = "VeryLazy",
@@ -281,7 +330,7 @@ require("lazy").setup({
 
   -- Jumping around the window with s or S
   {
-    'ggandor/leap.nvim',
+    url = "https://codeberg.org/andyg/leap.nvim",
     config = function()
       -- Work-around for the warning, see: https://github.com/ggandor/leap.nvim/issues/279
       vim.keymap.set({ 'n', 'x', 'o' }, 's', '<Plug>(leap-forward)')
@@ -301,22 +350,46 @@ require("lazy").setup({
 
   -- Language server manager
   {
-    'williamboman/mason.nvim',
+    "williamboman/mason.nvim",
+    dependencies = {
+      "williamboman/mason-lspconfig.nvim",
+      -- pre-configured LSPs, so I don't have to do everything manually
+      "neovim/nvim-lspconfig",
+    },
     config = function()
       require("mason").setup()
-    end
+      require("mason-lspconfig").setup({
+        ensure_installed = { "lua_ls" }, -- whatever you need
+      })
+
+      -- This we do manually, as we have our custom Expert build
+      -- vim.lsp.config("expert", {
+      --   cmd = { vim.fn.expand("~/.local/bin/start_expert.sh") },
+      --   root_markers = { ".git", "mix.exs", "mix.lock" },
+      --   filetypes = { 'elixir', 'eelixir', 'heex' },
+      -- })
+
+      vim.lsp.enable({ "lua_ls" })
+    end,
   },
 
-  {
-    'williamboman/mason-lspconfig.nvim',
-    config = function()
-      require("mason-lspconfig").setup()
-      -- You can various LSs right here, check out `:h mason-lspconfig.setup_handlers()`
-      -- Currently those configs are in "core/lsp.lua"
-    end
-  },
+  -- {
+  --   'williamboman/mason.nvim',
+  --   config = function()
+  --     require("mason").setup()
+  --   end
+  -- },
 
-  'neovim/nvim-lspconfig',
+  -- {
+  --   'williamboman/mason-lspconfig.nvim',
+  --   config = function()
+  --     require("mason-lspconfig").setup()
+  --     -- You can various LSs right here, check out `:h mason-lspconfig.setup_handlers()`
+  --     -- Currently those configs are in "core/lsp.lua"
+  --   end
+  -- },
+  --
+  -- 'neovim/nvim-lspconfig',
 
   -- Disabling on 2025-11-29 due to performance issues
   -- {
@@ -438,4 +511,57 @@ require("lazy").setup({
   -- }
   'coder/claudecode.nvim',
   -- TODO: try out 'dmtrKovalenko/fff.nvim'
+
+  -- This breaks the usual autocompletion, at least OOB.
+  -- {
+  --   'saghen/blink.cmp',
+  --   -- optional: provides snippets for the snippet source
+  --   dependencies = { 'rafamadriz/friendly-snippets' },
+  --
+  --   -- use a release tag to download pre-built binaries
+  --   version = '1.*',
+  --   -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
+  --   -- build = 'cargo build --release',
+  --   -- If you use nix, you can build from source using latest nightly rust with:
+  --   -- build = 'nix run .#build-plugin',
+  --
+  --   opts = {
+  --     -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
+  --     -- 'super-tab' for mappings similar to vscode (tab to accept)
+  --     -- 'enter' for enter to accept
+  --     -- 'none' for no mappings
+  --     --
+  --     -- All presets have the following mappings:
+  --     -- C-space: Open menu or open docs if already open
+  --     -- C-n/C-p or Up/Down: Select next/previous item
+  --     -- C-e: Hide menu
+  --     -- C-k: Toggle signature help (if signature.enabled = true)
+  --     --
+  --     -- See :h blink-cmp-config-keymap for defining your own keymap
+  --     keymap = { preset = 'default' },
+  --
+  --     appearance = {
+  --       -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+  --       -- Adjusts spacing to ensure icons are aligned
+  --       nerd_font_variant = 'mono'
+  --     },
+  --
+  --     -- (Default) Only show the documentation popup when manually triggered
+  --     completion = { documentation = { auto_show = false } },
+  --
+  --     -- Default list of enabled providers defined so that you can extend it
+  --     -- elsewhere in your config, without redefining it, due to `opts_extend`
+  --     sources = {
+  --       default = { 'lsp', 'path', 'snippets', 'buffer' },
+  --     },
+  --
+  --     -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
+  --     -- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
+  --     -- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
+  --     --
+  --     -- See the fuzzy documentation for more information
+  --     fuzzy = { implementation = "prefer_rust_with_warning" }
+  --   },
+  --   opts_extend = { "sources.default" }
+  -- }
 })

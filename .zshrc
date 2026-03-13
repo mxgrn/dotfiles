@@ -116,3 +116,11 @@ eval "$(mise activate zsh)"
 
 # opencode
 export PATH=/Users/mxgrn/.opencode/bin:$PATH
+
+# OpenClaw Completion. This is SLOW, use the cashed version below.
+# source <(openclaw completion --shell zsh)
+
+# To create the cash, run:
+# openclaw completion --shell zsh > ~/.openclaw/_completions.zsh
+source ~/.openclaw/_completions.zsh
+

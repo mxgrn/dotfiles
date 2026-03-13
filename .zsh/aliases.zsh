@@ -44,6 +44,7 @@ alias glt='git log --pretty=format:"%C(yellow)%h $RELATIVE_TIME %Cblue%an%C(auto
 
 # push
 alias gp='git push'
+alias gpf='git push --force-with-lease'
 alias gpu='git push --set-upstream'
 
 # 'git patch' or something
@@ -87,6 +88,8 @@ alias gbdm='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 # alias gbr='git for-each-ref --sort=-committerdate --format="%(committerdate:relative) -- %(refname:short)" refs/heads/ | head -n 20'
 alias gbr='git for-each-ref --sort=-committerdate --format="%(committerdate:relative) -- %(refname:short) -> %(upstream:short)" refs/heads/ | head -n 20'
 alias gbf='gbr | fzf | xargs git checkout'
+# Git graph with 10 recent branches
+alias gbrl='git log --pretty=format:"%C(yellow)%h $RELATIVE_TIME %Cblue%an%C(auto,green)%d %Creset%s" --graph $(git for-each-ref --sort=-committerdate --format="%(refname:short)" refs/heads | head -n 10)'
 
 # stash
 alias gsp='git stash pop'

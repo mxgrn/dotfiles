@@ -15,7 +15,7 @@
 	pager = delta
   hooksPath = /Users/mxgrn/.config/git/hooks
 [init]
-	defaultBranch = master
+	defaultBranch = main
 [include]
   path = /Users/mxgrn/.config/delta/themes.gitconfig
 [delta]

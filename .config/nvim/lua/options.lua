@@ -18,6 +18,7 @@ opt.swapfile               = false         -- Don't use swapfile
 opt.complete               = '.,w,b'       -- For autocomplete, use current buffer, other windows, and other open buffers
 opt.undofile               = true          -- Persistent undo history
 opt.foldenable             = false         -- Don't fold by default
+opt.textwidth              = 98            -- Elixir 'standard' (mix format)
 
 -- Execute .nvim.lua file in the current project
 vim.o.exrc                 = true
@@ -97,7 +98,6 @@ g.copilot_filetypes        = {
   lua = true,
   sql = true,
   po = true,
-  eelixir = true,
   elm = true,
   markdown = true,
   typescript = true,

@@ -4,3 +4,5 @@
 .zshenv.local
 .DS_Store
 tmuxinator
+worktrees
+.jj

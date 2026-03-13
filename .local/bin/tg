@@ -4,6 +4,7 @@
 # Usage:
 #   tg getWebhookInfo <bot_token>
 #   tg setWebhook <bot_token> <url>
+#   tg sendMessage <bot_token> <chat_id> <text>
 
 API_BASE="https://api.telegram.org"
 
@@ -11,6 +12,7 @@ if [[ $# -lt 2 ]]; then
   echo "Usage:"
   echo "  tg getWebhookInfo <bot_token>"
   echo "  tg setWebhook <bot_token> <url>"
+  echo "  tg sendMessage <bot_token> <chat_id> <text>"
   exit 1
 fi
 
@@ -33,9 +35,21 @@ case "$cmd" in
     curl -s -X POST "${API_BASE}/bot${token}/setWebhook" \
       -d "url=${url}" | jq .
     ;;
+  sendMessage)
+    if [[ $# -ne 4 ]]; then
+      echo "Usage: tg sendMessage <bot_token> <chat_id> <text>"
+      exit 1
+    fi
+    chat_id=$3
+    text=$4
+    curl -s -X POST "${API_BASE}/bot${token}/sendMessage" \
+      -d "chat_id=${chat_id}" \
+      -d "text=${text}" \
+      -d "parse_mode=Markdown" | jq .
+    ;;
   *)
     echo "Unknown command: $cmd"
-    echo "Available commands: getWebhookInfo, setWebhook"
+    echo "Available commands: getMe, getWebhookInfo, setWebhook, sendMessage"
     exit 1
     ;;
 esac

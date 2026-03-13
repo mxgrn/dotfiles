@@ -21,6 +21,7 @@ require('fzf_lua')
 -- Elixir
 require('elixir_map_key_toggle')
 require('elixir_copy_func_fqn')
+require('elixir_copy_line_with_file')
 require('elixir_snippets')
 require('elixir_misc')
 
